@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>A-CRM</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+            <div class="container"><a class="navbar-brand" href="/">A-CRM </a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">My Profile </a>
+                            <div class="dropdown-menu"><a class="dropdown-item" href="/profile/edit">Edit Profile</a><a class="dropdown-item" href="/logout">Logout </a></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="page-header">
+            <h2 class="text-center">My <strong>customers</strong>.</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>ID </th>
+                        <th>Name </th>
+                        <th>Email </th>
+                        <th>Mobile </th>
+                        <th>Action </th>
+                    </tr>
+                </thead>
+                <tbody id="tableData">
+                </tbody>
+            </table>
+        </div>
+        <div class="btn-group" role="group"><a class="btn btn-light" role="button" href="/customer/create"> <i class="fa fa-plus-square-o"></i></a></div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="confirm-modal">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Deletion of a <strong>customer</strong>.</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you want to delete a customer?</p>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel </button><button class="btn btn-primary" id="deleteData" data-id="#" type="button">Delete </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-basic">
+        <footer>
+            <p class="copyright">A-CRM © 2021</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/webapp.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(loadData());
+
+            function loadData() {
+                getCustomers(function (result) {
+                    $("#tableData").empty();
+                    $.each(result, function (i, item) {
+                        $("#tableData").append($("<tr>").append($("<td>").text(item.id)).append($("<td>").text(item.name)).append($("<td>").text(item.email)).append($("<td>").text(item.mobile)).append($(
+                            "<td>\n" +
+                            "<div class=\"btn-group btn-group-sm\" role=\"group\"><a class=\"btn btn-light\" role=\"button\" href=\"/customer/edit?id=" + item.id + "\"> <i class=\"fa fa-edit\"></i></a><button class=\"btn btn-light\" data-id=\"2\" type=\"button\" data-bs-target=\"#confirm-modal\" data-bs-toggle=\"modal\"> <i class=\"fa fa-trash\"></i></button></div>\n" +
+                            "</td></tr>"
+                        )));
+                    });
+                });
+            }
+
+            $("#deleteData").click(function () {
+                deleteCustomer($(this).attr('data-id'), function (result) {
+                    $('#confirm-modal').modal('hide');
+                    loadData();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
