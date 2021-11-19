@@ -5,20 +5,20 @@
 
 package ch.fhnw.acrm.controller;
 
-import ch.fhnw.acrm.business.service.AgentService;
+import ch.fhnw.acrm.business.service.AvatarService;
+import ch.fhnw.acrm.data.domain.Avatar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ch.fhnw.acrm.data.domain.Agent;
 
 @Controller
 public class UserController {
 
     @Autowired
-    private AgentService agentService;
+    private AvatarService avatarService;
 
     @GetMapping("/login")
     public String getLoginView() {
@@ -31,9 +31,9 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
-    public ResponseEntity<Void> postRegister(@RequestBody Agent agent) {
+    public ResponseEntity<Void> postRegister(@RequestBody Avatar avatar) {
         try {
-            agentService.saveAgent(agent);
+            avatarService.saveAvatar(avatar);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
@@ -46,15 +46,16 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public @ResponseBody Agent getProfile() {
-        return agentService.getCurrentAgent();
+    public @ResponseBody
+    Avatar getProfile() {
+        return avatarService.getCurrentAvatar();
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<Void> putProfile(@RequestBody Agent agent) {
+    public ResponseEntity<Void> putProfile(@RequestBody Avatar avatar) {
         try {
-            agent.setId(agentService.getCurrentAgent().getId());
-            agentService.saveAgent(agent);
+            avatar.setId(avatarService.getCurrentAvatar().getId());
+            avatarService.saveAvatar(avatar);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }

@@ -5,9 +5,9 @@
 
 package ch.fhnw.acrm.config;
 
-import ch.fhnw.acrm.business.service.AgentService;
+import ch.fhnw.acrm.business.service.AvatarService;
 import ch.fhnw.acrm.business.service.UserDetailsServiceImpl;
-import ch.fhnw.acrm.data.domain.Agent;
+import ch.fhnw.acrm.data.domain.Avatar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -30,7 +30,7 @@ public class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private AgentService agentService;
+    private AvatarService avatarService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -47,10 +47,10 @@ public class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-        Agent agentUser = new Agent();
-        agentUser.setEmail("user@user.com");
-        agentUser.setPassword("password");
-        agentUser.setName("user");
-        agentService.saveAgent(agentUser);
+        Avatar avatarUser = new Avatar();
+        avatarUser.setEmail("user@user.com");
+        avatarUser.setPassword("password");
+        avatarUser.setName("user");
+        avatarService.saveAvatar(avatarUser);
     }
 }

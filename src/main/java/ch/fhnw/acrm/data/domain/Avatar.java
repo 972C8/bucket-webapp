@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
-public class Agent {
+public class Avatar {
 
 	@Id
 	@GeneratedValue
@@ -30,7 +30,7 @@ public class Agent {
 	private String role = "USER";
 	@Transient // will not be stored in DB
 	private String remember;
-	@OneToMany(mappedBy = "agent")
+	@OneToMany(mappedBy = "avatar")
 	@JsonIgnore
 	private List<Customer> customers;
 

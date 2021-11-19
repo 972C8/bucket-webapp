@@ -33,13 +33,13 @@ This is a minimal CRM Web App (A-CRM - Insurance Agency CRM) as a template for s
 A-CRM (Agency Customer-Relationship-Management) is the smallest possible and lightweight demonstration tool that allows agents to manage their customer data. Agents have an own access to their customer data.
 
 ### User Stories
-1.	As an insurance agent, I want to have a Web app so that I can use it on different mobile devices and on desktop computers.
-2.	As an insurance agent, I want to see a consistent visual appearance so that I can navigate easily, and it looks consistent.
-3.	As an insurance agent, I want to use list views so that I can explore and read my business data.
-4.	As an insurance agent, I want to use edit and create views so that I can maintain my business data.
-5.	As an insurance agent, I want to create an account so that I can get access to the Web app.
-6.	As an insurance agent, I want to log-in so that I can authenticate myself.
-7.	As an insurance agent, I want to edit my profile so that my data is stored securely.
+1.	As an insurance avatar, I want to have a Web app so that I can use it on different mobile devices and on desktop computers.
+2.	As an insurance avatar, I want to see a consistent visual appearance so that I can navigate easily, and it looks consistent.
+3.	As an insurance avatar, I want to use list views so that I can explore and read my business data.
+4.	As an insurance avatar, I want to use edit and create views so that I can maintain my business data.
+5.	As an insurance avatar, I want to create an account so that I can get access to the Web app.
+6.	As an insurance avatar, I want to log-in so that I can authenticate myself.
+7.	As an insurance avatar, I want to edit my profile so that my data is stored securely.
 
 ### Use Case
 ![](images/use-case.png)
@@ -80,7 +80,7 @@ The `ch.fhnw.acrm.business.service` package contains classes of the following bu
 
 ```JSON
 {
-  "agent": {
+  "avatar": {
     "customers": [
       null
     ],
@@ -103,7 +103,7 @@ The `ch.fhnw.acrm.business.service` package contains classes of the following bu
 
 ```JSON
 {
-  "agent": {
+  "avatar": {
     "customers": [
       null
     ],

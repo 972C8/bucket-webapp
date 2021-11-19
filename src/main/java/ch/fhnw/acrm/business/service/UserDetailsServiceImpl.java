@@ -13,29 +13,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ch.fhnw.acrm.data.domain.Agent;
-import ch.fhnw.acrm.data.repository.AgentRepository;
+import ch.fhnw.acrm.data.domain.Avatar;
+import ch.fhnw.acrm.data.repository.AvatarRepository;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private AgentRepository agentRepository;
+    private AvatarRepository avatarRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Agent agent = agentRepository.findByEmail(username);
-        if (agent == null) {
+        Avatar avatar = avatarRepository.findByEmail(username);
+        if (avatar == null) {
             throw new UsernameNotFoundException(username);
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + agent.getRole()));
-        return new User(agent.getEmail(), agent.getPassword(), grantedAuthorities);
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + avatar.getRole()));
+        return new User(avatar.getEmail(), avatar.getPassword(), grantedAuthorities);
     }
 }
