@@ -44,4 +44,12 @@ public class AvatarService {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return avatarRepository.findByEmail(user.getUsername());
     }
+
+    public Avatar findAvatarById(Long avatarId) throws Exception {
+        Avatar avatar = avatarRepository.findAvatarById(avatarId);
+        if (avatar == null) {
+            throw new Exception("No customer with ID " + avatarId + " found.");
+        }
+        return avatar;
+    }
 }

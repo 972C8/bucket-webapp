@@ -50,7 +50,7 @@ public class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
         Avatar avatarUser = new Avatar();
         avatarUser.setEmail("user@user.com");
         avatarUser.setPassword("password");
-        avatarUser.setName("user");
+        avatarUser.setUsername("user");
         avatarService.saveAvatar(avatarUser);
     }
 }

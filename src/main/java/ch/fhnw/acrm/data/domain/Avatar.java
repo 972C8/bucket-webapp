@@ -19,20 +19,28 @@ public class Avatar {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@NotEmpty(message = "Please provide a name.")
-	private String name;
+	@NotEmpty(message = "Please provide a username.")
+	private String username;
 	@Email(message = "Please provide a valid e-mail.")
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
+
+	//TODO: remove role?
 	@JsonIgnore
 	private String role = "USER";
+
 	@Transient // will not be stored in DB
+	//stored as "true" or "false"
 	private String remember;
+
+	//TODO: Add bucketItems
+	/*
 	@OneToMany(mappedBy = "avatar")
 	@JsonIgnore
-	private List<Customer> customers;
+	private List<Customer> bucketItems;
+	*/
 
 	public Long getId() {
 		return id;
@@ -42,12 +50,12 @@ public class Avatar {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {
@@ -68,13 +76,15 @@ public class Avatar {
 		this.password = password;
 	}
 
-	public List<Customer> getCustomers() {
-		return customers;
+	/*
+	public List<Customer> getBucketListItems() {
+		return bucketItems;
 	}
 
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
+	public void setBucketListItems(List<Customer> customers) {
+		this.bucketItems = customers;
 	}
+	*/
 
 	public String getRemember() {
 		return remember;
