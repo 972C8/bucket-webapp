@@ -1,0 +1,505 @@
+{
+  "info": {
+    "_postman_id": "76e2e264-c83c-4ed1-b368-1b1ff6d6a3df",
+    "name": "Bucket API v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "avatars",
+      "item": [
+        {
+          "name": "Create avatar",
+          "id": "2b7d2302-c72f-4911-8698-5c77e716b127",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"user2\",\r\n    \"email\": \"user2@user.com\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/avatars"
+          },
+          "response": []
+        },
+        {
+          "name": "Get avatar by id",
+          "id": "229f36cc-7a65-4c28-85cc-d0a368dbe073",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/avatars/:avatar-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "avatars",
+                ":avatar-id"
+              ],
+              "variable": [
+                {
+                  "key": "avatar-id",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit avatar",
+          "id": "6d34c392-bcce-4d63-8fa2-0666c0b8899c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"user3\",\r\n    \"email\": \"user2@user.com\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/avatars/:avatar-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "avatars",
+                ":avatar-id"
+              ],
+              "variable": [
+                {
+                  "key": "avatar-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete avatar",
+          "id": "090d1aab-e436-4fe1-a11f-5ef111b1b6b1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/avatars/:avatar-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "avatars",
+                ":avatar-id"
+              ],
+              "variable": [
+                {
+                  "key": "avatar-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e6e2f295-ec06-4dfd-b1b0-5596a4d8fd13"
+    },
+    {
+      "name": "bucket-items",
+      "item": [
+        {
+          "name": "Create bucket item",
+          "id": "152c7e1e-7d65-4413-8824-7d5992ccf32c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Run a marathon\",\r\n    \"description\": \"Run the London marathon\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/bucket-items"
+          },
+          "response": []
+        },
+        {
+          "name": "Get bucket item by id",
+          "id": "38995708-7f05-49e9-868e-dd62895ca066",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bucket-items/:item-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bucket-items",
+                ":item-id"
+              ],
+              "variable": [
+                {
+                  "key": "item-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete bucket item",
+          "id": "581a513e-bb15-4660-ab0e-299aa8227a72",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bucket-items/:item-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bucket-items",
+                ":item-id"
+              ],
+              "variable": [
+                {
+                  "key": "item-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit bucket item",
+          "id": "48e0bdd7-3dc9-4a29-b409-4d2a6bbb43ff",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 123,\r\n    \"title\": \"Run a marathon 4\",\r\n    \"description\": \"Run the London marathon 2\",\r\n    \"dateToAccomplish\": \"tomorrow?\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bucket-items/:item-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bucket-items",
+                ":item-id"
+              ],
+              "variable": [
+                {
+                  "key": "item-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all bucket items of avatar",
+          "id": "23baab9e-8ba7-4be3-8c11-f75eb25fcdd9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bucket-items?avatar-id=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bucket-items"
+              ],
+              "query": [
+                {
+                  "key": "avatar-id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "9462f8ad-807c-4480-9066-efa6c981acfc"
+    },
+    {
+      "name": "buckets",
+      "item": [
+        {
+          "name": "Create bucket",
+          "id": "c5868dd7-0724-425c-b67f-c9cd5f9e758a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"color\": \"#FFFFF\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/buckets"
+          },
+          "response": []
+        },
+        {
+          "name": "Get bucket by id",
+          "id": "325e497f-3a49-4812-a2eb-b98e4ed071f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/:bucket-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "buckets",
+                ":bucket-id"
+              ],
+              "variable": [
+                {
+                  "key": "bucket-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit bucket",
+          "id": "2d772093-4d01-426c-ac16-0320efbf0c13",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Category 1 NEW\",\r\n    \"color\": \"#FFFFF NEW\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/:bucket-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "buckets",
+                ":bucket-id"
+              ],
+              "variable": [
+                {
+                  "key": "bucket-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete bucket",
+          "id": "eb7f93a4-0add-4865-a9da-9b244970ef9d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/:bucket-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "buckets",
+                ":bucket-id"
+              ],
+              "variable": [
+                {
+                  "key": "bucket-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
+    },
+    {
+      "name": "temp (delete later)",
+      "item": [
+        {
+          "name": "Get customer",
+          "id": "fef5269e-07b7-416d-b8e9-6d3682a8fb2c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/customer"
+          },
+          "response": []
+        },
+        {
+          "name": "Get customer by id",
+          "id": "7ccd8787-6803-461c-8825-3006d79bd779",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/customer/:customer-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customer",
+                ":customer-id"
+              ],
+              "variable": [
+                {
+                  "key": "customer-id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "662b5fd3-765e-4b4d-bfc0-dcb492830ca4"
+    },
+    {
+      "name": "Test connection",
+      "id": "1b36492c-5bb5-4d91-b3d5-e55395c03439",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "HEAD",
+        "header": [],
+        "url": "{{baseUrl}}"
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": {
+      "password": "{{auth_password}}",
+      "username": "{{auth_username}}"
+    }
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "10928548-12c1-4c50-961d-311945dd9c46",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "594478d8-746f-4265-bda0-942c91abef64",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "1fdd3346-a547-45a7-b546-116a041e4065",
+      "key": "baseUrl",
+      "value": "localhost:8080"
+    }
+  ]
+}
