@@ -329,7 +329,7 @@
       "id": "662b5fd3-765e-4b4d-bfc0-dcb492830ca4"
     },
     {
-      "name": "New Folder",
+      "name": "buckets",
       "item": [],
       "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
     },
@@ -378,7 +378,7 @@
   ],
   "variable": [
     {
-      "id": "51e09b82-3d0a-4f96-a408-33bc42283804",
+      "id": "d1a300b6-c82c-45e3-9007-7ac62fd1a1d2",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
