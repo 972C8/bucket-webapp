@@ -46,6 +46,17 @@ public class BucketEndpoint {
         return ResponseEntity.ok(bucketItem);
     }
 
+    @PutMapping(path = "/bucket-items/{itemId}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<BucketItem> putCustomer(@RequestBody BucketItem bucketItem, @PathVariable(value = "itemId") String itemId) {
+        try {
+            bucketItem.setId(Long.parseLong(itemId));
+            bucketItem = bucketService.editBucketItem(bucketItem);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().body(bucketItem);
+    }
+
     @DeleteMapping(path = "/bucket-items/{itemId}")
     public ResponseEntity<Void> deleteBucketItem(@PathVariable(value = "itemId") String itemId) {
         try {

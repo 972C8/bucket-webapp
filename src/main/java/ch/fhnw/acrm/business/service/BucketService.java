@@ -17,7 +17,7 @@ public class BucketService {
     @Autowired
     private AvatarService avatarService;
 
-    public BucketItem editBucketItem(@Valid BucketItem bucketItem) throws Exception {
+    public BucketItem editBucketItem(@Valid BucketItem bucketItem) {
         //Assign to current avatar if not already set
         if (bucketItem.getAvatar() == null) {
             bucketItem.setAvatar(avatarService.getCurrentAvatar());
