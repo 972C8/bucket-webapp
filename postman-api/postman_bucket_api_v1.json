@@ -374,7 +374,7 @@
           "response": []
         },
         {
-          "name": "New Request",
+          "name": "Delete bucket",
           "id": "eb7f93a4-0add-4865-a9da-9b244970ef9d",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
@@ -481,7 +481,7 @@
   ],
   "variable": [
     {
-      "id": "0fe4d014-0e8c-4f0e-9b1d-42bb91a35ca4",
+      "id": "74f0336f-01c3-4dba-9ff0-adb05c879e4c",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
