@@ -383,19 +383,19 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/buckets/:bucket",
+              "raw": "{{baseUrl}}/api/buckets/:bucket-id",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "buckets",
-                ":bucket"
+                ":bucket-id"
               ],
               "variable": [
                 {
-                  "key": "bucket",
-                  "value": "2"
+                  "key": "bucket-id",
+                  "value": null
                 }
               ]
             }
@@ -497,7 +497,7 @@
   ],
   "variable": [
     {
-      "id": "b8026598-3753-4935-be14-9319aef49d93",
+      "id": "aae81f79-6072-4c5b-8f01-cadcec5c462e",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
