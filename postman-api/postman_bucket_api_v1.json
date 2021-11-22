@@ -395,7 +395,7 @@
               "variable": [
                 {
                   "key": "bucket",
-                  "value": null
+                  "value": "2"
                 }
               ]
             }
@@ -497,7 +497,7 @@
   ],
   "variable": [
     {
-      "id": "926e3cf1-2f6b-4c97-8c65-e422b21eb82a",
+      "id": "b8026598-3753-4935-be14-9319aef49d93",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
