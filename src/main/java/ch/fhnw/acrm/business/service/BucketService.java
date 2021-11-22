@@ -18,7 +18,7 @@ public class BucketService {
     private AvatarService avatarService;
 
     public BucketItem editBucketItem(@Valid BucketItem bucketItem) {
-        //Assign to current avatar if not already set
+        //Assign new bucket item to current user
         if (bucketItem.getAvatar() == null) {
             bucketItem.setAvatar(avatarService.getCurrentAvatar());
         }
@@ -38,7 +38,7 @@ public class BucketService {
     }
 
     public List<BucketItem> findAllBucketItemsByAvatar(long avatarId) {
-        //TODO: Automatically use current user?
+        //TODO: Add method to automatically use current user?
         //return bucketRepository.findByAvatarId(avatarService.getCurrentAvatar().getId());
         return bucketRepository.findByAvatarId(avatarId);
     }

@@ -33,9 +33,9 @@ public class BucketItem {
     //location, categories (buckets)
 
     @ManyToOne
+    //Referenced avatar is not returned in api requests
     @JsonIgnore
     private Avatar avatar;
-
 
     public Long getId() {
         return id;

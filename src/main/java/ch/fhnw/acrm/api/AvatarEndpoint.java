@@ -35,7 +35,6 @@ public class AvatarEndpoint {
         return ResponseEntity.created(location).body(avatar);
     }
 
-    //TODO: put requests requires username, email and password to edit the avatar (as configured through @NotEmpty tag in Avatar.java). Not optimal?
     @PutMapping(path = "/avatars/{avatarId}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Avatar> putAvatar(@RequestBody Avatar avatar, @PathVariable(value = "avatarId") String avatarId) {
         try {

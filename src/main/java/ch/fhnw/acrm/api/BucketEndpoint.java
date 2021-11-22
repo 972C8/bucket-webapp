@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.ConstraintViolationException;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -37,7 +38,7 @@ public class BucketEndpoint {
 
     @GetMapping(path = "/bucket-items/{itemId}", produces = "application/json")
     public ResponseEntity<BucketItem> getBucketItem(@PathVariable(value = "itemId") String itemId) {
-        BucketItem bucketItem = null;
+        BucketItem bucketItem;
         try {
             bucketItem = bucketService.findBucketItemById(Long.parseLong(itemId));
         } catch (Exception e) {
@@ -67,10 +68,12 @@ public class BucketEndpoint {
         return ResponseEntity.accepted().build();
     }
 
-//    //TODO: Create api request to automatically use current user?
-    //TODO: use /api/bucket-items?avatar-id=2
-//    @GetMapping(path = "/bucket-items/{avatarId}", produces = "application/json")
-//    public List<BucketItem> getBucketItemsByAvatar(@PathVariable(value = "avatarId") String avatarId) {
-//        return bucketService.findAllBucketItemsByAvatar(Long.parseLong(avatarId));
-//    }
+    /*
+        Returns List<BucketItem> of bucket items assigned to the given avatar
+        Requests must be made in the format of "/api/bucket-items?avatar-id=123"
+     */
+    @GetMapping(path = "/bucket-items", produces = "application/json")
+    public List<BucketItem> getBucketItemsByAvatar(@RequestParam(value = "avatar-id") String avatarId) {
+        return bucketService.findAllBucketItemsByAvatar(Long.parseLong(avatarId));
+    }
 }
