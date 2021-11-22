@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Service
 @Validated
@@ -24,4 +25,15 @@ public class BucketService {
         return bucketRepository.save(bucket);
     }
 
+    public Bucket findBucketById(Long bucketId) throws Exception {
+        List<Bucket> bucketList = bucketRepository.findByIdAndAvatarId(bucketId, avatarService.getCurrentAvatar().getId());
+        if (bucketList.isEmpty()) {
+            throw new Exception("No bucket with ID " + bucketId + " found.");
+        }
+        return bucketList.get(0);
+    }
+
+    public void deleteBucket(Long bucketId) {
+        bucketRepository.deleteById(bucketId);
+    }
 }

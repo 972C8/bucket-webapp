@@ -34,4 +34,38 @@ public class BucketEndpoint {
 
         return ResponseEntity.created(location).body(bucket);
     }
+
+    @GetMapping(path = "/buckets/{bucketId}", produces = "application/json")
+    public ResponseEntity<Bucket> getBucket(@PathVariable(value = "bucketId") String bucketId) {
+        Bucket bucket;
+        try {
+            bucket = bucketService.findBucketById(Long.parseLong(bucketId));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+        return ResponseEntity.ok(bucket);
+    }
+
+    @PutMapping(path = "/buckets/{bucketId}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Bucket> putBucket(@RequestBody Bucket bucket, @PathVariable(value = "bucketId") String bucketId) {
+        try {
+            bucket.setId(Long.parseLong(bucketId));
+            bucket = bucketService.saveBucket(bucket);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().body(bucket);
+    }
+
+    @DeleteMapping(path = "/buckets/{bucketId}")
+    public ResponseEntity<Void> deleteBucket(@PathVariable(value = "bucketId") String bucketId) {
+        try {
+            bucketService.deleteBucket(Long.parseLong(bucketId));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().build();
+    }
+
+    //TODO: Add request to get all buckets of an avatar?
 }
