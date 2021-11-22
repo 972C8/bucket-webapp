@@ -336,7 +336,7 @@
           "response": []
         },
         {
-          "name": "New Request",
+          "name": "Edit bucket",
           "id": "2d772093-4d01-426c-ac16-0320efbf0c13",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
@@ -443,7 +443,7 @@
   ],
   "variable": [
     {
-      "id": "16d0110b-1851-4bd0-b708-536d5ad8fcce",
+      "id": "0321f9ad-2ba4-470a-827b-fca9cc395c69",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
