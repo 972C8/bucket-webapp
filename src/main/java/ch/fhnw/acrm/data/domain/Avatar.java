@@ -25,6 +25,7 @@ public class Avatar {
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
+	@NotEmpty(message = "Please provide a password.")
 	private String password;
 
 	//TODO: remove role?

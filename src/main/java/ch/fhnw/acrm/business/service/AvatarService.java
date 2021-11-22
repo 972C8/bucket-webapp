@@ -40,6 +40,14 @@ public class AvatarService {
         avatarRepository.save(avatar);
     }
 
+    public Avatar editAvatar(@Valid Avatar avatar) throws Exception {
+        //TODO: ignore id when already present? currently returns status 409
+        if (avatar.getId() == null) {
+            return avatarRepository.save(avatar);
+        }
+        throw new Exception("Avatar could not be edited.");
+    }
+
     public Avatar getCurrentAvatar() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return avatarRepository.findByEmail(user.getUsername());
