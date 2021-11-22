@@ -307,7 +307,7 @@
           "response": []
         },
         {
-          "name": "New Request",
+          "name": "Get bucket by id",
           "id": "325e497f-3a49-4812-a2eb-b98e4ed071f1",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
@@ -414,7 +414,7 @@
   ],
   "variable": [
     {
-      "id": "f0ec23a1-5cb8-4e3d-8271-a57c617c1073",
+      "id": "333bd7d9-0b9a-4907-b2c0-4860bfd53ae2",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
