@@ -344,6 +344,15 @@
           "request": {
             "method": "PUT",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Category 1 NEW\",\r\n    \"color\": \"#FFFFF NEW\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
               "raw": "{{baseUrl}}/api/buckets/:bucket-id",
               "host": [
@@ -357,7 +366,7 @@
               "variable": [
                 {
                   "key": "bucket-id",
-                  "value": null
+                  "value": "2"
                 }
               ]
             }
@@ -459,7 +468,7 @@
   ],
   "variable": [
     {
-      "id": "3922ab0f-5a5a-475e-8232-954857d339e4",
+      "id": "693514db-8871-4681-b97d-4ceb7d70b317",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
