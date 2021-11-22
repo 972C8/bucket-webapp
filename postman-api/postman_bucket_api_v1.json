@@ -293,6 +293,15 @@
           "request": {
             "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"color\": \"#FFFFF\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": "{{baseUrl}}/api/buckets"
           },
           "response": []
@@ -392,7 +401,7 @@
   ],
   "variable": [
     {
-      "id": "96474d93-c312-42b4-b324-835514648053",
+      "id": "55c86795-99a8-47d2-9a5e-bfd1ff21f461",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
