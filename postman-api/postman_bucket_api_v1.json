@@ -285,7 +285,7 @@
       "name": "buckets",
       "item": [
         {
-          "name": "New Request",
+          "name": "Create bucket",
           "id": "c5868dd7-0724-425c-b67f-c9cd5f9e758a",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
@@ -392,7 +392,7 @@
   ],
   "variable": [
     {
-      "id": "64148857-9550-4333-931d-4997d3eb7407",
+      "id": "a29516b3-2208-4684-b78c-1b3d1ca81069",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
