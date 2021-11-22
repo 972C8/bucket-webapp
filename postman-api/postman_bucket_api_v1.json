@@ -305,6 +305,19 @@
             "url": "{{baseUrl}}/api/buckets"
           },
           "response": []
+        },
+        {
+          "name": "New Request",
+          "id": "325e497f-3a49-4812-a2eb-b98e4ed071f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": null
+          },
+          "response": []
         }
       ],
       "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
@@ -401,7 +414,7 @@
   ],
   "variable": [
     {
-      "id": "55c86795-99a8-47d2-9a5e-bfd1ff21f461",
+      "id": "4340424d-5274-478a-a148-5acff4de825c",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
