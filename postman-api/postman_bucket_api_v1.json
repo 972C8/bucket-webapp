@@ -342,9 +342,25 @@
             "disableBodyPruning": true
           },
           "request": {
-            "method": "GET",
+            "method": "PUT",
             "header": [],
-            "url": null
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/:bucket-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "buckets",
+                ":bucket-id"
+              ],
+              "variable": [
+                {
+                  "key": "bucket-id",
+                  "value": null
+                }
+              ]
+            }
           },
           "response": []
         }
@@ -443,7 +459,7 @@
   ],
   "variable": [
     {
-      "id": "0321f9ad-2ba4-470a-827b-fca9cc395c69",
+      "id": "3922ab0f-5a5a-475e-8232-954857d339e4",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
