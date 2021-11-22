@@ -21,7 +21,7 @@ public class AvatarEndpoint {
     @PostMapping(path = "/avatars", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Avatar> postAvatar(@RequestBody Avatar avatar) {
         try {
-            avatar = avatarService.editAvatar(avatar);
+            avatar = avatarService.saveAvatar(avatar);
         } catch (ConstraintViolationException e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getConstraintViolations().iterator().next().getMessage());
         } catch (Exception e) {
@@ -35,6 +35,19 @@ public class AvatarEndpoint {
         return ResponseEntity.created(location).body(avatar);
     }
 
+    //TODO: put requests requires username, email and password to edit the avatar (as configured through @NotEmpty tag in Avatar.java). Not optimal?
+    @PutMapping(path = "/avatars/{avatarId}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Avatar> putAvatar(@RequestBody Avatar avatar, @PathVariable(value = "avatarId") String avatarId) {
+        try {
+            avatar.setId(Long.parseLong(avatarId));
+            avatar = avatarService.saveAvatar(avatar);
+        } catch (Exception e) {
+            System.out.println("Exception:" + e);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().body(avatar);
+    }
+
     @GetMapping(path = "/avatars/{avatarId}", produces = "application/json")
     public ResponseEntity<Avatar> getAvatar(@PathVariable(value = "avatarId") String avatarId) {
         Avatar avatar;
@@ -44,5 +57,15 @@ public class AvatarEndpoint {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
         return ResponseEntity.ok(avatar);
+    }
+
+    @DeleteMapping(path = "/avatars/{avatarId}")
+    public ResponseEntity<Void> deleteAvatar(@PathVariable(value = "avatarId") String avatarId) {
+        try {
+            avatarService.deleteAvatar(Long.parseLong(avatarId));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().build();
     }
 }

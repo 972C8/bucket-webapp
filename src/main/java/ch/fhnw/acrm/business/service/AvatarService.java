@@ -28,7 +28,8 @@ public class AvatarService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void saveAvatar(@Valid Avatar avatar) throws Exception {
+    //Save or edit avatar based on avatarId if provided
+    public Avatar saveAvatar(@Valid Avatar avatar) throws Exception {
         if (avatar.getId() == null) {
             if (avatarRepository.findByEmail(avatar.getEmail()) != null) {
                 throw new Exception("Email address " + avatar.getEmail() + " already assigned another avatar.");
@@ -37,15 +38,11 @@ public class AvatarService {
             throw new Exception("Email address " + avatar.getEmail() + " already assigned another avatar.");
         }
         avatar.setPassword(passwordEncoder.encode(avatar.getPassword()));
-        avatarRepository.save(avatar);
+        return avatarRepository.save(avatar);
     }
 
-    public Avatar editAvatar(@Valid Avatar avatar) throws Exception {
-        //TODO: ignore id when already present? currently returns status 409
-        if (avatar.getId() == null) {
-            return avatarRepository.save(avatar);
-        }
-        throw new Exception("Avatar could not be edited.");
+    public void deleteAvatar(Long avatarId) {
+        avatarRepository.deleteById(avatarId);
     }
 
     public Avatar getCurrentAvatar() {
