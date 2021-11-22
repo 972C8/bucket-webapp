@@ -10,7 +10,7 @@
       "item": [
         {
           "name": "Create avatar",
-          "_postman_id": "2b7d2302-c72f-4911-8698-5c77e716b127",
+          "id": "2b7d2302-c72f-4911-8698-5c77e716b127",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -32,7 +32,7 @@
         },
         {
           "name": "Get avatar by id",
-          "_postman_id": "229f36cc-7a65-4c28-85cc-d0a368dbe073",
+          "id": "229f36cc-7a65-4c28-85cc-d0a368dbe073",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -52,8 +52,7 @@
               "variable": [
                 {
                   "key": "avatar-id",
-                  "value": "3",
-                  "type": "string"
+                  "value": "3"
                 }
               ]
             }
@@ -62,7 +61,7 @@
         },
         {
           "name": "Edit avatar",
-          "_postman_id": "6d34c392-bcce-4d63-8fa2-0666c0b8899c",
+          "id": "6d34c392-bcce-4d63-8fa2-0666c0b8899c",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -91,8 +90,7 @@
               "variable": [
                 {
                   "key": "avatar-id",
-                  "value": "2",
-                  "type": "string"
+                  "value": "2"
                 }
               ]
             }
@@ -101,7 +99,7 @@
         },
         {
           "name": "Delete avatar",
-          "_postman_id": "090d1aab-e436-4fe1-a11f-5ef111b1b6b1",
+          "id": "090d1aab-e436-4fe1-a11f-5ef111b1b6b1",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -121,8 +119,7 @@
               "variable": [
                 {
                   "key": "avatar-id",
-                  "value": "2",
-                  "type": "string"
+                  "value": "2"
                 }
               ]
             }
@@ -130,14 +127,14 @@
           "response": []
         }
       ],
-      "_postman_id": "e6e2f295-ec06-4dfd-b1b0-5596a4d8fd13"
+      "id": "e6e2f295-ec06-4dfd-b1b0-5596a4d8fd13"
     },
     {
       "name": "bucket-items",
       "item": [
         {
           "name": "Create bucket item",
-          "_postman_id": "152c7e1e-7d65-4413-8824-7d5992ccf32c",
+          "id": "152c7e1e-7d65-4413-8824-7d5992ccf32c",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -159,7 +156,7 @@
         },
         {
           "name": "Get bucket item by id",
-          "_postman_id": "38995708-7f05-49e9-868e-dd62895ca066",
+          "id": "38995708-7f05-49e9-868e-dd62895ca066",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -179,8 +176,7 @@
               "variable": [
                 {
                   "key": "item-id",
-                  "value": "2",
-                  "type": "string"
+                  "value": "2"
                 }
               ]
             }
@@ -189,7 +185,7 @@
         },
         {
           "name": "Delete bucket item",
-          "_postman_id": "581a513e-bb15-4660-ab0e-299aa8227a72",
+          "id": "581a513e-bb15-4660-ab0e-299aa8227a72",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -209,8 +205,7 @@
               "variable": [
                 {
                   "key": "item-id",
-                  "value": "2",
-                  "type": "string"
+                  "value": "2"
                 }
               ]
             }
@@ -219,7 +214,7 @@
         },
         {
           "name": "Edit bucket item",
-          "_postman_id": "48e0bdd7-3dc9-4a29-b409-4d2a6bbb43ff",
+          "id": "48e0bdd7-3dc9-4a29-b409-4d2a6bbb43ff",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -248,8 +243,7 @@
               "variable": [
                 {
                   "key": "item-id",
-                  "value": "2",
-                  "type": "string"
+                  "value": "2"
                 }
               ]
             }
@@ -258,7 +252,7 @@
         },
         {
           "name": "Get all bucket items of avatar",
-          "_postman_id": "23baab9e-8ba7-4be3-8c11-f75eb25fcdd9",
+          "id": "23baab9e-8ba7-4be3-8c11-f75eb25fcdd9",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -285,14 +279,14 @@
           "response": []
         }
       ],
-      "_postman_id": "9462f8ad-807c-4480-9066-efa6c981acfc"
+      "id": "9462f8ad-807c-4480-9066-efa6c981acfc"
     },
     {
       "name": "temp (delete later)",
       "item": [
         {
           "name": "Get customer",
-          "_postman_id": "fef5269e-07b7-416d-b8e9-6d3682a8fb2c",
+          "id": "fef5269e-07b7-416d-b8e9-6d3682a8fb2c",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -305,7 +299,7 @@
         },
         {
           "name": "Get customer by id",
-          "_postman_id": "7ccd8787-6803-461c-8825-3006d79bd779",
+          "id": "7ccd8787-6803-461c-8825-3006d79bd779",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -324,8 +318,7 @@
               "variable": [
                 {
                   "key": "customer-id",
-                  "value": "2",
-                  "type": "string"
+                  "value": "2"
                 }
               ]
             }
@@ -333,11 +326,16 @@
           "response": []
         }
       ],
-      "_postman_id": "662b5fd3-765e-4b4d-bfc0-dcb492830ca4"
+      "id": "662b5fd3-765e-4b4d-bfc0-dcb492830ca4"
+    },
+    {
+      "name": "New Folder",
+      "item": [],
+      "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
     },
     {
       "name": "Test connection",
-      "_postman_id": "1b36492c-5bb5-4d91-b3d5-e55395c03439",
+      "id": "1b36492c-5bb5-4d91-b3d5-e55395c03439",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -380,10 +378,9 @@
   ],
   "variable": [
     {
-      "id": "b2f1c8ca-bd88-48f0-992e-8c9147029142",
+      "id": "4ed98edc-57df-4551-a0a8-5cc36803e7c6",
       "key": "baseUrl",
-      "value": "localhost:8080",
-      "type": "string"
+      "value": "localhost:8080"
     }
   ]
 }
