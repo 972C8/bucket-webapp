@@ -283,7 +283,21 @@
     },
     {
       "name": "buckets",
-      "item": [],
+      "item": [
+        {
+          "name": "New Request",
+          "id": "c5868dd7-0724-425c-b67f-c9cd5f9e758a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": null
+          },
+          "response": []
+        }
+      ],
       "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
     },
     {
@@ -378,7 +392,7 @@
   ],
   "variable": [
     {
-      "id": "3c8e2892-abbd-42b1-960d-d649ae930965",
+      "id": "26173d4e-fadc-41af-979d-d3c8e56858ee",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
