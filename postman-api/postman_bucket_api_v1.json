@@ -282,6 +282,11 @@
       "id": "9462f8ad-807c-4480-9066-efa6c981acfc"
     },
     {
+      "name": "buckets",
+      "item": [],
+      "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
+    },
+    {
       "name": "temp (delete later)",
       "item": [
         {
@@ -329,11 +334,6 @@
       "id": "662b5fd3-765e-4b4d-bfc0-dcb492830ca4"
     },
     {
-      "name": "buckets",
-      "item": [],
-      "id": "86bc0b43-07d2-42bc-8e6b-e53f4f4718d5"
-    },
-    {
       "name": "Test connection",
       "id": "1b36492c-5bb5-4d91-b3d5-e55395c03439",
       "protocolProfileBehavior": {
@@ -378,7 +378,7 @@
   ],
   "variable": [
     {
-      "id": "d1a300b6-c82c-45e3-9007-7ac62fd1a1d2",
+      "id": "3c8e2892-abbd-42b1-960d-d649ae930965",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
