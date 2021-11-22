@@ -13,7 +13,6 @@ import java.time.Instant;
 
 @Entity
 public class BucketItem {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -36,6 +35,11 @@ public class BucketItem {
     //Referenced avatar is not returned in api requests
     @JsonIgnore
     private Avatar avatar;
+
+    //One bucket (category) holds many bucket items
+    @ManyToOne
+    @JsonIgnore
+    private Bucket bucket;
 
     public Long getId() {
         return id;
@@ -87,5 +91,13 @@ public class BucketItem {
 
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public Bucket getBucket() {
+        return bucket;
+    }
+
+    public void setBucket(Bucket bucket) {
+        this.bucket = bucket;
     }
 }

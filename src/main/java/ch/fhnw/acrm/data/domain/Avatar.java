@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
- */
-
 package ch.fhnw.acrm.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,9 +30,15 @@ public class Avatar {
     //stored as "true" or "false"
     private String remember;
 
+    //One avatar has many bucket items
     @OneToMany(mappedBy = "avatar")
     @JsonIgnore
     private List<BucketItem> bucketItems;
+
+    //One avatar has many buckets (categories)
+    @OneToMany(mappedBy = "avatar")
+    @JsonIgnore
+    private List<Bucket> buckets;
 
     public Long getId() {
         return id;
@@ -91,5 +92,13 @@ public class Avatar {
 
     public void setBucketItems(List<BucketItem> bucketItems) {
         this.bucketItems = bucketItems;
+    }
+
+    public List<Bucket> getBuckets() {
+        return buckets;
+    }
+
+    public void setBuckets(List<Bucket> buckets) {
+        this.buckets = buckets;
     }
 }
