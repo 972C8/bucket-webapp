@@ -291,9 +291,9 @@
             "disableBodyPruning": true
           },
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [],
-            "url": null
+            "url": "{{baseUrl}}/api/buckets"
           },
           "response": []
         }
@@ -392,7 +392,7 @@
   ],
   "variable": [
     {
-      "id": "a29516b3-2208-4684-b78c-1b3d1ca81069",
+      "id": "96474d93-c312-42b4-b324-835514648053",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
