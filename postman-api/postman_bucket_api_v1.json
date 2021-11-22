@@ -380,7 +380,7 @@
             "disableBodyPruning": true
           },
           "request": {
-            "method": "GET",
+            "method": "DELETE",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/buckets/:bucket-id",
@@ -395,7 +395,7 @@
               "variable": [
                 {
                   "key": "bucket-id",
-                  "value": null
+                  "value": "2"
                 }
               ]
             }
@@ -497,7 +497,7 @@
   ],
   "variable": [
     {
-      "id": "aae81f79-6072-4c5b-8f01-cadcec5c462e",
+      "id": "1fdd3346-a547-45a7-b546-116a041e4065",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
