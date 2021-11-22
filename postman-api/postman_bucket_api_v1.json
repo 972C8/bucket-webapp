@@ -382,7 +382,23 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": null
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/:bucket",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "buckets",
+                ":bucket"
+              ],
+              "variable": [
+                {
+                  "key": "bucket",
+                  "value": null
+                }
+              ]
+            }
           },
           "response": []
         }
@@ -481,7 +497,7 @@
   ],
   "variable": [
     {
-      "id": "74f0336f-01c3-4dba-9ff0-adb05c879e4c",
+      "id": "926e3cf1-2f6b-4c97-8c65-e422b21eb82a",
       "key": "baseUrl",
       "value": "localhost:8080"
     }
