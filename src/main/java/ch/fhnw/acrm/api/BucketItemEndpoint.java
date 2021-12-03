@@ -70,10 +70,9 @@ public class BucketItemEndpoint {
 
     /*
         Returns List<BucketItem> of bucket items assigned to the given avatar
-        Requests must be made in the format of "/api/bucket-items?avatar-id=123"
      */
     @GetMapping(path = "/bucket-items", produces = "application/json")
-    public List<BucketItem> getBucketItemsByAvatar(@RequestParam(value = "avatar-id") String avatarId) {
-        return bucketItemService.findAllBucketItemsByAvatar(Long.parseLong(avatarId));
+    public List<BucketItem> getBucketItems() {
+        return bucketItemService.findAllBucketItems();
     }
 }

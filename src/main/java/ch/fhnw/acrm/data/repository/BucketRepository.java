@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BucketRepository extends JpaRepository<Bucket, Long> {
+	List<Bucket> findByAvatarId(Long avatarId);
     List<Bucket> findByIdAndAvatarId(Long bucketId, Long avatarId);
 }

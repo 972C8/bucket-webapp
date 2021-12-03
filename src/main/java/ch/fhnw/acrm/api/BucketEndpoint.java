@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.ConstraintViolationException;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -67,5 +68,11 @@ public class BucketEndpoint {
         return ResponseEntity.accepted().build();
     }
 
-    //TODO: Add request to get all buckets of an avatar?
+    /*
+        Returns List<Bucket> of buckets assigned to the given avatar
+     */
+    @GetMapping(path = "/buckets", produces = "application/json")
+    public List<Bucket> getBucketItems() {
+        return bucketService.findAllBuckets();
+    }
 }

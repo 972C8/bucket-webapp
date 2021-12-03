@@ -36,4 +36,8 @@ public class BucketService {
     public void deleteBucket(Long bucketId) {
         bucketRepository.deleteById(bucketId);
     }
+
+    public List<Bucket> findAllBuckets() {
+        return bucketRepository.findByAvatarId(avatarService.getCurrentAvatar().getId());
+    }
 }

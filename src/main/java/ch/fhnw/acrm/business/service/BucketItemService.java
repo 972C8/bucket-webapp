@@ -37,10 +37,8 @@ public class BucketItemService {
         bucketItemRepository.deleteById(itemId);
     }
 
-    public List<BucketItem> findAllBucketItemsByAvatar(long avatarId) {
-        //TODO: Add method to automatically use current user?
-        //return bucketRepository.findByAvatarId(avatarService.getCurrentAvatar().getId());
-        return bucketItemRepository.findByAvatarId(avatarId);
+    public List<BucketItem> findAllBucketItems() {
+        return bucketItemRepository.findByAvatarId(avatarService.getCurrentAvatar().getId());
     }
 
 }
