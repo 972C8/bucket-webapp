@@ -26,11 +26,6 @@ public class BucketItem {
     //Date until bucket item should be accomplished
     private String dateToAccomplish;
 
-    private String image;
-
-    //TODO: Add data types
-    //location, categories (buckets)
-
     @ManyToOne
     //Referenced avatar is not returned in api requests
     @JsonIgnore
@@ -75,14 +70,6 @@ public class BucketItem {
 
     public void setDateToAccomplish(String dateToAccomplish) {
         this.dateToAccomplish = dateToAccomplish;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public Avatar getAvatar() {

@@ -1,0 +1,10 @@
+package ch.fhnw.acrm.data.repository;
+
+import ch.fhnw.acrm.data.domain.Image;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ImageRepository extends JpaRepository<Image, Long> {
+
+}
