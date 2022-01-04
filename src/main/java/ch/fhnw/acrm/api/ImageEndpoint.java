@@ -15,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -26,7 +25,7 @@ public class ImageEndpoint {
     @PostMapping("/uploadImage")
     public ResponseEntity<Image> uploadImage(@RequestParam("image") MultipartFile image) {
         try {
-            Image file = imageService.storeImage(image);
+            Image file = imageService.storeImageForBucketItem(image);
 
             //TODO: return Response?
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()

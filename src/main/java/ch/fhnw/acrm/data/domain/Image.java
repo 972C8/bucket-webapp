@@ -19,6 +19,9 @@ public class Image {
     @Lob
     private byte[] data;
 
+    @OneToOne
+    private Avatar avatar;
+
     public Image() {
     }
 
@@ -58,5 +61,13 @@ public class Image {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }

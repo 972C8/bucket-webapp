@@ -4,8 +4,10 @@ import ch.fhnw.acrm.business.service.BucketItemService;
 import ch.fhnw.acrm.data.domain.BucketItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,8 +21,9 @@ public class BucketItemEndpoint {
     @Autowired
     private BucketItemService bucketItemService;
 
-    @PostMapping(path = "/bucket-items", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<BucketItem> postBucketItem(@RequestBody BucketItem bucketItem) {
+    @PostMapping(value = "/bucket-items", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
+
+    public ResponseEntity<BucketItem> postBucketItem(@RequestBody BucketItem bucketItem, @RequestParam(value = "file", required = false) MultipartFile image) {
         try {
             bucketItem = bucketItemService.saveBucketItem(bucketItem);
         } catch (ConstraintViolationException e) {
@@ -48,7 +51,7 @@ public class BucketItemEndpoint {
     }
 
     @PutMapping(path = "/bucket-items/{itemId}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<BucketItem> putCustomer(@RequestBody BucketItem bucketItem, @PathVariable(value = "itemId") String itemId) {
+    public ResponseEntity<BucketItem> putBucketItem(@RequestBody BucketItem bucketItem, @PathVariable(value = "itemId") String itemId) {
         try {
             bucketItem.setId(Long.parseLong(itemId));
             bucketItem = bucketItemService.saveBucketItem(bucketItem);

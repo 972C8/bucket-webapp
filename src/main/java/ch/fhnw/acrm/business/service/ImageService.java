@@ -15,10 +15,13 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
+    @Autowired
+    private AvatarService avatarService;
+
     /*
-    Save image in database as byte
+    Save image in database as byte and add current avatar as owner of image.
      */
-    public Image storeImage(MultipartFile img) throws Exception {
+    public Image storeImageForBucketItem(MultipartFile img) throws Exception {
         // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
 
@@ -29,6 +32,11 @@ public class ImageService {
             }
 
             Image image = new Image(fileName, img.getContentType(), img.getBytes());
+
+            //Assign current avatar to image
+            if (image.getAvatar() == null) {
+                image.setAvatar(avatarService.getCurrentAvatar());
+            }
 
             return imageRepository.save(image);
         } catch (Exception ex) {

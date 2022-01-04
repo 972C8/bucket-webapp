@@ -30,6 +30,9 @@ public class Avatar {
     //stored as "true" or "false"
     private String remember;
 
+    @OneToOne(mappedBy = "avatar")
+    private Image profilePicture;
+
     //One avatar has many bucket items
     @OneToMany(mappedBy = "avatar")
     @JsonIgnore
@@ -84,6 +87,14 @@ public class Avatar {
 
     public String getRole() {
         return role;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public List<BucketItem> getBucketItems() {

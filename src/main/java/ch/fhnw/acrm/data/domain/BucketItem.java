@@ -2,11 +2,7 @@ package ch.fhnw.acrm.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
 
@@ -28,13 +24,16 @@ public class BucketItem {
 
     @ManyToOne
     //Referenced avatar is not returned in api requests
-    @JsonIgnore
+    //@JsonIgnore
     private Avatar avatar;
 
     //One bucket (category) holds many bucket items
     @ManyToOne
-    @JsonIgnore
+    //@JsonIgnore
     private Bucket bucket;
+
+    @OneToOne
+    private Image image;
 
     public Long getId() {
         return id;
@@ -86,5 +85,13 @@ public class BucketItem {
 
     public void setBucket(Bucket bucket) {
         this.bucket = bucket;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
