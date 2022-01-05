@@ -68,7 +68,7 @@ We used another repository for easier deployment of the prototypes (https://gith
 
 The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with jQuery, to build a dynamic website.
 
-![](images/bucketList_Design_Timeline.png)
+![](images/bucketList_Design_Timeline2.png)
 
 ### Domain design
 
