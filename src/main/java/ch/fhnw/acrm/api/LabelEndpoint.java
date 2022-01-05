@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.ConstraintViolationException;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -35,4 +36,44 @@ public class LabelEndpoint {
         return ResponseEntity.created(location).body(label);
     }
 
+    @GetMapping(path = "/labels/{labelId}", produces = "application/json")
+    public ResponseEntity<Label> getLabel(@PathVariable(value = "labelId") String labelId) {
+        Label label;
+        try {
+            label = labelService.findLabelById(Long.parseLong(labelId));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+        return ResponseEntity.ok(label);
+    }
+
+    @PutMapping(path = "/labels/{labelId}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Label> putLabel(@RequestBody Label label, @PathVariable(value = "labelId") String labelId) {
+        try {
+            label.setId(Long.parseLong(labelId));
+            label = labelService.saveLabel(label);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().body(label);
+    }
+
+
+    @DeleteMapping(path = "/labels/{labelId}")
+    public ResponseEntity<Void> deleteLabel(@PathVariable(value = "labelId") String labelId) {
+        try {
+            labelService.deleteLabel(Long.parseLong(labelId));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().build();
+    }
+
+    /*
+    Returns List<Bucket> of buckets assigned to the given avatar
+    */
+    @GetMapping(path = "/labels", produces = "application/json")
+    public List<Label> geLabelItems() {
+        return labelService.findAllLabels();
+    }
 }

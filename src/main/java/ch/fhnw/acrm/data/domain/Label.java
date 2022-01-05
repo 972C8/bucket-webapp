@@ -23,13 +23,11 @@ public class Label {
 
     //One bucketItem holds many labels
     @ManyToOne
-    @JsonIgnore
     private BucketItem bucketItem;
 
     //One avatar holds many labels
     //labels must be assigned to an avatar when created
     @ManyToOne
-    @JsonIgnore
     private Avatar avatar;
 
     public Long getId() {
