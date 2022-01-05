@@ -40,6 +40,11 @@ public class Avatar {
     @JsonIgnore
     private List<Bucket> buckets;
 
+    //One avatar has many labels
+    @OneToMany(mappedBy = "avatar")
+    @JsonIgnore
+    private List<Label> labels;
+
     public Long getId() {
         return id;
     }
@@ -100,5 +105,13 @@ public class Avatar {
 
     public void setBuckets(List<Bucket> buckets) {
         this.buckets = buckets;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
     }
 }

@@ -3,12 +3,10 @@ package ch.fhnw.acrm.data.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.util.List;
 
 
 @Entity
@@ -40,6 +38,10 @@ public class BucketItem {
     @ManyToOne
     @JsonIgnore
     private Bucket bucket;
+
+    //One bucketItem has many labels
+    @OneToMany(mappedBy = "bucketItem")
+    private List<Label> labels;
 
     public Long getId() {
         return id;
@@ -99,5 +101,13 @@ public class BucketItem {
 
     public void setBucket(Bucket bucket) {
         this.bucket = bucket;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
     }
 }
