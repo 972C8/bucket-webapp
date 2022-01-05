@@ -95,14 +95,21 @@ Tibor
 
 ### Frontend Technology
 
-This Web application is relying on the following frontend technology/libraries:
+The frontend was developed in a separate repository ([bucket-frontend](https://github.com/mahgoh/bucket-frontend)) with the usage of a custom component-based HTML bundler written in [Go](https://go.dev/), specifically for this project. More about how the bundler works and how to use it is mentioned in the repository.
+
+The power of utility classes in CSS, especially, when working in a team is incredible. We use [Tailwind CSS](https://tailwindcss.com/) to make use of this and ensure a great collaboration and maintainability in the future. During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes. The bundler does the same for the HTML files. These static files can then be integrated with the backend.
+
+- Custom HTML bundler
+- Tailwind CSS
 - JQuery
-- Bootstrap
 
 ## Deployment
-This spring boot has been deployed to Netlify. (marco?)
+
+TODO: Deploy on Heroku  
+TODO: Write section about deployment
 
 ## User Guide
+TODO: Update URL once deployed  
 This Web application can be accessed over the browser by using the following address: `https://bucket-frontend.netlify.app/index.html`.
 
 ## Project Management
