@@ -95,13 +95,13 @@ Tibor
 
 ### Frontend Technology
 
-The frontend was developed in a separate repository ([bucket-frontend](https://github.com/mahgoh/bucket-frontend)) with the usage of a custom component-based HTML bundler written in [Go](https://go.dev/), specifically for this project. More about how the bundler works and how to use it is mentioned in the repository.
+The visual appearance of the frontend was developed in a separate repository ([bucket-frontend](https://github.com/mahgoh/bucket-frontend)) with the usage of a custom component-based HTML bundler - written in [Go](https://go.dev/) specifically for this project. More about how the bundler works and how to use it is mentioned in the repository.
 
 The power of utility classes in CSS, especially, when working in a team is incredible. We use [Tailwind CSS](https://tailwindcss.com/) to make use of this and ensure a great collaboration and maintainability in the future. During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes. The bundler does the same for the HTML files. These static files can then be integrated with the backend.
 
-- Custom HTML bundler
-- Tailwind CSS
-- JQuery
+- [Custom HTML bundler](https://github.com/mahgoh/bucket-frontend)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [JQuery](https://jquery.com/)
 
 ## Deployment
 
