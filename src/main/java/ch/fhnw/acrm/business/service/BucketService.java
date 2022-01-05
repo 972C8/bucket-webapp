@@ -25,6 +25,16 @@ public class BucketService {
         return bucketRepository.save(bucket);
     }
 
+    //TODO: Fix bug where buckets are overwritten with parameter bucket instead of updated
+    public Bucket updateBucket(@Valid Bucket bucket) throws Exception {
+        //Check if bucket with given id is already present
+        //Only buckets with valid id are updated.
+        if (!bucketRepository.findById(bucket.getId()).isPresent()) {
+            throw new Exception("No bucket with ID " + bucket.getId() + " found.");
+        }
+        return bucketRepository.save(bucket);
+    }
+
     public Bucket findBucketById(Long bucketId) throws Exception {
         List<Bucket> bucketList = bucketRepository.findByIdAndAvatarId(bucketId, avatarService.getCurrentAvatar().getId());
         if (bucketList.isEmpty()) {

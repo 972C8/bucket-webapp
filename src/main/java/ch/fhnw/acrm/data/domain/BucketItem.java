@@ -31,7 +31,6 @@ public class BucketItem {
 
     @ManyToOne
     //Referenced avatar is not returned in api requests
-    @JsonIgnore
     private Avatar avatar;
 
     //One bucket (category) holds many bucket items

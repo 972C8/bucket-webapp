@@ -51,7 +51,7 @@ public class BucketEndpoint {
     public ResponseEntity<Bucket> putBucket(@RequestBody Bucket bucket, @PathVariable(value = "bucketId") String bucketId) {
         try {
             bucket.setId(Long.parseLong(bucketId));
-            bucket = bucketService.saveBucket(bucket);
+            bucket = bucketService.updateBucket(bucket);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }

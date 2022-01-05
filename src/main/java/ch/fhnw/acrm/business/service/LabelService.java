@@ -25,6 +25,16 @@ public class LabelService {
         return labelRepository.save(label);
     }
 
+    //TODO: Fix bug where labels are overwritten with parameter label instead of updated
+    public Label updateLabel(@Valid Label label) throws Exception {
+        //Check if label with given id is already present
+        //Only labels with valid id are updated.
+        if (!labelRepository.findById(label.getId()).isPresent()) {
+            throw new Exception("No label with ID " + label.getId() + " found.");
+        }
+        return labelRepository.save(label);
+    }
+
     public Label findLabelById(Long labelId) throws Exception {
         List<Label> labelList = labelRepository.findByIdAndAvatarId(labelId, avatarService.getCurrentAvatar().getId());
         if (labelList.isEmpty()) {

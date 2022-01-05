@@ -22,7 +22,6 @@ public class Bucket {
 
     //One avatar holds many buckets
     @ManyToOne
-    @JsonIgnore
     private Avatar avatar;
 
     public Long getId() {

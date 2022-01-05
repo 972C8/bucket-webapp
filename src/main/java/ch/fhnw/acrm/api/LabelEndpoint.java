@@ -51,7 +51,7 @@ public class LabelEndpoint {
     public ResponseEntity<Label> putLabel(@RequestBody Label label, @PathVariable(value = "labelId") String labelId) {
         try {
             label.setId(Long.parseLong(labelId));
-            label = labelService.saveLabel(label);
+            label = labelService.updateLabel(label);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
