@@ -2,7 +2,7 @@
 
 async function GET(endpoint) {
   try {
-    const response = await fetch(`${serviceEndpointURL}/api/${endpoint}`, {
+    const response = await fetch(`${serviceEndpointURL}${endpoint}`, {
       method: 'GET',
       headers: {
         'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
@@ -25,7 +25,7 @@ async function POST(endpoint, payload, json = true) {
   if (json) headers['Content-Type'] = 'application/json';
 
   try {
-    const response = await fetch(`${serviceEndpointURL}/api/${endpoint}`, {
+    const response = await fetch(`${serviceEndpointURL}${endpoint}`, {
       method: 'POST',
       headers,
       body: json ? JSON.stringify(payload) : payload,
@@ -39,9 +39,9 @@ async function POST(endpoint, payload, json = true) {
   }
 }
 
-async function PUT(endpoint, payload) {
+async function PUT(endpoint, payload, jsonFeedback = true) {
   try {
-    const response = await fetch(`${serviceEndpointURL}/api/${endpoint}`, {
+    const response = await fetch(`${serviceEndpointURL}${endpoint}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ async function PUT(endpoint, payload) {
 
     if (!response.ok) throw new Error(`PUT: Request failed endpoint ${endpoint}.`);
 
-    return await response.json();
+    return jsonFeedback ? await response.json() : response;
   } catch (error) {
     throw error;
   }
@@ -60,7 +60,7 @@ async function PUT(endpoint, payload) {
 
 async function DELETE(endpoint) {
   try {
-    const response = await fetch(`${serviceEndpointURL}/api/${endpoint}`, {
+    const response = await fetch(`${serviceEndpointURL}${endpoint}`, {
       method: 'DELETE',
       headers: {
         'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
@@ -75,27 +75,37 @@ async function DELETE(endpoint) {
   }
 }
 
+// Profile
+
+async function getProfile() {
+  return await GET('/profile');
+}
+
+async function putProfile(profile) {
+  return await PUT('/profile', profile, false);
+}
+
 // Requests for:
 // BucketItem
 
 async function postBucketItem(bucketItem) {
-  return await POST('bucket-items', bucketItem);
+  return await POST('/api/bucket-items', bucketItem);
 }
 
 async function getBucketItem(bucketItemID) {
-  return await GET(`bucket-items/${bucketItemID}`);
+  return await GET(`/api/bucket-items/${bucketItemID}`);
 }
 
 async function getBucketItems() {
-  return await GET('bucket-items');
+  return await GET('/api/bucket-items');
 }
 
 async function putBucketItem(bucketItemID, bucketItem) {
-  return await PUT(`bucket-items/${bucketItemID}`, bucketItem);
+  return await PUT(`/api/bucket-items/${bucketItemID}`, bucketItem);
 }
 
 async function deleteLabel(bucketItemID) {
-  return await DELETE(`bucket-items/${bucketItemID}`);
+  return await DELETE(`/api/bucket-items/${bucketItemID}`);
 }
 
 function getBucketItemJSON(id, title, description, bucket, dateToAccomplish, image, labels) {
@@ -124,23 +134,23 @@ function getBucketItemJSON(id, title, description, bucket, dateToAccomplish, ima
 // Bucket
 
 async function postBucket(bucket) {
-  return await POST('buckets', bucket);
+  return await POST('/api/buckets', bucket);
 }
 
 async function getBucket(bucketID) {
-  return await GET(`buckets/${bucketID}`);
+  return await GET(`/api/buckets/${bucketID}`);
 }
 
 async function getBuckets() {
-  return await GET('buckets');
+  return await GET('/api/buckets');
 }
 
 async function putBucket(bucketID, bucket) {
-  return await PUT(`buckets/${bucketID}`, bucket);
+  return await PUT(`/api/buckets/${bucketID}`, bucket);
 }
 
 async function deleteBucket(bucketID) {
-  return await DELETE(`buckets/${bucketID}`);
+  return await DELETE(`/api/buckets/${bucketID}`);
 }
 
 function getBucketJSON(id, name, color) {
@@ -161,23 +171,23 @@ function getBucketJSON(id, name, color) {
 // Label
 
 async function postLabel(label) {
-  return await POST('labels', label);
+  return await POST('/api/labels', label);
 }
 
 async function getLabel(labelID) {
-  return await GET(`labels/${labelID}`);
+  return await GET(`/api/labels/${labelID}`);
 }
 
 async function getLabels() {
-  return await GET('labels');
+  return await GET('/api/labels');
 }
 
 async function putLabel(labelID, label) {
-  return await PUT(`labels/${labelID}`, label);
+  return await PUT(`/api/labels/${labelID}`, label);
 }
 
 async function deleteLabel(labelID) {
-  return await DELETE(`labels/${labelID}`);
+  return await DELETE(`/api/labels/${labelID}`);
 }
 
 function getLabelJSON(id, name) {
@@ -201,5 +211,5 @@ async function postImage(data) {
     payload.append(name, data[name]);
   }
 
-  return await POST('images', payload, false);
+  return await POST('/api/images', payload, false);
 }

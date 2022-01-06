@@ -42,25 +42,28 @@ function watchValues(watchers, submit) {
   isValid = {};
 
   watchers.forEach((watcher) => {
-    isValid[watcher.identifier] = !watcher.required;
     watchValue(watcher, submit);
   });
 }
 
 function watchValue(watcher, submit) {
-  const { identifier, type, regexp, message } = watcher;
+  validateAndFeedback(watcher, val(watcher.identifier), submit);
 
-  query(identifier).addEventListener('keyup', (e) => {
-    isValid[identifier] =
-      !watcher.required && e.target.value === '' ? true : validate(e.target.value, regexp);
-
-    setErrorMessage(identifier, message);
-    setAppearance(identifier, type, isValid[identifier]);
-    setSubmit(submit);
+  query(watcher.identifier).addEventListener('keyup', (e) => {
+    validateAndFeedback(watcher, e.target.value, submit);
   });
 }
 
-function validate(value, regexp) {
+function validateAndFeedback(watcher, value, submit) {
+  const { identifier, type, regexp, message, required } = watcher;
+
+  isValid[identifier] = !required && value === '' ? true : validate(regexp, value);
+  setErrorMessage(identifier, message);
+  setAppearance(identifier, type, isValid[identifier]);
+  setSubmit(submit);
+}
+
+function validate(regexp, value) {
   return regexp.test(value);
 }
 
@@ -90,14 +93,17 @@ const regExpPresets = {
   default: '^[a-z0-9\\s]{MIN,MAX}$',
   number: '[0-9]+',
   text: "^[a-z0-9äöüéèà.:,;'!?()=$\\s_-]{MIN,MAX}$",
+  email:
+    '^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$',
+  password: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$',
   labels: '^[\\sa-z0-9-]+$',
   url: 'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)',
 };
 
-function getRegExp(key, min, max) {
+function getRegExp(key, min, max, flags = 'i') {
   if (!regExpPresets.hasOwnProperty(key)) key = 'default';
 
-  return new RegExp(regExpPresets[key].replace('MIN', min).replace('MAX', max), 'i');
+  return new RegExp(regExpPresets[key].replace('MIN', min).replace('MAX', max), flags);
 }
 
 function validResult(result) {
@@ -146,8 +152,12 @@ function redirect(path) {
   window.location.replace(path);
 }
 
-function val(identifier) {
-  return query(identifier).value;
+function val(identifier, value) {
+  if (value) {
+    query(identifier).value = value;
+  } else {
+    return query(identifier).value;
+  }
 }
 
 // Notification
