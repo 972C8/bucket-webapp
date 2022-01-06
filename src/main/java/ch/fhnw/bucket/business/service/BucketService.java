@@ -16,18 +16,40 @@ import java.util.List;
 public class BucketService {
     @Autowired
     private BucketRepository bucketRepository;
+
+    @Autowired
+    private AvatarRepository avatarRepository;
+
     @Autowired
     private AvatarService avatarService;
 
-    public Bucket saveBucket(@Valid Bucket bucket) {
-        //Assign new bucket item to current user
-        if (bucket.getAvatar() == null) {
-            bucket.setAvatar(avatarService.getCurrentAvatar());
+    public Bucket saveBucket(@Valid Bucket bucket) throws Exception {
+        try {
+            //Add referenced avatar to Bucket that is saved
+            if (bucket.getAvatar() != null) {
+                //When creating a new bucket, store the referenced avatar id as object
+                Long avatarId = bucket.getAvatar().getId();
+
+                //Find avatar object by id from provided RequestBody
+                Avatar proxy = avatarRepository.findAvatarById(avatarId);
+
+                //Assign new bucket to provided avatar. As fallback, assign it to the current avatar
+                if (proxy == null) {
+                    bucket.setAvatar(avatarService.getCurrentAvatar());
+                } else {
+                    bucket.setAvatar(proxy);
+                }
+            }
+
+            return bucketRepository.save(bucket);
+
+        } catch (Exception e) {
+            throw new Exception("No bucket found.");
         }
-        return bucketRepository.save(bucket);
     }
 
     public Bucket findBucketById(Long bucketId) throws Exception {
+        //TODO: Currently gives only the buckets of the current user (api call "get bucket by api")
         List<Bucket> bucketList = bucketRepository.findByIdAndAvatarId(bucketId, avatarService.getCurrentAvatar().getId());
         if (bucketList.isEmpty()) {
             throw new Exception("No bucket with ID " + bucketId + " found.");

@@ -22,7 +22,9 @@ public class Bucket {
 
     //One avatar holds many buckets
     @ManyToOne
-    @JsonIgnore
+    //TODO: FetchType Lazy?
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JsonIgnore
     private Avatar avatar;
 
     public Long getId() {

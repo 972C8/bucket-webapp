@@ -1,13 +1,11 @@
-package ch.fhnw.acrm.api;
+package ch.fhnw.bucket.api;
 
-import ch.fhnw.acrm.business.service.BucketItemService;
-import ch.fhnw.acrm.data.domain.BucketItem;
+import ch.fhnw.bucket.business.service.BucketItemService;
+import ch.fhnw.bucket.data.domain.BucketItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,9 +19,8 @@ public class BucketItemEndpoint {
     @Autowired
     private BucketItemService bucketItemService;
 
-    @PostMapping(value = "/bucket-items", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
-
-    public ResponseEntity<BucketItem> postBucketItem(@RequestBody BucketItem bucketItem, @RequestParam(value = "file", required = false) MultipartFile image) {
+    @PostMapping(path = "/bucket-items", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<BucketItem> postBucketItem(@RequestBody BucketItem bucketItem) {
         try {
             bucketItem = bucketItemService.saveBucketItem(bucketItem);
         } catch (ConstraintViolationException e) {
