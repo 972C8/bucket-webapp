@@ -27,10 +27,10 @@ public class BucketItem {
 
     //One bucket (category) holds many bucket items
     @ManyToOne
-    //@JsonIgnore
     private Bucket bucket;
 
-    @OneToOne
+    //one bucket item has one image
+    @OneToOne(mappedBy = "bucketItem")
     private Image image;
 
     public Long getId() {

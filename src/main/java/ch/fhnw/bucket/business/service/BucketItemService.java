@@ -25,6 +25,12 @@ public class BucketItemService {
     @Autowired
     private AvatarService avatarService;
 
+    /*
+    Save BucketItem and assign referenced objects (avatar, bucket, image, label) based on provided id in JSON using a proxy
+
+    Proxy logic adapted from:
+    https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy
+     */
     public BucketItem saveBucketItem(@Valid BucketItem bucketItem) throws Exception {
         //Logic to store referenced objects by provided id from JSON
         try {
@@ -56,7 +62,7 @@ public class BucketItemService {
                 bucketItem.setBucket(proxy);
             }
 
-            //TODO: image reference
+            //TODO: image, label reference
 
             return bucketItemRepository.save(bucketItem);
         } catch (Exception e) {

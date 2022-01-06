@@ -1,4 +1,6 @@
-package ch.fhnw.acrm.data.domain;
+package ch.fhnw.bucket.data.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -16,11 +18,19 @@ public class Image {
 
     private String fileType;
 
-    @Lob
-    private byte[] data;
-
+    //One avatar has one profile picture (image)
     @OneToOne
+    @JsonIgnore
     private Avatar avatar;
+
+    //one bucket item has one image
+    @OneToOne
+    @JsonIgnore
+    private BucketItem bucketItem;
+
+    @Lob
+    @JsonIgnore
+    private byte[] data;
 
     public Image() {
     }
@@ -69,5 +79,13 @@ public class Image {
 
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public BucketItem getBucketItem() {
+        return bucketItem;
+    }
+
+    public void setBucketItem(BucketItem bucketItem) {
+        this.bucketItem = bucketItem;
     }
 }

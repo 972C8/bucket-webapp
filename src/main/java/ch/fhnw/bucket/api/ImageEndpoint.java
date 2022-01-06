@@ -22,10 +22,13 @@ public class ImageEndpoint {
     @Autowired
     private ImageService imageService;
 
-    @PostMapping("/uploadImage")
-    public ResponseEntity<Image> uploadImage(@RequestParam("image") MultipartFile image) {
+    @PostMapping("/images")
+    public ResponseEntity<Image> uploadImage(
+            @RequestParam(value = "image") MultipartFile image,
+            @RequestParam(value = "avatar", required = false) Long avatarId,
+            @RequestParam(value = "bucketItem", required = false) Long bucketItemId) {
         try {
-            Image file = imageService.storeImageForBucketItem(image);
+            Image file = imageService.saveImage(image, avatarId, bucketItemId);
 
             //TODO: return Response?
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -33,7 +36,7 @@ public class ImageEndpoint {
                     .path(file.getFileName())
                     .toUriString();
 
-            //TODO: remove print
+            //TODO: remove print. Url not valid!
             System.out.println(fileDownloadUri);
 
             return ResponseEntity.accepted().body(file);

@@ -1,6 +1,10 @@
 package ch.fhnw.bucket.business.service;
 
+import ch.fhnw.bucket.data.domain.Avatar;
+import ch.fhnw.bucket.data.domain.BucketItem;
 import ch.fhnw.bucket.data.domain.Image;
+import ch.fhnw.bucket.data.repository.AvatarRepository;
+import ch.fhnw.bucket.data.repository.BucketItemRepository;
 import ch.fhnw.bucket.data.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,10 @@ import java.util.Objects;
 public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private AvatarRepository avatarRepository;
+    @Autowired
+    private BucketItemRepository bucketItemRepository;
 
     @Autowired
     private AvatarService avatarService;
@@ -21,7 +29,7 @@ public class ImageService {
     /*
     Save image in database as byte and add current avatar as owner of image.
      */
-    public Image storeImageForBucketItem(MultipartFile img) throws Exception {
+    public Image saveImage(MultipartFile img, Long avatarId, Long bucketItemId) throws Exception {
         // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
 
@@ -33,9 +41,24 @@ public class ImageService {
 
             Image image = new Image(fileName, img.getContentType(), img.getBytes());
 
-            //Assign current avatar to image
-            if (image.getAvatar() == null) {
-                image.setAvatar(avatarService.getCurrentAvatar());
+            //Add referenced Avatar to Image (using the provided ID) if it is a profile picture
+            if (avatarId != null) {
+                //Find avatar object by id from provided RequestBody
+                Avatar proxy = avatarRepository.findAvatarById(avatarId);
+
+                //Assign new bucket item to provided avatar
+                if (proxy != null) {
+                    image.setAvatar(proxy);
+                }
+            }
+
+            //Add referenced BucketItem to Image by provided ID.
+            if (bucketItemId != null) {
+                BucketItem proxy = bucketItemRepository.findBucketItemByIdAndAvatarId(bucketItemId, avatarService.getCurrentAvatar().getId());
+
+                if (proxy != null) {
+                    image.setBucketItem(proxy);
+                }
             }
 
             return imageRepository.save(image);
