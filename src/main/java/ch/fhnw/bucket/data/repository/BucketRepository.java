@@ -10,4 +10,5 @@ import java.util.List;
 public interface BucketRepository extends JpaRepository<Bucket, Long> {
 	List<Bucket> findByAvatarId(Long avatarId);
     List<Bucket> findByIdAndAvatarId(Long bucketId, Long avatarId);
+    Bucket findBucketByIdAndAvatarId(Long bucketId, Long avatarId);
 }

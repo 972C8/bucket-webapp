@@ -1,7 +1,11 @@
 package ch.fhnw.bucket.business.service;
 
+import ch.fhnw.bucket.data.domain.Avatar;
+import ch.fhnw.bucket.data.domain.Bucket;
 import ch.fhnw.bucket.data.domain.BucketItem;
+import ch.fhnw.bucket.data.repository.AvatarRepository;
 import ch.fhnw.bucket.data.repository.BucketItemRepository;
+import ch.fhnw.bucket.data.repository.BucketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -15,14 +19,49 @@ public class BucketItemService {
     @Autowired
     private BucketItemRepository bucketItemRepository;
     @Autowired
+    private AvatarRepository avatarRepository;
+    @Autowired
+    private BucketRepository bucketRepository;
+    @Autowired
     private AvatarService avatarService;
 
-    public BucketItem saveBucketItem(@Valid BucketItem bucketItem) {
-        //Assign new bucket item to current user
-        if (bucketItem.getAvatar() == null) {
-            bucketItem.setAvatar(avatarService.getCurrentAvatar());
+    public BucketItem saveBucketItem(@Valid BucketItem bucketItem) throws Exception {
+        //Logic to store referenced objects by provided id from JSON
+        try {
+            Avatar currentAvatar = avatarService.getCurrentAvatar();
+            //Add referenced avatar to bucket item that is saved
+            if (bucketItem.getAvatar() != null) {
+                //When creating a new bucket item, store the referenced avatar id as object
+                Long avatarId = bucketItem.getAvatar().getId();
+
+                //Find avatar object by id from provided RequestBody
+                Avatar proxy = avatarRepository.findAvatarById(avatarId);
+
+                //Assign new bucket item to provided avatar. As fallback, assign it to the current avatar
+                if (proxy == null) {
+                    bucketItem.setAvatar(currentAvatar);
+                } else {
+                    bucketItem.setAvatar(proxy);
+                }
+            }
+
+            //Add referenced bucket
+            if (bucketItem.getBucket() != null) {
+                //When creating a new bucket item, store the referenced bucket id as object
+                Long bucketId = bucketItem.getBucket().getId();
+
+                //Find avatar object by id from provided RequestBody
+                Bucket proxy = bucketRepository.findBucketByIdAndAvatarId(bucketId, currentAvatar.getId());
+
+                bucketItem.setBucket(proxy);
+            }
+
+            //TODO: image reference
+
+            return bucketItemRepository.save(bucketItem);
+        } catch (Exception e) {
+            throw new Exception("No bucket found.");
         }
-        return bucketItemRepository.save(bucketItem);
     }
 
     public BucketItem findBucketItemById(Long itemId) throws Exception {
