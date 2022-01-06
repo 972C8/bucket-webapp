@@ -68,7 +68,15 @@ We used another repository for easier deployment of the prototypes (https://gith
 
 The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with jQuery, to build a dynamic website.
 
-![](images/bucketList_Design_Timeline2.png)
+We used a method called brainwriting to gather ideas for certain designs of our interface. With this method the members of our group individually wrote down their ideas and presented them in a Microsoft Teams meeting to the team. The advantage of this method was that everyone of the team already had their ideas ready and thus we did not waste time to look for ideas but combined the presented ideas to create our design.
+An example for the bucketlist timeline design written by hand:
+
+<img src="images/bucketList_Design_Timeline2.png" width="300">
+
+
+An example for the dashboard design written by hand:
+
+<img src="images/Dashboard_Brainstorming_Luca_Herlig.png" width="600">
 
 ### Domain design
 
