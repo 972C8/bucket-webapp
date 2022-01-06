@@ -3,6 +3,7 @@ package ch.fhnw.bucket.data.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.util.List;
 
 
 @Entity
@@ -32,6 +33,10 @@ public class BucketItem {
     //one bucket item has one image
     @OneToOne(mappedBy = "bucketItem")
     private Image image;
+
+    //One bucketItem has many labels
+    @OneToMany(mappedBy = "bucketItem", fetch = FetchType.EAGER)
+    private List<Label> labels;
 
     public Long getId() {
         return id;
@@ -91,5 +96,13 @@ public class BucketItem {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
     }
 }

@@ -48,6 +48,17 @@ public class BucketService {
         }
     }
 
+    //TODO: FIX
+    public Bucket updateBucket(@Valid Bucket bucket) throws Exception {
+        //Check if bucket with given id is already present
+        //Only buckets with valid id are updated.
+        if (!bucketRepository.findById(bucket.getId()).isPresent()) {
+            throw new Exception("No bucket with ID " + bucket.getId() + " found.");
+        }
+        //Call regular save method
+        return saveBucket(bucket);
+    }
+
     public Bucket findBucketById(Long bucketId) throws Exception {
         //TODO: Currently gives only the buckets of the current user (api call "get bucket by api")
         List<Bucket> bucketList = bucketRepository.findByIdAndAvatarId(bucketId, avatarService.getCurrentAvatar().getId());
