@@ -51,7 +51,8 @@ function watchValue(watcher, submit) {
   const { identifier, type, regexp, message } = watcher;
 
   query(identifier).addEventListener('keyup', (e) => {
-    isValid[identifier] = validate(e.target.value, regexp);
+    isValid[identifier] =
+      !watcher.required && e.target.value === '' ? true : validate(e.target.value, regexp);
 
     setErrorMessage(identifier, message);
     setAppearance(identifier, type, isValid[identifier]);
@@ -87,7 +88,9 @@ function setSubmit(identifier) {
 
 const regExpPresets = {
   default: '^[a-z0-9\\s]{MIN,MAX}$',
+  number: '[0-9]+',
   text: "^[a-z0-9äöüéèà.:,;'!?()=$\\s_-]{MIN,MAX}$",
+  labels: '^[\\sa-z0-9-]+$',
   url: 'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)',
 };
 
@@ -104,7 +107,7 @@ function validResult(result) {
 // General utility functions
 
 /**
- * Transform a given ISO datetime string to DD.MM.YYYY format.
+ * Transform a given ISO datetime string to DD. Januar YYYY format.
  *
  * @param {*} dateString
  * @returns
@@ -145,4 +148,57 @@ function redirect(path) {
 
 function val(identifier) {
   return query(identifier).value;
+}
+
+// Notification
+
+function notify(title, message) {
+  const notification = query('#notification');
+  const id = randomHex(8);
+
+  notification.content.querySelector('[data-notification]').dataset.id = id;
+  notification.content.querySelector('[data-title]').textContent = title;
+  notification.content.querySelector('[data-message]').textContent = message;
+  notification.content
+    .querySelector('[data-close]')
+    .setAttribute('onclick', `closeNotification("${id}")`);
+
+  const clone = document.importNode(notification.content, true);
+  query('#notification-panel').appendChild(clone);
+  animateIn(`[data-notification][data-id="${id}"]`);
+
+  setTimeout(() => {
+    closeNotification(id);
+  }, 10000);
+}
+
+function closeNotification(id) {
+  animateOut(`[data-notification][data-id="${id}"]`);
+  setTimeout(() => {
+    query(`[data-notification][data-id="${id}"]`).remove();
+  }, 500);
+}
+
+function randomHex(length = 8) {
+  let str = '';
+  for (let i = 0; i < length; i++) {
+    str += randomHexChar();
+  }
+  return str;
+}
+
+function randomHexChar() {
+  let chars = 'abcdef0123456789';
+  let index = Math.floor(Math.random() * chars.length);
+  return chars[index];
+}
+
+function animateIn(identifier) {
+  setTimeout(() => {
+    query(identifier).classList.remove('translate-x-24', 'opacity-0');
+  }, 100);
+}
+
+function animateOut(identifier) {
+  query(identifier).classList.add('translate-x-24', 'opacity-0');
 }
