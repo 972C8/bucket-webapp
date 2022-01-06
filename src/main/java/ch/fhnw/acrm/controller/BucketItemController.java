@@ -15,21 +15,21 @@ public class BucketItemController {
 
     @GetMapping
     public String getBucketItemListView(){
-        return "bucket/itemList.html";
+        return "/views/itemList.html";
     }
 
     @GetMapping("/create")
     public String getBucketItemCreateView(){
-        return "../bucket/itemCreate.html";
+        return "/views/itemCreate.html";
     }
 
     @GetMapping("/view")
     public String getBucketItemDetailView(){
-        return "../bucket/itemView.html";
+        return "/views/itemView.html";
     }
 
     @GetMapping("/edit")
     public String getBucketItemEditView(){
-        return "../bucket/itemEdit.html";
+        return "/views/itemEdit.html";
     }
 }
