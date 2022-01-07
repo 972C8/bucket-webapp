@@ -23,8 +23,10 @@ public abstract class AbstractImage {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     private String fileName;
 
+    @JsonIgnore
     private String fileType;
 
     @Lob

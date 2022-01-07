@@ -21,7 +21,7 @@ public class ProfilePicture extends AbstractImage {
     }
 
     //A profile picture is assigned to one avatar
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Avatar avatar;
 

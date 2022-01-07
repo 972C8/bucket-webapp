@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 
+/*
+Service to store image uploaded through API as byte in the database.
+ */
 @Service
 public class ImageService {
     @Autowired
@@ -61,7 +64,11 @@ public class ImageService {
         }
     }
 
-    public ProfilePicture saveAvatarProfilePicture(MultipartFile img) throws Exception {
+    /*
+    Create the new profile picture and assign it to the current user.
+    If a profile picture already exists, it is overwritten and the old one is deleted.
+     */
+    public ProfilePicture uploadAvatarProfilePicture(MultipartFile img) throws Exception {
         // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
 
@@ -73,21 +80,32 @@ public class ImageService {
 
             ProfilePicture image = new ProfilePicture(fileName, img.getContentType(), img.getBytes());
 
-            //TODO: one avatar can only have one image. check!
-
+            //Assign the current avatar to the created image
             image.setAvatar(avatarService.getCurrentAvatar());
+
+            //Remove the current profile picture from the current avatar as it is overwritten with the new one
+            if (avatarService.getCurrentAvatar().getProfilePicture() != null) {
+                profilePictureRepository.delete(avatarService.getCurrentAvatar().getProfilePicture());
+            }
 
             return profilePictureRepository.save(image);
         } catch (Exception ex) {
-            throw new Exception("Could not store file " + fileName + ". Please try again!", ex);
+            throw new Exception("Could not store file " + fileName, ex);
         }
     }
 
     /*
-    Get image from database by id
-     */
+Get image from database by id
+ */
     public BucketItemImage getImage(Long imgId) throws FileNotFoundException {
         return bucketItemImageRepository.findById(imgId)
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + imgId));
+    }
+
+    /*
+    Get profile picture of the current avatar
+     */
+    public ProfilePicture getCurrentAvatarProfilePicture() {
+        return profilePictureRepository.findProfilePictureByAvatarId(avatarService.getCurrentAvatar().getId());
     }
 }

@@ -31,7 +31,8 @@ public class Avatar {
     //stored as "true" or "false"
     private String remember;
 
-    @OneToOne(mappedBy = "avatar", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "avatar", fetch = FetchType.EAGER)
+    @JsonIgnore
     private ProfilePicture profilePicture;
 
     //One avatar has many bucket items

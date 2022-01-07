@@ -27,7 +27,7 @@ public class ImageEndpoint {
     Save the uploaded image as the image of the provided bucket item id
      */
     @PostMapping("/bucket-items/images")
-    public ResponseEntity<BucketItemImage> uploadImage(
+    public ResponseEntity<BucketItemImage> uploadBucketItemImage(
             @RequestParam(value = "image") MultipartFile image,
             @RequestParam(value = "bucketItem") Long bucketItemId) {
         try {
@@ -53,14 +53,30 @@ public class ImageEndpoint {
     Save the uploaded image as the profile picture of the current avatar
      */
     @PostMapping("/avatars/profile-picture")
-    public ResponseEntity<ProfilePicture> uploadImage(@RequestParam(value = "image") MultipartFile image) {
+    public ResponseEntity<ProfilePicture> uploadProfilePicture(@RequestParam(value = "image") MultipartFile image) {
         try {
-            ProfilePicture file = imageService.saveAvatarProfilePicture(image);
+            ProfilePicture file = imageService.uploadAvatarProfilePicture(image);
 
             return ResponseEntity.accepted().body(file);
 
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+    }
+
+    @GetMapping("/avatars/profile-picture")
+    public ResponseEntity<Resource> getProfilePicture() {
+        try {
+            // Load file as Resource
+            ProfilePicture imageFile = imageService.getCurrentAvatarProfilePicture();
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(imageFile.getFileType()))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageFile.getFileName() + "\"")
+                    .body(new ByteArrayResource(imageFile.getData()));
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -84,15 +100,4 @@ public class ImageEndpoint {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
-
-    //TODO: UploadStream
-    /*
-    @PostMapping("/uploadMultipleFiles")
-    public List < Response > uploadMultipleFiles(@RequestParam("images") MultipartFile[] images) {
-        return Arrays.asList(images)
-                .stream()
-                .map(image -> uploadFile(image))
-                .collect(Collectors.toList());
-    }
-     */
 }
