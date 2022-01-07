@@ -19,12 +19,12 @@ public class Image {
     private String fileType;
 
     //One avatar has one profile picture (image)
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Avatar avatar;
 
     //one bucket item has one image
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private BucketItem bucketItem;
 
