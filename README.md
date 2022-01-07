@@ -64,7 +64,7 @@ API
 
 ### Prototype Design
 After the Analysis we started with the prototype design. At first we only had the prototype design for the timeline and the dashboard. After the first designs were given we focused on the domain model and the business logic (including the API design). Simultaneously we started to code the website according to our designs. During this phase we also designed the profile page and the page to add a new item.
-We used another repository for easier deployment of the prototypes (https://github.com/mahgoh/flex.git)
+We used another repository for easier deployment of the prototypes (https://github.com/mahgoh/bucket-frontend.git)
 
 The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with jQuery, to build a dynamic website.
 
