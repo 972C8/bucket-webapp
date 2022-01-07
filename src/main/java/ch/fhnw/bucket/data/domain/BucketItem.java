@@ -1,5 +1,7 @@
 package ch.fhnw.bucket.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
@@ -21,21 +23,27 @@ public class BucketItem {
     //Date until bucket item should be accomplished
     private String dateToAccomplish;
 
-    @ManyToOne
+    //Whether the bucket item was completed
+    private boolean completed;
+
+    private String dateAccomplishedOn;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     //Referenced avatar is not returned in api requests
-    //@JsonIgnore
+    @JsonIgnore
     private Avatar avatar;
 
     //One bucket (category) holds many bucket items
-    @ManyToOne
+    //TODO: Ignore with @JsonIgnore and add get param api call to request all bucket items of a certain bucket
+    @ManyToOne(fetch = FetchType.EAGER)
     private Bucket bucket;
 
     //one bucket item has one image
-    @OneToOne(mappedBy = "bucketItem")
+    @OneToOne(fetch = FetchType.EAGER)
     private Image image;
 
     //One bucketItem has many labels
-    @OneToMany(mappedBy = "bucketItem", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Label> labels;
 
     public Long getId() {

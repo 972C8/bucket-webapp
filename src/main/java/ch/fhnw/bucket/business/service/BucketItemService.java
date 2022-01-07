@@ -1,16 +1,13 @@
 package ch.fhnw.bucket.business.service;
 
-import ch.fhnw.bucket.data.domain.Avatar;
-import ch.fhnw.bucket.data.domain.Bucket;
-import ch.fhnw.bucket.data.domain.BucketItem;
-import ch.fhnw.bucket.data.repository.AvatarRepository;
-import ch.fhnw.bucket.data.repository.BucketItemRepository;
-import ch.fhnw.bucket.data.repository.BucketRepository;
+import ch.fhnw.bucket.data.domain.*;
+import ch.fhnw.bucket.data.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +19,10 @@ public class BucketItemService {
     private AvatarRepository avatarRepository;
     @Autowired
     private BucketRepository bucketRepository;
+    @Autowired
+    private ImageRepository imageRepository;
+    @Autowired
+    private LabelRepository labelRepository;
     @Autowired
     private AvatarService avatarService;
 
@@ -35,21 +36,9 @@ public class BucketItemService {
         //Logic to store referenced objects by provided id from JSON
         try {
             Avatar currentAvatar = avatarService.getCurrentAvatar();
-            //Add referenced avatar to bucket item that is saved
-            if (bucketItem.getAvatar() != null) {
-                //When creating a new bucket item, store the referenced avatar id as object
-                Long avatarId = bucketItem.getAvatar().getId();
 
-                //Find avatar object by id from provided RequestBody
-                Avatar proxy = avatarRepository.findAvatarById(avatarId);
-
-                //Assign new bucket item to provided avatar. As fallback, assign it to the current avatar
-                if (proxy == null) {
-                    bucketItem.setAvatar(currentAvatar);
-                } else {
-                    bucketItem.setAvatar(proxy);
-                }
-            }
+            //Assign bucket item to the current avatar
+            bucketItem.setAvatar(currentAvatar);
 
             //Add referenced bucket
             if (bucketItem.getBucket() != null) {
@@ -57,12 +46,35 @@ public class BucketItemService {
                 Long bucketId = bucketItem.getBucket().getId();
 
                 //Find avatar object by id from provided RequestBody
-                Bucket proxy = bucketRepository.findBucketByIdAndAvatarId(bucketId, currentAvatar.getId());
+                Bucket proxyBucketItem = bucketRepository.findBucketByIdAndAvatarId(bucketId, currentAvatar.getId());
 
-                bucketItem.setBucket(proxy);
+                bucketItem.setBucket(proxyBucketItem);
             }
 
-            //TODO: image, label reference
+            //Add referenced image
+            if (bucketItem.getImage() != null) {
+                //When creating a new bucket item, store the referenced bucket id as object
+                Long imageId = bucketItem.getImage().getId();
+
+                //Find avatar object by id from provided RequestBody
+                Image proxyImage = imageRepository.findImageById(imageId);
+
+                bucketItem.setImage(proxyImage);
+            }
+
+            //Add referenced labels
+            if (bucketItem.getLabels() != null) {
+                //When creating a new bucket item, store the referenced labels as objects
+                List<Label> proxyLabel = new ArrayList<>();
+
+                //Find list of labels by id from provided RequestBody
+                for (Label label : bucketItem.getLabels()) {
+                    Label foundLabel = labelRepository.findLabelByIdAndAvatarId(label.getId(), avatarService.getCurrentAvatar().getId());
+                    proxyLabel.add(foundLabel);
+                }
+
+                bucketItem.setLabels(proxyLabel);
+            }
 
             return bucketItemRepository.save(bucketItem);
         } catch (Exception e) {

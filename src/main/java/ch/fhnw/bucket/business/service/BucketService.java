@@ -25,21 +25,8 @@ public class BucketService {
 
     public Bucket saveBucket(@Valid Bucket bucket) throws Exception {
         try {
-            //Add referenced avatar to Bucket that is saved
-            if (bucket.getAvatar() != null) {
-                //When creating a new bucket, store the referenced avatar id as object
-                Long avatarId = bucket.getAvatar().getId();
-
-                //Find avatar object by id from provided RequestBody
-                Avatar proxy = avatarRepository.findAvatarById(avatarId);
-
-                //Assign new bucket to provided avatar. As fallback, assign it to the current avatar
-                if (proxy == null) {
-                    bucket.setAvatar(avatarService.getCurrentAvatar());
-                } else {
-                    bucket.setAvatar(proxy);
-                }
-            }
+            //Assign current avatar to bucket
+            bucket.setAvatar(avatarService.getCurrentAvatar());
 
             return bucketRepository.save(bucket);
 
@@ -48,7 +35,6 @@ public class BucketService {
         }
     }
 
-    //TODO: FIX
     public Bucket updateBucket(@Valid Bucket bucket) throws Exception {
         //Check if bucket with given id is already present
         //Only buckets with valid id are updated.

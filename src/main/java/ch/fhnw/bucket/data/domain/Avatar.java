@@ -30,21 +30,21 @@ public class Avatar {
     //stored as "true" or "false"
     private String remember;
 
-    @OneToOne(mappedBy = "avatar")
+    @OneToOne(mappedBy = "avatar", fetch = FetchType.LAZY)
     private Image profilePicture;
 
     //One avatar has many bucket items
-    @OneToMany(mappedBy = "avatar")
+    @OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<BucketItem> bucketItems;
 
     //One avatar has many buckets (categories)
-    @OneToMany(mappedBy = "avatar")
+    @OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Bucket> buckets;
 
     //One avatar has many labels
-    @OneToMany(mappedBy = "avatar")
+    @OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Label> labels;
 
