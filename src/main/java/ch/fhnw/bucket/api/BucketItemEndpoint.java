@@ -73,9 +73,14 @@ public class BucketItemEndpoint {
 
     /*
         Returns List<BucketItem> of bucket items assigned to the given avatar
+
+        Boolean completed must be of Boolean (not primitive type boolean!) so that it can be null if no parameter was sent,
+        else it is false as default
      */
     @GetMapping(path = "/bucket-items", produces = "application/json")
-    public List<BucketItem> getBucketItems() {
-        return bucketItemService.findAllBucketItems();
+    public List<BucketItem> getBucketItems(
+            @RequestParam(value = "bucketId", required = false) Long bucketId,
+            @RequestParam(value = "completed", required = false) Boolean completed) {
+        return bucketItemService.findAllBucketItems(bucketId, completed);
     }
 }

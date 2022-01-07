@@ -97,8 +97,8 @@ public class BucketItemService {
         bucketItemRepository.deleteById(itemId);
     }
 
-    public List<BucketItem> findAllBucketItems() {
-        return bucketItemRepository.findByAvatarId(avatarService.getCurrentAvatar().getId());
+    public List<BucketItem> findAllBucketItems(Long bucketId, Boolean completed) {
+        return bucketItemRepository.findByParams(avatarService.getCurrentAvatar().getId(), bucketId, completed);
     }
 
 }
