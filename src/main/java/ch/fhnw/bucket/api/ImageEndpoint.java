@@ -1,7 +1,8 @@
 package ch.fhnw.bucket.api;
 
 import ch.fhnw.bucket.business.service.ImageService;
-import ch.fhnw.bucket.data.domain.Image;
+import ch.fhnw.bucket.data.domain.image.BucketItemImage;
+import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -22,13 +23,15 @@ public class ImageEndpoint {
     @Autowired
     private ImageService imageService;
 
-    @PostMapping("/images")
-    public ResponseEntity<Image> uploadImage(
+    /*
+    Save the uploaded image as the image of the provided bucket item id
+     */
+    @PostMapping("/bucket-items/images")
+    public ResponseEntity<BucketItemImage> uploadImage(
             @RequestParam(value = "image") MultipartFile image,
-            @RequestParam(value = "avatar", required = false) Long avatarId,
-            @RequestParam(value = "bucketItem", required = false) Long bucketItemId) {
+            @RequestParam(value = "bucketItem") Long bucketItemId) {
         try {
-            Image file = imageService.saveImage(image, avatarId, bucketItemId);
+            BucketItemImage file = imageService.saveBucketItemImage(image, bucketItemId);
 
             //TODO: return Response?
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -46,12 +49,31 @@ public class ImageEndpoint {
         }
     }
 
+    /*
+    Save the uploaded image as the profile picture of the current avatar
+     */
+    @PostMapping("/avatars/profile-picture")
+    public ResponseEntity<ProfilePicture> uploadImage(@RequestParam(value = "image") MultipartFile image) {
+        try {
+            ProfilePicture file = imageService.saveAvatarProfilePicture(image);
+
+            return ResponseEntity.accepted().body(file);
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+    }
+
+    /*
+    GET the image by id
+     */
+    //TODO: FIX GET for both ProfilePicture and BucketItem
     @GetMapping("/images/{imageId:.+}")
     public ResponseEntity<Resource> downloadImage(@PathVariable Long imageId, HttpServletRequest request) {
         try {
 
             // Load file as Resource
-            Image imageFile = imageService.getImage(imageId);
+            BucketItemImage imageFile = imageService.getImage(imageId);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(imageFile.getFileType()))

@@ -1,5 +1,6 @@
 package ch.fhnw.bucket.data.domain;
 
+import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,7 +32,7 @@ public class Avatar {
     private String remember;
 
     @OneToOne(mappedBy = "avatar", fetch = FetchType.LAZY)
-    private Image profilePicture;
+    private ProfilePicture profilePicture;
 
     //One avatar has many bucket items
     @OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
@@ -94,11 +95,11 @@ public class Avatar {
         return role;
     }
 
-    public Image getProfilePicture() {
+    public ProfilePicture getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    public void setProfilePicture(ProfilePicture profilePicture) {
         this.profilePicture = profilePicture;
     }
 

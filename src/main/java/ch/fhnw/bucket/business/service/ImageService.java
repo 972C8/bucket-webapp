@@ -1,11 +1,11 @@
 package ch.fhnw.bucket.business.service;
 
-import ch.fhnw.bucket.data.domain.Avatar;
 import ch.fhnw.bucket.data.domain.BucketItem;
-import ch.fhnw.bucket.data.domain.Image;
-import ch.fhnw.bucket.data.repository.AvatarRepository;
+import ch.fhnw.bucket.data.domain.image.BucketItemImage;
+import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import ch.fhnw.bucket.data.repository.BucketItemRepository;
-import ch.fhnw.bucket.data.repository.ImageRepository;
+import ch.fhnw.bucket.data.repository.BucketItemImageRepository;
+import ch.fhnw.bucket.data.repository.ProfilePictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -17,9 +17,9 @@ import java.util.Objects;
 @Service
 public class ImageService {
     @Autowired
-    private ImageRepository imageRepository;
+    private BucketItemImageRepository bucketItemImageRepository;
     @Autowired
-    private AvatarRepository avatarRepository;
+    private ProfilePictureRepository profilePictureRepository;
     @Autowired
     private BucketItemRepository bucketItemRepository;
 
@@ -29,7 +29,39 @@ public class ImageService {
     /*
     Save image in database as byte and add current avatar as owner of image.
      */
-    public Image saveImage(MultipartFile img, Long avatarId, Long bucketItemId) throws Exception {
+    public BucketItemImage saveBucketItemImage(MultipartFile img, Long bucketItemId) throws Exception {
+        try {
+            //bucketItemId is required to upload a bucket item image
+            if (bucketItemId == null) {
+                throw new Exception("Storing a bucket item image requires a bucket item id.");
+            }
+
+            // Normalize file name
+            String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
+
+            // Check if the file's name contains invalid characters
+            if (fileName.contains("..")) {
+                throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+
+            //Create the uploaded image object
+            BucketItemImage image = new BucketItemImage(fileName, img.getContentType(), img.getBytes());
+
+            //Add referenced BucketItem to Image by provided ID.
+            //It is mandatory that a bucketItem can be referenced. If no entity is found, an exception is thrown
+            BucketItem proxy = bucketItemRepository.findBucketItemByIdAndAvatarId(bucketItemId, avatarService.getCurrentAvatar().getId());
+            if (proxy == null) {
+                throw new Exception("Storing a bucket item image requires a bucket item id.");
+            }
+            image.setBucketItem(proxy);
+
+            return bucketItemImageRepository.save(image);
+        } catch (Exception ex) {
+            throw new Exception("Could not store image.", ex);
+        }
+    }
+
+    public ProfilePicture saveAvatarProfilePicture(MultipartFile img) throws Exception {
         // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
 
@@ -39,29 +71,13 @@ public class ImageService {
                 throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
-            Image image = new Image(fileName, img.getContentType(), img.getBytes());
+            ProfilePicture image = new ProfilePicture(fileName, img.getContentType(), img.getBytes());
 
-            //Add referenced Avatar to Image (using the provided ID) if it is a profile picture
-            if (avatarId != null) {
-                //Find avatar object by id from provided RequestBody
-                Avatar proxy = avatarRepository.findAvatarById(avatarId);
+            //TODO: one avatar can only have one image. check!
 
-                //Assign new bucket item to provided avatar
-                if (proxy != null) {
-                    image.setAvatar(proxy);
-                }
-            }
+            image.setAvatar(avatarService.getCurrentAvatar());
 
-            //Add referenced BucketItem to Image by provided ID.
-            if (bucketItemId != null) {
-                BucketItem proxy = bucketItemRepository.findBucketItemByIdAndAvatarId(bucketItemId, avatarService.getCurrentAvatar().getId());
-
-                if (proxy != null) {
-                    image.setBucketItem(proxy);
-                }
-            }
-
-            return imageRepository.save(image);
+            return profilePictureRepository.save(image);
         } catch (Exception ex) {
             throw new Exception("Could not store file " + fileName + ". Please try again!", ex);
         }
@@ -70,8 +86,8 @@ public class ImageService {
     /*
     Get image from database by id
      */
-    public Image getImage(Long imgId) throws FileNotFoundException {
-        return imageRepository.findById(imgId)
+    public BucketItemImage getImage(Long imgId) throws FileNotFoundException {
+        return bucketItemImageRepository.findById(imgId)
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + imgId));
     }
 }
