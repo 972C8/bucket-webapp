@@ -39,7 +39,7 @@ public class BucketItem {
     private Bucket bucket;
 
     //one bucket item has one image
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Image image;
 
     //One bucketItem has many labels
