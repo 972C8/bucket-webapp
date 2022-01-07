@@ -45,7 +45,7 @@ public class BucketService {
         return saveBucket(bucket);
     }
 
-    public Bucket findBucketById(Long bucketId) throws Exception {
+    public Bucket findBucketByIdAndCurrentAvatar(Long bucketId) throws Exception {
         //TODO: Currently gives only the buckets of the current user (api call "get bucket by api")
         List<Bucket> bucketList = bucketRepository.findByIdAndAvatarId(bucketId, avatarService.getCurrentAvatar().getId());
         if (bucketList.isEmpty()) {

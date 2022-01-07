@@ -82,7 +82,7 @@ public class BucketItemService {
         }
     }
 
-    public BucketItem findBucketItemById(Long itemId) throws Exception {
+    public BucketItem findBucketItemByIdAndCurrentAvatar(Long itemId) throws Exception {
         List<BucketItem> bucketItemsList = bucketItemRepository.findByIdAndAvatarId(itemId, avatarService.getCurrentAvatar().getId());
         if (bucketItemsList.isEmpty()) {
             throw new Exception("No bucket item with ID " + itemId + " found.");

@@ -36,11 +36,14 @@ public class BucketItemEndpoint {
         return ResponseEntity.created(location).body(bucketItem);
     }
 
+    /*
+    Get bucket item by id and current avatar
+     */
     @GetMapping(path = "/bucket-items/{itemId}", produces = "application/json")
     public ResponseEntity<BucketItem> getBucketItem(@PathVariable(value = "itemId") String itemId) {
         BucketItem bucketItem;
         try {
-            bucketItem = bucketItemService.findBucketItemById(Long.parseLong(itemId));
+            bucketItem = bucketItemService.findBucketItemByIdAndCurrentAvatar(Long.parseLong(itemId));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
