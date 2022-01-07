@@ -16,7 +16,7 @@ public class Avatar {
     @GeneratedValue
     private Long id;
     @NotEmpty(message = "Please provide a username.")
-    private String username;
+    private String name;
     @Email(message = "Please provide a valid e-mail.")
     @NotEmpty(message = "Please provide an e-mail.")
     private String email;
@@ -58,12 +58,12 @@ public class Avatar {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
     public String getEmail() {
