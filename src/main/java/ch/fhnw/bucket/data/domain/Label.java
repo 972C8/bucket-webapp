@@ -1,14 +1,10 @@
 package ch.fhnw.bucket.data.domain;
 
-import ch.fhnw.bucket.data.domain.Avatar;
-import ch.fhnw.bucket.data.domain.BucketItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 public class Label {
@@ -23,14 +19,15 @@ public class Label {
     @NotEmpty(message = "Please define the color.")
     private String color;
 
-    //One bucketItem holds many labels
-    @ManyToOne
-    private BucketItem bucketItem;
-
     //One avatar holds many labels
     //labels must be assigned to an avatar when created
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Avatar avatar;
+
+    @ManyToMany(mappedBy = "labels", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<BucketItem> bucketItems;
 
     public Long getId() {
         return id;
@@ -56,20 +53,20 @@ public class Label {
         this.color = color;
     }
 
-    public BucketItem getBucketItem() {
-        return bucketItem;
-    }
-
-    public void setBucketItem(BucketItem bucketItem) {
-        this.bucketItem = bucketItem;
-    }
-
     public Avatar getAvatar() {
         return avatar;
     }
 
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public List<BucketItem> getBucketItems() {
+        return bucketItems;
+    }
+
+    public void setBucketItems(List<BucketItem> bucketItems) {
+        this.bucketItems = bucketItems;
     }
 }
 

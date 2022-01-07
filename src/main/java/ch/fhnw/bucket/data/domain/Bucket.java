@@ -21,10 +21,8 @@ public class Bucket {
     private String icon;
 
     //One avatar holds many buckets
-    @ManyToOne
-    //TODO: FetchType Lazy?
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Avatar avatar;
 
     public Long getId() {
