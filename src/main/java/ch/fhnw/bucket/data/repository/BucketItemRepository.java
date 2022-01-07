@@ -26,6 +26,7 @@ public interface BucketItemRepository extends JpaRepository<BucketItem, Long> {
     /*
     Query concept from:
     https://www.baeldung.com/spring-data-jpa-null-parameters
+    https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
     The query enables optional parameters to be used. A variety of query params can be provided through the api
     that are optional due to the @Query code below.
@@ -34,7 +35,7 @@ public interface BucketItemRepository extends JpaRepository<BucketItem, Long> {
     //TODO: labelId, limit, sort(asc/desc)
 
     @Query("SELECT b FROM BucketItem b WHERE b.avatar.id = :avatarId AND (:bucketId IS NULL"
-            + " OR b.bucket.id = :bucketId) AND (:completed IS NULL OR b.completed = :completed)")
+            + " OR b.bucket.id = :bucketId) AND (:completed IS NULL OR b.completed = :completed) ORDER BY b.created ASC")
     List<BucketItem> findByParams(
             @Param("avatarId") Long avatarId,
             @Param("bucketId") Long bucketId,
