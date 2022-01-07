@@ -58,7 +58,7 @@ public class BucketItemService {
                 Long imageId = bucketItem.getImage().getId();
 
                 //Find avatar object by id from provided RequestBody
-                BucketItemImage proxyImage = bucketItemImageRepository.findImageById(imageId);
+                BucketItemImage proxyImage = bucketItemImageRepository.findBucketItemImageById(imageId);
 
                 bucketItem.setImage(proxyImage);
             }

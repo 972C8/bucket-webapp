@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BucketItemImageRepository extends JpaRepository<BucketItemImage, Long> {
-    BucketItemImage findImageById(Long imageId);
+    BucketItemImage findBucketItemImageById(Long imageId);
+    BucketItemImage findBucketItemImageByBucketItemId(Long bucketItemId);
 }

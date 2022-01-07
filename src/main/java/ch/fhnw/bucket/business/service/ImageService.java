@@ -23,8 +23,6 @@ public class ImageService {
     private BucketItemImageRepository bucketItemImageRepository;
     @Autowired
     private ProfilePictureRepository profilePictureRepository;
-    @Autowired
-    private BucketItemRepository bucketItemRepository;
 
     @Autowired
     private AvatarService avatarService;
@@ -32,13 +30,8 @@ public class ImageService {
     /*
     Save image in database as byte and add current avatar as owner of image.
      */
-    public BucketItemImage saveBucketItemImage(MultipartFile img, Long bucketItemId) throws Exception {
+    public BucketItemImage uploadBucketItemImage(MultipartFile img) throws Exception {
         try {
-            //bucketItemId is required to upload a bucket item image
-            if (bucketItemId == null) {
-                throw new Exception("Storing a bucket item image requires a bucket item id.");
-            }
-
             // Normalize file name
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
 
@@ -49,14 +42,6 @@ public class ImageService {
 
             //Create the uploaded image object
             BucketItemImage image = new BucketItemImage(fileName, img.getContentType(), img.getBytes());
-
-            //Add referenced BucketItem to Image by provided ID.
-            //It is mandatory that a bucketItem can be referenced. If no entity is found, an exception is thrown
-            BucketItem proxy = bucketItemRepository.findBucketItemByIdAndAvatarId(bucketItemId, avatarService.getCurrentAvatar().getId());
-            if (proxy == null) {
-                throw new Exception("Storing a bucket item image requires a bucket item id.");
-            }
-            image.setBucketItem(proxy);
 
             return bucketItemImageRepository.save(image);
         } catch (Exception ex) {
@@ -69,10 +54,10 @@ public class ImageService {
     If a profile picture already exists, it is overwritten and the old one is deleted.
      */
     public ProfilePicture uploadAvatarProfilePicture(MultipartFile img) throws Exception {
-        // Normalize file name
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
-
         try {
+            // Normalize file name
+            String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
+
             // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
                 throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
@@ -90,16 +75,15 @@ public class ImageService {
 
             return profilePictureRepository.save(image);
         } catch (Exception ex) {
-            throw new Exception("Could not store file " + fileName, ex);
+            throw new Exception("Could not store profile picture.", ex);
         }
     }
 
     /*
-Get image from database by id
- */
-    public BucketItemImage getImage(Long imgId) throws FileNotFoundException {
-        return bucketItemImageRepository.findById(imgId)
-                .orElseThrow(() -> new FileNotFoundException("File not found with id " + imgId));
+    Get image from database by id
+     */
+    public BucketItemImage getBucketItemImage(Long bucketItemId) {
+        return bucketItemImageRepository.findBucketItemImageByBucketItemId(bucketItemId);
     }
 
     /*

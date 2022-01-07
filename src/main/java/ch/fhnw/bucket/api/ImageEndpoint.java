@@ -27,20 +27,9 @@ public class ImageEndpoint {
     Save the uploaded image as the image of the provided bucket item id
      */
     @PostMapping("/bucket-items/images")
-    public ResponseEntity<BucketItemImage> uploadBucketItemImage(
-            @RequestParam(value = "image") MultipartFile image,
-            @RequestParam(value = "bucketItem") Long bucketItemId) {
+    public ResponseEntity<BucketItemImage> uploadImage(@RequestParam(value = "image") MultipartFile image) {
         try {
-            BucketItemImage file = imageService.saveBucketItemImage(image, bucketItemId);
-
-            //TODO: return Response?
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/downloadFile/")
-                    .path(file.getFileName())
-                    .toUriString();
-
-            //TODO: remove print. Url not valid!
-            System.out.println(fileDownloadUri);
+            BucketItemImage file = imageService.uploadBucketItemImage(image);
 
             return ResponseEntity.accepted().body(file);
 
@@ -81,15 +70,13 @@ public class ImageEndpoint {
     }
 
     /*
-    GET the image by id
+    GET the bucket item image by id
      */
-    //TODO: FIX GET for both ProfilePicture and BucketItem
-    @GetMapping("/images/{imageId:.+}")
-    public ResponseEntity<Resource> downloadImage(@PathVariable Long imageId, HttpServletRequest request) {
+    @GetMapping("/bucket-items/images/{bucketItemId}")
+    public ResponseEntity<Resource> getBucketItemImage(@PathVariable(value = "bucketItemId") String bucketItemId) {
         try {
-
             // Load file as Resource
-            BucketItemImage imageFile = imageService.getImage(imageId);
+            BucketItemImage imageFile = imageService.getBucketItemImage(Long.parseLong(bucketItemId));
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(imageFile.getFileType()))

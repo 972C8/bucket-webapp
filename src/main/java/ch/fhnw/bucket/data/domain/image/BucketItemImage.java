@@ -21,7 +21,8 @@ public class BucketItemImage extends AbstractImage {
     }
 
     //The image is assigned to a bucket item
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "image", fetch = FetchType.EAGER)
+    @JsonIgnore
     private BucketItem bucketItem;
 
     public BucketItem getBucketItem() {
