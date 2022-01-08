@@ -1,12 +1,11 @@
 package ch.fhnw.bucket.data.domain;
 
-import okhttp3.OkHttpClient;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Takes a location in String format and uses the Google Maps API to geocode the location into latitude (lat)
@@ -15,36 +14,60 @@ import java.net.URLEncoder;
 @Entity
 public class Location {
 
-    private final static String googleMapsUrl = "";
-
     @Id
     @GeneratedValue
     private Long id;
 
-    //The location provided in text format.
-    //Used to generate the location of lat and lng.
-    private String textLocation;
+    /**
+     * The location provided in text format.
+     * Used to generate the location of lat and lng.
+     */
+    private String address;
 
-    //Latitude of location
-    private String lat;
+    //The addresses can be attached to this url to get a functioning google maps url.
+    private final String googleMapsUrl = "https://www.google.com/maps/place/";
 
-    //Longitude of location
-    private String lng;
+    public Location() {
+    }
 
-    //The generated url to display
-    private String generatedUrl;
+    /**
+     * Create Location by providing location in text formation, which is geocoded to lat and lng with the google maps api
+     */
+    public Location(String address) {
+        setAddress(address);
+    }
 
-    private String getGeocode(String textLocation) {
-            /*OkHttpClient client = new OkHttpClient();
-            String encodedAddress = URLEncoder.encode(textLocation, "UTF-8");
-            Request request = new Request.Builder()
-                    .url("https://google-maps-geocoding.p.rapidapi.com/geocode/json?language=en&address=" + encodedAddress)
-                    .get()
-                    .addHeader("x-rapidapi-host", "google-maps-geocoding.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", {your - api - key - here}/*  Use your API Key here)
-                  /*  .build();
-            ResponseBody responseBody = client.newCall(request).execute().body();
-            return responseBody.string();*/
-        return null;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        //Store the UrlEncoded address
+        this.address = encodeValue(address);
+    }
+
+    /**
+     * Method to encode a string value using `UTF-8` encoding scheme
+     *
+     * Necessary to adhere to URL structure.
+     */
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
         }
+    }
+
+    public String getGoogleMapsUrl() {
+        return googleMapsUrl;
+    }
 }
