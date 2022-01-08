@@ -126,7 +126,7 @@ public class BucketItemService {
         }
 
         //Limit the result size based on query param limit
-        if (limit >= 0) {
+        if (limit != null && limit >= 0) {
             //No need to limit the result if the limit is bigger than the size
             if (limit < bucketItems.size()) {
                 bucketItems = bucketItems.subList(0, limit);

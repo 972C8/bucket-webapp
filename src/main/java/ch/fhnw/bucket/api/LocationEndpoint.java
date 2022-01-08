@@ -46,4 +46,14 @@ public class LocationEndpoint {
         }
         return ResponseEntity.ok(location);
     }
+
+    @DeleteMapping(path = "/locations/{locationId}")
+    public ResponseEntity<Void> deleteLocation(@PathVariable(value = "locationId") String locationId) {
+        try {
+            locationService.deleteLocation(Long.parseLong(locationId));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+        return ResponseEntity.accepted().build();
+    }
 }

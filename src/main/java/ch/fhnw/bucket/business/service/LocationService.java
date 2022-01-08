@@ -30,4 +30,8 @@ public class LocationService {
         return location;
     }
 
+    public void deleteLocation(Long locationId) {
+        locationRepository.deleteById(locationId);
+    }
+
 }
