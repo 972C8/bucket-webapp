@@ -125,8 +125,8 @@ This Web application can be accessed over the browser by using the following add
 ### Roles
 - Backend: Tibor Haller
 - Frontend: Marco Kaufmann
-- Praktikant: Luca Herlig
-- Lehrling: Flavio Filoni (.md file specialist)
+- Frontend / Documentation: Luca Herlig
+- Frontend / documentation: Flavio Filoni
 
 ### Milestones
 1. **Analysis**: Scenario ideation, use case analysis and user story writing.
