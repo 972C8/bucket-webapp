@@ -167,16 +167,28 @@ const API = {
   },
 };
 
-function getBucketItemPayload(id, title, description, bucket, dateToAccomplish, image, labels) {
+function getBucketItemPayload(
+  id,
+  title,
+  description,
+  bucket,
+  dateToAccomplish,
+  dateAccomplishedOn,
+  completed,
+  image,
+  labels
+) {
   let bucketItem = {
     title: title,
     description: description,
     bucket: {
       id: parseInt(bucket),
     },
+    dateToAccomplish: dateToAccomplish,
+    dateAccomplishedOn: dateAccomplishedOn,
+    completed: completed,
     image: null,
     labels: null,
-    dateToAccomplish: dateToAccomplish,
   };
 
   if (id !== null) bucketItem.id = id;
