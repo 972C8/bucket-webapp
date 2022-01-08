@@ -84,7 +84,7 @@ const Request = {
 
       if (!response.ok) throw new Error(`DELETE: Request failed endpoint ${endpoint}.`);
 
-      return await response.json();
+      return response;
     } catch (error) {
       throw error;
     }
@@ -97,6 +97,15 @@ const API = {
   },
   async putProfile(profile) {
     return await Request.PUT('/profile', profile, false);
+  },
+  async postAvatarImage(data) {
+    const payload = new FormData();
+
+    for (const name in data) {
+      payload.append(name, data[name]);
+    }
+
+    return await Request.POST('/api/avatars/profile-picture', payload, false);
   },
 
   async postBucketItem(bucketItem) {
@@ -111,7 +120,7 @@ const API = {
   async putBucketItem(bucketItemID, bucketItem) {
     return await Request.PUT(`/api/bucket-items/${bucketItemID}`, bucketItem);
   },
-  async deleteLabel(bucketItemID) {
+  async deleteBucketItem(bucketItemID) {
     return await Request.DELETE(`/api/bucket-items/${bucketItemID}`);
   },
 
@@ -147,14 +156,14 @@ const API = {
     return await Request.DELETE(`/api/labels/${labelID}`);
   },
 
-  async postImage(data) {
+  async postBucketImage(data) {
     const payload = new FormData();
 
     for (const name in data) {
       payload.append(name, data[name]);
     }
 
-    return await Request.POST('/api/images', payload, false);
+    return await Request.POST('/api/bucket-items/images', payload, false);
   },
 };
 
