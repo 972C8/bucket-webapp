@@ -1,62 +1,35 @@
 serviceEndpointURL = window.location.protocol + '//' + window.location.host;
 
-function login(email, password, remember, callback) {
-  $.ajax({
-    type: 'POST',
-    contentType: 'application/json',
-    headers: {
-      'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-    },
-    url: serviceEndpointURL + '/login',
-    data: JSON.stringify({
-      email: email,
-      password: password,
-      remember: remember,
-    }),
-    success: function () {
-      callback(true);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.log(jqXHR, textStatus, errorThrown);
-      callback(false);
-    },
+async function login(email, password, remember, callback) {
+  const result = await Request.POST('/login', {
+    email: email,
+    password: password,
+    remember: remember,
   });
+  callback(result);
 }
 
-function validateLogin(callback) {
-  $.ajax({
-    type: 'HEAD',
-    url: serviceEndpointURL + '/validate',
-    success: function () {
-      callback(true);
-    },
-    error: function () {
-      callback(false);
-    },
-  });
+async function validateLogin(callback) {
+  try {
+    await Request.HEAD('/validate');
+    callback(true);
+  } catch (e) {
+    callback(false);
+  }
 }
 
-function register(name, email, password, callbackSuccess, callbackError) {
-  $.ajax({
-    type: 'POST',
-    contentType: 'application/json',
-    headers: {
-      'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-    },
-    url: serviceEndpointURL + '/user/register',
-    data: JSON.stringify({
+async function register(name, email, password, callbackSuccess, callbackError) {
+  try {
+    await Request.POST('/user/register', {
       name: name,
       email: email,
       password: password,
-    }),
-    success: function () {
-      callbackSuccess(true);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.log(jqXHR, textStatus, errorThrown);
-      callbackError(jqXHR.responseJSON.message);
-    },
-  });
+    });
+
+    callbackSuccess(true);
+  } catch (e) {
+    callbackError(e);
+  }
 }
 
 function getURLParameter(name) {
