@@ -32,8 +32,6 @@ public interface BucketItemRepository extends JpaRepository<BucketItem, Long> {
     that are optional due to the @Query code below.
      */
 
-    //TODO: labelId, limit, sort(asc/desc)
-
     @Query("SELECT b FROM BucketItem b WHERE b.avatar.id = :avatarId AND (:bucketId IS NULL"
             + " OR b.bucket.id = :bucketId) AND (:completed IS NULL OR b.completed = :completed) ORDER BY b.created ASC")
     List<BucketItem> findByParams(

@@ -80,7 +80,10 @@ public class BucketItemEndpoint {
     @GetMapping(path = "/bucket-items", produces = "application/json")
     public List<BucketItem> getBucketItems(
             @RequestParam(value = "bucketId", required = false) Long bucketId,
-            @RequestParam(value = "completed", required = false) Boolean completed) {
-        return bucketItemService.findAllBucketItems(bucketId, completed);
+            @RequestParam(value = "completed", required = false) Boolean completed,
+            @RequestParam(value = "labelId", required = false) Long labelId,
+            @RequestParam(value = "limit", required = false) Integer limit
+    ) {
+        return bucketItemService.findAllBucketItems(bucketId, completed, labelId, limit);
     }
 }
