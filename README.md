@@ -123,10 +123,10 @@ This Web application can be accessed over the browser by using the following add
 ## Project Management
 
 ### Roles
-- Backend: Tibor Haller
-- Frontend: Marco Kaufmann
+- Leader Backend: Tibor Haller
+- Leader Frontend: Marco Kaufmann
 - Frontend / Documentation: Luca Herlig
-- Frontend / documentation: Flavio Filoni
+- Frontend / Documentation: Flavio Filoni
 
 ### Milestones
 1. **Analysis**: Scenario ideation, use case analysis and user story writing.
