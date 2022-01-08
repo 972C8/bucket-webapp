@@ -24,6 +24,9 @@
 /nbdist/
 /.nb-gradle/
 
+### VS Code
+.vscode
+
 *-dev.yml
 export/
 *.vpp.bak*
