@@ -35,7 +35,6 @@ public class BucketItem {
     private Avatar avatar;
 
     //One bucket (category) holds many bucket items
-    //TODO: Ignore with @JsonIgnore and add get param api call to request all bucket items of a certain bucket
     @ManyToOne(fetch = FetchType.EAGER)
     private Bucket bucket;
 
