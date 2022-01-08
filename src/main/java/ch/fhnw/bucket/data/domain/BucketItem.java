@@ -1,5 +1,6 @@
 package ch.fhnw.bucket.data.domain;
 
+import ch.fhnw.bucket.data.domain.image.BucketItemImage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -40,7 +41,7 @@ public class BucketItem {
 
     //one bucket item has one image
     @OneToOne(fetch = FetchType.EAGER)
-    private Image image;
+    private BucketItemImage image;
 
     //One bucketItem has many labels
     @ManyToMany(fetch = FetchType.EAGER)
@@ -98,11 +99,27 @@ public class BucketItem {
         this.bucket = bucket;
     }
 
-    public Image getImage() {
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public String getDateAccomplishedOn() {
+        return dateAccomplishedOn;
+    }
+
+    public void setDateAccomplishedOn(String dateAccomplishedOn) {
+        this.dateAccomplishedOn = dateAccomplishedOn;
+    }
+
+    public BucketItemImage getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(BucketItemImage image) {
         this.image = image;
     }
 

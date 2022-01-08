@@ -1,5 +1,6 @@
 package ch.fhnw.bucket.data.domain;
 
+import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,7 +16,7 @@ public class Avatar {
     @GeneratedValue
     private Long id;
     @NotEmpty(message = "Please provide a username.")
-    private String username;
+    private String name;
     @Email(message = "Please provide a valid e-mail.")
     @NotEmpty(message = "Please provide an e-mail.")
     private String email;
@@ -30,8 +31,9 @@ public class Avatar {
     //stored as "true" or "false"
     private String remember;
 
-    @OneToOne(mappedBy = "avatar", fetch = FetchType.LAZY)
-    private Image profilePicture;
+    @OneToOne(mappedBy = "avatar", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private ProfilePicture profilePicture;
 
     //One avatar has many bucket items
     @OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
@@ -56,12 +58,12 @@ public class Avatar {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
     public String getEmail() {
@@ -94,11 +96,11 @@ public class Avatar {
         return role;
     }
 
-    public Image getProfilePicture() {
+    public ProfilePicture getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    public void setProfilePicture(ProfilePicture profilePicture) {
         this.profilePicture = profilePicture;
     }
 
