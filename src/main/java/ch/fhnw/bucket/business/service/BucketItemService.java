@@ -1,6 +1,7 @@
 package ch.fhnw.bucket.business.service;
 
 import ch.fhnw.bucket.data.domain.*;
+import ch.fhnw.bucket.data.domain.image.BucketItemImage;
 import ch.fhnw.bucket.data.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class BucketItemService {
     @Autowired
     private BucketRepository bucketRepository;
     @Autowired
-    private ImageRepository imageRepository;
+    private BucketItemImageRepository bucketItemImageRepository;
     @Autowired
     private LabelRepository labelRepository;
     @Autowired
@@ -57,7 +58,7 @@ public class BucketItemService {
                 Long imageId = bucketItem.getImage().getId();
 
                 //Find avatar object by id from provided RequestBody
-                Image proxyImage = imageRepository.findImageById(imageId);
+                BucketItemImage proxyImage = bucketItemImageRepository.findBucketItemImageById(imageId);
 
                 bucketItem.setImage(proxyImage);
             }
@@ -70,7 +71,9 @@ public class BucketItemService {
                 //Find list of labels by id from provided RequestBody
                 for (Label label : bucketItem.getLabels()) {
                     Label foundLabel = labelRepository.findLabelByIdAndAvatarId(label.getId(), avatarService.getCurrentAvatar().getId());
-                    proxyLabel.add(foundLabel);
+                    if (foundLabel != null) {
+                        proxyLabel.add(foundLabel);
+                    }
                 }
 
                 bucketItem.setLabels(proxyLabel);
@@ -82,7 +85,7 @@ public class BucketItemService {
         }
     }
 
-    public BucketItem findBucketItemById(Long itemId) throws Exception {
+    public BucketItem findBucketItemByIdAndCurrentAvatar(Long itemId) throws Exception {
         List<BucketItem> bucketItemsList = bucketItemRepository.findByIdAndAvatarId(itemId, avatarService.getCurrentAvatar().getId());
         if (bucketItemsList.isEmpty()) {
             throw new Exception("No bucket item with ID " + itemId + " found.");
@@ -94,8 +97,8 @@ public class BucketItemService {
         bucketItemRepository.deleteById(itemId);
     }
 
-    public List<BucketItem> findAllBucketItems() {
-        return bucketItemRepository.findByAvatarId(avatarService.getCurrentAvatar().getId());
+    public List<BucketItem> findAllBucketItems(Long bucketId, Boolean completed) {
+        return bucketItemRepository.findByParams(avatarService.getCurrentAvatar().getId(), bucketId, completed);
     }
 
 }

@@ -36,11 +36,14 @@ public class LabelEndpoint {
         return ResponseEntity.created(location).body(label);
     }
 
+    /*
+    Get label by id and current avatar
+     */
     @GetMapping(path = "/labels/{labelId}", produces = "application/json")
     public ResponseEntity<Label> getLabel(@PathVariable(value = "labelId") String labelId) {
         Label label;
         try {
-            label = labelService.findLabelById(Long.parseLong(labelId));
+            label = labelService.findLabelByIdAndCurrentAvatar(Long.parseLong(labelId));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }

@@ -33,7 +33,7 @@ public class LabelService {
         return saveLabel(label);
     }
 
-    public Label findLabelById(Long labelId) throws Exception {
+    public Label findLabelByIdAndCurrentAvatar(Long labelId) throws Exception {
         List<Label> labelList = labelRepository.findByIdAndAvatarId(labelId, avatarService.getCurrentAvatar().getId());
         if (labelList.isEmpty()) {
             throw new Exception("No label with ID " + labelId + " found.");
