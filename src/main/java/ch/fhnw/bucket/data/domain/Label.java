@@ -68,6 +68,20 @@ public class Label {
     public void setBucketItems(List<BucketItem> bucketItems) {
         this.bucketItems = bucketItems;
     }
+
+    /*
+    Handle referential integrity constraint for n:n relationship between Label and BucketItem
+
+    If a Label is removed, the references to this Label must be removed from all BucketItems.
+    This is not required in BucketItem as it is the owner of the relationship (as indicated by "mappedBy" in this class
+    for List<BucketItem> bucketItems.
+     */
+    @PreRemove
+    private void removeLabelsFromBucketItems() {
+        for (BucketItem bucketItem : this.bucketItems) {
+            bucketItem.getLabels().remove(this);
+        }
+    }
 }
 
 

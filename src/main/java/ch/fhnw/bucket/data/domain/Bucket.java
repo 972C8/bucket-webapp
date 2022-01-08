@@ -87,7 +87,7 @@ public class Bucket {
     for List<BucketItem> bucketItems.
      */
     @PreRemove
-    private void removeBucketFromBucketItem() {
+    private void removeBucketFromBucketItems() {
         for (BucketItem bucketItem : this.bucketItems) {
             bucketItem.setBucket(null);
         }

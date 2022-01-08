@@ -31,7 +31,7 @@ public class Avatar {
     //stored as "true" or "false"
     private String remember;
 
-    @OneToOne(mappedBy = "avatar", fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private ProfilePicture profilePicture;
 

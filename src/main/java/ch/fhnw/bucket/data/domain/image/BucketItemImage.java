@@ -3,10 +3,7 @@ package ch.fhnw.bucket.data.domain.image;
 import ch.fhnw.bucket.data.domain.BucketItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("BUCKETITEMIMAGE")
@@ -31,5 +28,17 @@ public class BucketItemImage extends AbstractImage {
 
     public void setBucketItem(BucketItem bucketItem) {
         this.bucketItem = bucketItem;
+    }
+
+    /*
+    Handle referential integrity constraint for 1:1 relationship between Image and BucketItem
+
+    If a Image is removed, the references to this Image must be removed from all BucketItems.
+    This is not required in BucketItem as it is the owner of the relationship (as indicated by "mappedBy" in this class
+    for List<BucketItem> bucketItem.
+     */
+    @PreRemove
+    private void removeImageFromBucketItem() {
+        this.bucketItem.setImage(null);
     }
 }
