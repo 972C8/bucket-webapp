@@ -17,7 +17,7 @@ public class BucketItemService {
     @Autowired
     private BucketItemRepository bucketItemRepository;
     @Autowired
-    private AvatarRepository avatarRepository;
+    private LocationRepository locationRepository;
     @Autowired
     private BucketRepository bucketRepository;
     @Autowired
@@ -47,9 +47,9 @@ public class BucketItemService {
                 Long bucketId = bucketItem.getBucket().getId();
 
                 //Find avatar object by id from provided RequestBody
-                Bucket proxyBucketItem = bucketRepository.findBucketByIdAndAvatarId(bucketId, currentAvatar.getId());
+                Bucket proxyBucket = bucketRepository.findBucketByIdAndAvatarId(bucketId, currentAvatar.getId());
 
-                bucketItem.setBucket(proxyBucketItem);
+                bucketItem.setBucket(proxyBucket);
             }
 
             //Add referenced image
@@ -77,6 +77,17 @@ public class BucketItemService {
                 }
 
                 bucketItem.setLabels(proxyLabel);
+            }
+
+            //Add referenced location
+            if (bucketItem.getLocation() != null) {
+                //When creating a new bucket item, store the referenced bucket id as object
+                Long locationId = bucketItem.getLocation().getId();
+
+                //Find avatar object by id from provided RequestBody
+                Location proxyLocation = locationRepository.findLocationById(locationId);
+
+                bucketItem.setLocation(proxyLocation);
             }
 
             return bucketItemRepository.save(bucketItem);

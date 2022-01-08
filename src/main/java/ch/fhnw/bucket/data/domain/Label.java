@@ -15,10 +15,6 @@ public class Label {
     @NotEmpty(message = "Please name the label.")
     private String name;
 
-    //In hex code
-    @NotEmpty(message = "Please define the color.")
-    private String color;
-
     //One avatar holds many labels
     //labels must be assigned to an avatar when created
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,14 +39,6 @@ public class Label {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Avatar getAvatar() {

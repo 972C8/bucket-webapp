@@ -42,6 +42,10 @@ public class BucketItem {
     @OneToOne(fetch = FetchType.EAGER)
     private BucketItemImage image;
 
+    //One location can be used by many bucket items
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Location location;
+
     //One bucketItem has many labels
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Label> labels;
@@ -128,5 +132,13 @@ public class BucketItem {
 
     public void setLabels(List<Label> labels) {
         this.labels = labels;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
