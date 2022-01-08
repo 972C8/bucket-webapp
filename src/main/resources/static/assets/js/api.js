@@ -114,8 +114,8 @@ const API = {
   async getBucketItem(bucketItemID) {
     return await Request.GET(`/api/bucket-items/${bucketItemID}`);
   },
-  async getBucketItems() {
-    return await Request.GET('/api/bucket-items');
+  async getBucketItems(params = '') {
+    return await Request.GET(`/api/bucket-items${params}`);
   },
   async putBucketItem(bucketItemID, bucketItem) {
     return await Request.PUT(`/api/bucket-items/${bucketItemID}`, bucketItem);
