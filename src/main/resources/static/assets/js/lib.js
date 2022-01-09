@@ -18,13 +18,6 @@ function param(key) {
   return params[key];
 }
 
-function paramsWithDefaults(defaults) {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-
-  return { ...defaults, ...params };
-}
-
 // Shortcut for querySelector
 function query(identifier) {
   return document.querySelector(identifier);
@@ -368,8 +361,9 @@ const Format = {
   sort(items, key, desc = false) {
     switch (key) {
       case 'title':
+      case 'name':
         items.sort((a, b) => {
-          return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+          return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
         });
         break;
       case 'bucket':
