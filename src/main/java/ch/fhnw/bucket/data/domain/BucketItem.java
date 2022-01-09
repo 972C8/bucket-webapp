@@ -35,13 +35,16 @@ public class BucketItem {
     private Avatar avatar;
 
     //One bucket (category) holds many bucket items
-    //TODO: Ignore with @JsonIgnore and add get param api call to request all bucket items of a certain bucket
     @ManyToOne(fetch = FetchType.EAGER)
     private Bucket bucket;
 
     //one bucket item has one image
     @OneToOne(fetch = FetchType.EAGER)
     private BucketItemImage image;
+
+    //One location can be used by many bucket items
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Location location;
 
     //One bucketItem has many labels
     @ManyToMany(fetch = FetchType.EAGER)
@@ -129,5 +132,13 @@ public class BucketItem {
 
     public void setLabels(List<Label> labels) {
         this.labels = labels;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
