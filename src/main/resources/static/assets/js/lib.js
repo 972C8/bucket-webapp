@@ -30,7 +30,18 @@ function queryAll(identifier) {
 
 // Shortcut for when document is ready
 function ready(callback) {
-  document.addEventListener('DOMContentLoaded', callback, { once: true });
+  document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+      validateLogin((result) => {
+        if (!result) {
+          redirect('/login');
+        }
+      });
+      callback();
+    },
+    { once: true }
+  );
 }
 
 // Shortcut for redirecting to path
@@ -113,12 +124,22 @@ const Form = {
     Form.format(watcher, submit);
     if (watcher.colorize) Form.colorize(watcher, val(watcher.identifier));
 
-    const event = watcher.event || 'keyup';
-    query(watcher.identifier).addEventListener(event, (e) => {
-      Form.validate(watcher, e.target.value);
-      Form.format(watcher, submit);
-      if (watcher.colorize) Form.colorize(watcher, e.target.value);
-    });
+    if (watcher.event && Array.isArray(watcher.event)) {
+      watcher.event.forEach((event) => {
+        query(watcher.identifier).addEventListener(event, (e) => {
+          Form.validate(watcher, e.target.value);
+          Form.format(watcher, submit);
+          if (watcher.colorize) Form.colorize(watcher, e.target.value);
+        });
+      });
+    } else {
+      const event = watcher.event || 'keyup';
+      query(watcher.identifier).addEventListener(event, (e) => {
+        Form.validate(watcher, e.target.value);
+        Form.format(watcher, submit);
+        if (watcher.colorize) Form.colorize(watcher, e.target.value);
+      });
+    }
   },
   validate(watcher, value) {
     const { identifier, required, validator } = watcher;
@@ -165,6 +186,10 @@ const Format = {
   capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1);
   },
+  // Additionally replace + with space as decodeURIComponent expects %20 for a space
+  decodeURIComponent(value) {
+    return decodeURIComponent(value).replaceAll('+', ' ');
+  },
   // Transform a given ISO date string to DD. Month YYYY format.
   parseDate(dateString, short = false) {
     const date = new Date(dateString);
@@ -172,6 +197,35 @@ const Format = {
       ? { year: 'numeric', month: 'short', day: '2-digit' }
       : { year: 'numeric', month: 'long', day: '2-digit' };
     return date.toLocaleDateString('de-CH', options);
+  },
+  sort(array, key, desc = false) {
+    array.sort((a, b) => {
+      // Transform dateString (YYYY-MM-DD) to integer
+      let x = Format.dateToInt(a[key]);
+      let y = Format.dateToInt(b[key]);
+
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+    if (desc) array.reverse();
+    return array;
+  },
+  dateToInt(dateString) {
+    if (dateString === null) return 99999999;
+    return parseInt(dateString.replaceAll('-', ''));
+  },
+  groupByYear(array, key) {
+    let years = {};
+
+    array.forEach((item) => {
+      let year = item[key].split('-')[0];
+      if (!years.hasOwnProperty(year)) {
+        years[year] = { year, items: [] };
+      }
+
+      years[year].items.push(item);
+    });
+
+    return Object.values(years);
   },
 };
 
@@ -216,7 +270,7 @@ const Modal = {
     query('#modal-panel').classList.add('hidden');
   },
   async confirm(title, message, callback) {
-    const modal = query('#modal');
+    const modal = query('#modal-confirm');
     const id = Random.hex(8);
     const clone = document.importNode(modal.content, true);
 
@@ -233,6 +287,44 @@ const Modal = {
 
     query('#modal-panel').classList.remove('hidden');
     query('#modal-container').appendChild(clone);
+    await Animation.fadeIn('#modal-background', 100);
+    await Animation.fadeIn(`[data-modal][data-id="${id}"]`, 250);
+  },
+  async prompt(title, message, callback) {
+    const modal = query('#modal-prompt');
+    const id = Random.hex(8);
+    const clone = document.importNode(modal.content, true);
+
+    clone.querySelector('[data-modal]').dataset.id = id;
+    clone.querySelector('[data-confirm]').dataset.id = id;
+
+    clone.querySelector('[data-title]').textContent = title;
+    clone.querySelector('[data-message]').textContent = message;
+    clone.querySelector('[data-confirm]').addEventListener('click', async () => {
+      let value = val('#confirm');
+      await Modal.close(id);
+      callback(value);
+    });
+    clone.querySelector('[data-cancel]').addEventListener('click', async () => {
+      await Modal.close(id);
+    });
+
+    const watchers = [
+      {
+        identifier: '#confirm',
+        type: 'text',
+        required: true,
+        message: 'Must be a valid date.',
+        event: 'change',
+        validator: (value) => Regex.validate(Regex.preset('date', null, null), value),
+      },
+    ];
+
+    query('#modal-panel').classList.remove('hidden');
+    query('#modal-container').appendChild(clone);
+
+    Form.watch(watchers, `[data-confirm][data-id="${id}"`);
+
     await Animation.fadeIn('#modal-background', 100);
     await Animation.fadeIn(`[data-modal][data-id="${id}"]`, 250);
   },
@@ -262,6 +354,7 @@ const Random = {
 const Regex = {
   presets: {
     default: '^[a-z0-9\\s]{MIN,MAX}$',
+    date: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$',
     number: '[0-9]+',
     text: "^[a-z0-9äöüéèà.:,;'!?()=$\\s_-]{MIN,MAX}$",
     email:
@@ -1848,6 +1941,12 @@ const Template = {
         clone.querySelector(`[data-${rule.key}]`).addEventListener('click', () => {
           rule.listener();
         });
+      }
+
+      if (rule.remove) {
+        if (clone.querySelector(`[data-${rule.key}]`).textContent === '') {
+          clone.querySelector(`[data-${rule.key}]`).remove();
+        }
       }
     });
 

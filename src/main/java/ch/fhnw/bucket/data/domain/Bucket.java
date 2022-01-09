@@ -89,7 +89,7 @@ public class Bucket {
     @PreRemove
     private void removeBucketFromBucketItems() {
         for (BucketItem bucketItem : this.bucketItems) {
-            bucketItem.setLocation(null);
+            bucketItem.setBucket(null);
         }
     }
 }

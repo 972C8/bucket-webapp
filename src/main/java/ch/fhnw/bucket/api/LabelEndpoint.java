@@ -73,10 +73,10 @@ public class LabelEndpoint {
     }
 
     /*
-    Returns List<Bucket> of buckets assigned to the given avatar
+    Returns List<Label> of labels assigned to the given avatar
     */
     @GetMapping(path = "/labels", produces = "application/json")
-    public List<Label> geLabelItems() {
+    public List<Label> getLabelItems() {
         return labelService.findAllLabels();
     }
 }

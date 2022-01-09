@@ -98,7 +98,7 @@ const API = {
   async putProfile(profile) {
     return await Request.PUT('/profile', profile, false);
   },
-  async postAvatarImage(data) {
+  async postAvatarPicture(data) {
     const payload = new FormData();
 
     for (const name in data) {
@@ -165,18 +165,46 @@ const API = {
 
     return await Request.POST('/api/bucket-items/images', payload, false);
   },
+
+  async postLocation(address) {
+    const payload = new FormData();
+
+    payload.append('address', address);
+
+    return await Request.POST('/api/locations', payload, false);
+  },
+  async getLocation(locationID) {
+    return await Request.GET(`/api/locations/${locationID}`);
+  },
+  async getLocations() {
+    return await Request.GET('/api/locations');
+  },
 };
 
-function getBucketItemPayload(id, title, description, bucket, dateToAccomplish, image, labels) {
+function getBucketItemPayload(
+  id,
+  title,
+  description,
+  bucket,
+  dateToAccomplish,
+  dateAccomplishedOn,
+  completed,
+  image,
+  location,
+  labels
+) {
   let bucketItem = {
     title: title,
     description: description,
     bucket: {
       id: parseInt(bucket),
     },
-    image: null,
-    labels: null,
     dateToAccomplish: dateToAccomplish,
+    dateAccomplishedOn: dateAccomplishedOn,
+    completed: completed,
+    image: null,
+    location: location,
+    labels: null,
   };
 
   if (id !== null) bucketItem.id = id;
@@ -205,12 +233,10 @@ function getLabelPayload(id, name) {
   if (id === null) {
     return {
       name: name,
-      color: 'black',
     };
   }
   return {
     id: id,
     name: name,
-    color: 'black',
   };
 }
