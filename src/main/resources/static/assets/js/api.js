@@ -98,7 +98,7 @@ const API = {
   async putProfile(profile) {
     return await Request.PUT('/profile', profile, false);
   },
-  async postAvatarImage(data) {
+  async postAvatarPicture(data) {
     const payload = new FormData();
 
     for (const name in data) {
