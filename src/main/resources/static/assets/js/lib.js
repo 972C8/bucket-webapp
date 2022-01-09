@@ -101,6 +101,162 @@ const Animation = {
   },
 };
 
+// Filter
+
+function Filter(options) {
+  this.defaults = {
+    completed: {
+      type: 'boolean',
+      default: null,
+    },
+    bucketId: {
+      type: 'number',
+      default: null,
+    },
+    labelId: {
+      type: 'number',
+      default: null,
+    },
+    limit: {
+      type: 'number',
+      default: null,
+    },
+    sort: {
+      type: 'sort',
+      allowed: ['title', 'bucket', 'dateToAccomplish', 'dateAccomplishedOn'],
+    },
+  };
+
+  this.options = { ...this.defaults, ...options };
+  this.filter = {};
+
+  this.parseSort = (value, allowed) => {
+    allowed.forEach((entry) => allowed.push(`-${entry}`));
+
+    if (!allowed.includes(value)) {
+      return { key: 'dateToAccomplish', desc: false };
+    }
+
+    return {
+      key: value.replace('-', ''),
+      desc: value[0] === '-',
+    };
+  };
+
+  this.parseString = (value, allowed) => {
+    return allowed.includes(value) ? value : null;
+  };
+
+  this.parseNumber = (value) => {
+    return isNaN(parseInt(value)) ? null : parseInt(value);
+  };
+
+  this.parseBoolean = (value) => {
+    switch (value) {
+      case 'true':
+        return true;
+      case 'false':
+        return false;
+      default:
+        return null;
+    }
+  };
+
+  this.sortQuery = (key) => {
+    let sort = Object.assign({}, this.filter.sort);
+
+    if (sort.key === key) {
+      sort.desc = !sort.desc;
+    } else {
+      sort = {
+        key: key,
+        desc: false,
+      };
+    }
+
+    return this.query('sort', sort);
+  };
+
+  this.toggleQuery = (key) => {
+    if (!this.filter.hasOwnProperty(key)) return this.query();
+
+    let value = this.filter[key];
+
+    switch (value) {
+      case true:
+        value = false;
+        break;
+      case false:
+        value = null;
+        break;
+      case null:
+        value = true;
+        break;
+    }
+
+    return this.query(key, value);
+  };
+
+  this.query = (key, value) => {
+    let copy = this.copy();
+    // remove unset filters and sort
+
+    if (key !== undefined && value !== undefined) {
+      copy[key] = value;
+    }
+
+    for (let key in copy) {
+      if (copy[key] === null) delete copy[key];
+      if (key === 'sort') {
+        copy[key] = copy[key].desc ? '-' + copy[key].key : copy[key].key;
+      }
+    }
+
+    return '?' + new URLSearchParams(copy).toString();
+  };
+
+  this.copy = () => {
+    return Object.assign({}, this.filter);
+  };
+
+  this.get = (key) => {
+    if (!this.filter.hasOwnProperty(key)) return undefined;
+
+    return this.filter[key];
+  };
+
+  this.set = (key, value) => {
+    this.filter[key] = value;
+  };
+
+  this.parse = () => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    for (let key in this.options) {
+      switch (this.options[key].type) {
+        case 'boolean':
+          this.filter[key] = params.hasOwnProperty(key) ? this.parseBoolean(params[key]) : null;
+          break;
+        case 'number':
+          this.filter[key] = params.hasOwnProperty(key) ? this.parseNumber(params[key]) : null;
+          break;
+        case 'sort':
+          this.filter[key] = params.hasOwnProperty(key)
+            ? this.parseSort(params[key], this.options[key].allowed)
+            : { key: 'dateToAccomplish', desc: false };
+          break;
+        default:
+          this.filter[key] = null;
+          // unreachable!
+          break;
+      }
+    }
+  };
+
+  this.parse();
+}
+
 // Form
 
 const Form = {
@@ -182,6 +338,10 @@ const Form = {
 // Formatting
 
 const Format = {
+  // Convert camelCase to kebab-case
+  camelToKebab(camelCase) {
+    return camelCase.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+  },
   // Capitalize first character
   capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1);
@@ -198,19 +358,37 @@ const Format = {
       : { year: 'numeric', month: 'long', day: '2-digit' };
     return date.toLocaleDateString('de-CH', options);
   },
-  sort(array, key, desc = false) {
-    array.sort((a, b) => {
-      // Transform dateString (YYYY-MM-DD) to integer
-      let x = Format.dateToInt(a[key]);
-      let y = Format.dateToInt(b[key]);
+  sort(items, key, desc = false) {
+    switch (key) {
+      case 'title':
+      case 'name':
+        items.sort((a, b) => {
+          return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
+        });
+        break;
+      case 'bucket':
+        items.sort((a, b) => {
+          return a.bucket.name < b.bucket.name ? -1 : a.bucket.name > b.bucket.name ? 1 : 0;
+        });
+        break;
+      case 'dateToAccomplish':
+      case 'dateAccomplishedOn':
+      case 'year':
+        items.sort((a, b) => {
+          // Transform dateString (YYYY-MM-DD) to integer
+          let x = Format.dateToInt(a[key], desc);
+          let y = Format.dateToInt(b[key], desc);
 
-      return x < y ? -1 : x > y ? 1 : 0;
-    });
-    if (desc) array.reverse();
-    return array;
+          return x < y ? -1 : x > y ? 1 : 0;
+        });
+        break;
+    }
+
+    if (desc) items.reverse();
+    return items;
   },
-  dateToInt(dateString) {
-    if (dateString === null) return 99999999;
+  dateToInt(dateString, low) {
+    if (dateString === null) return low ? 0 : 99999999;
     return parseInt(dateString.replaceAll('-', ''));
   },
   groupByYear(array, key) {
