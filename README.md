@@ -48,15 +48,13 @@ In addition to the minimal generic user stories, the following user stories were
 ### Use Case / Fuctionalities
 <img src="images/Use-case_BucketWebapp.PNG" width="700">
 
-•	User (CRUD)
-  o	 Profile, Login
-  o	Different user data
-      Firstname, lastname, mail, password, age, image
-•	BLI (CRUD)
-  o	Different bucket data
-      User, name, category, description, created, dateToAccomplish, images (mul-tiple), location, tags
-  o	Mark favorites
-  
+UC-1 [Login on bucket-webapp]: Customers can log-in by entering an email address and password. As an extension, new customers may register first.
+UC-2 [Register on bucket-webappp]: Customers can register to get an account (profile) to access the bucket-webapp.
+UC-3 [Edit profile information]: Customers can edit their profile information, e.g. Email/password/name.
+UC-4 [Create a BLI]: Customers can create BLI. They can choose a title, description, date to accomplish, bucket, label, and an icon. These BLI can be edited/deleted[UC-5] and their status can be set to achieved[UC-6].
+UC-7-10: The BLI can be viewed in different views. A Customer can see all of the BLI at once / on the timeline / filtered by buckets / filtered by labels.
+
+
 API
   •	Read bucket entries by filters (year, date, priority, ...)
     Limitations for first prototype: Social media aspect
