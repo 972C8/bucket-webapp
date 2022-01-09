@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @Validated
@@ -32,6 +33,13 @@ public class LocationService {
 
     public void deleteLocation(Long locationId) {
         locationRepository.deleteById(locationId);
+    }
+
+    /*
+    Returns List<Location> of locations assigned to the given avatar
+    */
+    public List<Location> findAllLocations() {
+        return locationRepository.findAll();
     }
 
 }

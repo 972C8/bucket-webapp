@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -55,5 +56,13 @@ public class LocationEndpoint {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
         return ResponseEntity.accepted().build();
+    }
+
+    /*
+    Returns List<Location> of locations assigned to the given avatar
+    */
+    @GetMapping(path = "/locations", produces = "application/json")
+    public List<Location> getLocationItems() {
+        return locationService.findAllLocations();
     }
 }
