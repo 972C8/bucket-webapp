@@ -217,12 +217,10 @@ function getLabelPayload(id, name) {
   if (id === null) {
     return {
       name: name,
-      color: 'black',
     };
   }
   return {
     id: id,
     name: name,
-    color: 'black',
   };
 }
