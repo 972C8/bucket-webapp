@@ -23,7 +23,8 @@
 ## Analysis
 
 ### Scenario
-One of the first major decisions we made as a group was the idea of an application for our project work. We voted for the idea of making a Bucketlist application. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future.
+One of the first major decisions we made as a group was the idea of an application for our project work. We voted for the idea of making a Bucketlist application which was very unambiguously. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future. The CRM template provided by the lecturers served as basis of our program. We adjusted and changed the template accordingly to our visions to deliver a well designed result. We even went as far as creating a second repository dedicated to the front-end development. (add repository link)
+By determining our goal for the project we set up the scene for the next step which is the definition of user stories regarding the Bucketlist application.
 
 ### User Stories
 1. As a [user], I want to have a Web app so that I can use it on different mobile devices and on desktop computers.
