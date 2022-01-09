@@ -46,7 +46,8 @@ In addition to the minimal generic user stories, the following user stories were
 7.	As a [user], I want to add a focus to my BLI so that I can see my prioritized BLI.
 
 ### Use Case / Fuctionalities
-image
+<img src="images/Use-case_BucketWebapp.PNG" width="300">
+
 •	User (CRUD)
   o	 Profile, Login
   o	Different user data
