@@ -23,9 +23,7 @@
 ## Analysis
 
 ### Scenario
-
-We as a group brainstormed some idea for our project. One of the first ideas all of us agreed to was a bucket list. We wanted to have a website/webapp where the users can write down activities or tasks they want to achieve in the future. Then we took a detailed look at the CRM template and and saw the potential to change it to fit the idea of a todo-list (Bucket List).
-We started with writing down our use case analysis and the user stories. 
+One of the first major decisions we made as a group was the idea of an application for our project work. We voted for the idea of making a Bucketlist application. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future.
 
 ### User Stories
 1. As a [user], I want to have a Web app so that I can use it on different mobile devices and on desktop computers.
