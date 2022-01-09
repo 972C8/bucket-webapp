@@ -124,12 +124,22 @@ const Form = {
     Form.format(watcher, submit);
     if (watcher.colorize) Form.colorize(watcher, val(watcher.identifier));
 
-    const event = watcher.event || 'keyup';
-    query(watcher.identifier).addEventListener(event, (e) => {
-      Form.validate(watcher, e.target.value);
-      Form.format(watcher, submit);
-      if (watcher.colorize) Form.colorize(watcher, e.target.value);
-    });
+    if (watcher.event && Array.isArray(watcher.event)) {
+      watcher.event.forEach((event) => {
+        query(watcher.identifier).addEventListener(event, (e) => {
+          Form.validate(watcher, e.target.value);
+          Form.format(watcher, submit);
+          if (watcher.colorize) Form.colorize(watcher, e.target.value);
+        });
+      });
+    } else {
+      const event = watcher.event || 'keyup';
+      query(watcher.identifier).addEventListener(event, (e) => {
+        Form.validate(watcher, e.target.value);
+        Form.format(watcher, submit);
+        if (watcher.colorize) Form.colorize(watcher, e.target.value);
+      });
+    }
   },
   validate(watcher, value) {
     const { identifier, required, validator } = watcher;
@@ -175,6 +185,10 @@ const Format = {
   // Capitalize first character
   capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1);
+  },
+  // Additionally replace + with space as decodeURIComponent expects %20 for a space
+  decodeURIComponent(value) {
+    return decodeURIComponent(value).replaceAll('+', ' ');
   },
   // Transform a given ISO date string to DD. Month YYYY format.
   parseDate(dateString, short = false) {

@@ -165,6 +165,20 @@ const API = {
 
     return await Request.POST('/api/bucket-items/images', payload, false);
   },
+
+  async postLocation(address) {
+    const payload = new FormData();
+
+    payload.append('address', address);
+
+    return await Request.POST('/api/locations', payload, false);
+  },
+  async getLocation(locationID) {
+    return await Request.GET(`/api/locations/${locationID}`);
+  },
+  async getLocations() {
+    return await Request.GET('/api/locations');
+  },
 };
 
 function getBucketItemPayload(
@@ -176,6 +190,7 @@ function getBucketItemPayload(
   dateAccomplishedOn,
   completed,
   image,
+  location,
   labels
 ) {
   let bucketItem = {
@@ -188,6 +203,7 @@ function getBucketItemPayload(
     dateAccomplishedOn: dateAccomplishedOn,
     completed: completed,
     image: null,
+    location: location,
     labels: null,
   };
 
