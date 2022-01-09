@@ -1942,6 +1942,12 @@ const Template = {
           rule.listener();
         });
       }
+
+      if (rule.remove) {
+        if (clone.querySelector(`[data-${rule.key}]`).textContent === '') {
+          clone.querySelector(`[data-${rule.key}]`).remove();
+        }
+      }
     });
 
     query(parent).appendChild(clone);
