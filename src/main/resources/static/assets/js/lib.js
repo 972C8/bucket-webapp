@@ -104,28 +104,7 @@ const Animation = {
 // Filter
 
 function Filter(options) {
-  this.defaults = {
-    completed: {
-      type: 'boolean',
-      default: null,
-    },
-    bucketId: {
-      type: 'number',
-      default: null,
-    },
-    labelId: {
-      type: 'number',
-      default: null,
-    },
-    limit: {
-      type: 'number',
-      default: null,
-    },
-    sort: {
-      type: 'sort',
-      allowed: ['title', 'bucket', 'dateToAccomplish', 'dateAccomplishedOn'],
-    },
-  };
+  this.defaults = {};
 
   this.options = { ...this.defaults, ...options };
   this.filter = {};
@@ -134,7 +113,7 @@ function Filter(options) {
     allowed.forEach((entry) => allowed.push(`-${entry}`));
 
     if (!allowed.includes(value)) {
-      return { key: 'dateToAccomplish', desc: false };
+      return Object.assign({}, this.options.sort.default);
     }
 
     return {
@@ -244,7 +223,7 @@ function Filter(options) {
         case 'sort':
           this.filter[key] = params.hasOwnProperty(key)
             ? this.parseSort(params[key], this.options[key].allowed)
-            : { key: 'dateToAccomplish', desc: false };
+            : Object.assign({}, this.options.sort.default);
           break;
         default:
           this.filter[key] = null;
@@ -362,6 +341,8 @@ const Format = {
     switch (key) {
       case 'title':
       case 'name':
+      case 'color':
+      case 'icon':
         items.sort((a, b) => {
           return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
         });
