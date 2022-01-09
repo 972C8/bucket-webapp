@@ -368,7 +368,9 @@ const Format = {
         break;
       case 'bucket':
         items.sort((a, b) => {
-          return a.bucket.name < b.bucket.name ? -1 : a.bucket.name > b.bucket.name ? 1 : 0;
+          a = a.bucket ? a.bucket.name : '';
+          b = b.bucket ? b.bucket.name : '';
+          return a < b ? -1 : a > b ? 1 : 0;
         });
         break;
       case 'dateToAccomplish':
