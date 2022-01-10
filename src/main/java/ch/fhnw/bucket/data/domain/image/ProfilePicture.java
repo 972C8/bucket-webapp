@@ -18,7 +18,7 @@ public class ProfilePicture extends AbstractImage {
     }
 
     //A profile picture is assigned to one avatar
-    @OneToOne(mappedBy = "profilePicture", fetch = FetchType.EAGER)
+    @OneToOne
     @JsonIgnore
     private Avatar avatar;
 
