@@ -34,11 +34,11 @@ function ready(callback, validate = true) {
     'DOMContentLoaded',
     () => {
       if (validate) {
-        validateLogin((result) => {
-          if (!result) {
-            redirect('/login');
-          }
-        });
+        // validateLogin((result) => {
+        //   if (!result) {
+        //     redirect('/login');
+        //   }
+        // });
       }
       callback();
     },
