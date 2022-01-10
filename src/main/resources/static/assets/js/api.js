@@ -32,7 +32,7 @@ const Request = {
     }
   },
 
-  async POST(endpoint, payload, json = true) {
+  async POST(endpoint, payload, json = true, jsonFeedback = true) {
     const headers = {
       'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
     };
@@ -48,7 +48,7 @@ const Request = {
 
       if (!response.ok) throw new Error(`POST: Request failed endpoint ${endpoint}.`);
 
-      return await response.json();
+      return jsonFeedback ? await response.json() : response;
     } catch (error) {
       throw error;
     }
@@ -92,6 +92,13 @@ const Request = {
 };
 
 const API = {
+  async register(payload) {
+    return await Request.POST('/user/register', payload, true, false);
+  },
+  async login(payload) {
+    return await Request.POST('/login', payload, true, false);
+  },
+
   async getProfile() {
     return await Request.GET('/profile');
   },
