@@ -106,11 +106,65 @@ Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/9
 
 ## Implementation
 
-After the work was done and the website was running like we wanted we had to implement the security framework and deploy the finished website.
-
 ### Backend Technology
 
-Tibor
+The backend was initially based on a fork of https://github.com/DigiPR/acrm-webapp. The following description are copied from acrm-webapp and explain the main project dependencies:
+
+#### Dependencies according to the ACRM fork:
+This Web application is relying on [Spring Boot](https://projects.spring.io/spring-boot) and the following dependencies:
+
+- [Spring Boot](https://projects.spring.io/spring-boot)
+- [Spring Web](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)
+- [Spring Data](https://projects.spring.io/spring-data)
+- [Java Persistence API (JPA)](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html)
+- [H2 Database Engine](https://www.h2database.com)
+- [PostgreSQL](https://www.postgresql.org)
+
+To bootstrap the application, the [Spring Initializr](https://start.spring.io/) has been used.
+
+### Backend Implementation
+
+The backend serves two main purposes: Provide an API endpoint the frontend can interact with, and interact with the database using custom business logic through API calls.
+
+#### Domain Design:
+Data classes were implemented according to the created [domain design](#domain-design) and are found under `ch.fhnw.bucket.data.domain`. Using JPA it was possible to dynamically create the database schema with the help of annotations, such as @Entity and @Id.
+Furthermore, the relationship mapping was defined using JPA annotations such as @OneToOne, @OneToMany, @ManyToMany, etc. This means that there was no need to manually create a database as JPA automatically does the job for us when the annotations were used.
+
+This example highlights the defined relationships using JPA. The @OneToOne/@OneToMany relationships from Avatar correspond to the domain model.
+
+![](images/backend-jpa_explanation.png)
+
+#### Support of Images 
+The support of uploading images both as profile pictures and for bucket items is enabled through a custom implementation that stores images as byte[] in the database and using inheritance.
+
+This is highlighted in the domain model and implemented accordingly. The abstract class AbstractImage holds the main attributes relevant to images (such as fileName, fileType and data) and the classes ProfilePicture and BucketItemImage extend it.
+
+**Single table inheritance and discriminator:**
+
+The image implementation uses single table inheritance and a discriminator column.
+This effectively means that a single table is created (although there are 3 classes!) and that the discriminator is used
+to determine which class the particular row belongs to. More information is found at https://en.wikibooks.org/wiki/Java_Persistence/Inheritance#Single_Table_Inheritance
+
+#### Location
+
+When creating a bucket item, a specific location can be added. For example: the location "Big Ben, London, England" can be added to the bucket item "Run a Marathon".
+
+The location is added as regular text and uses the **Google Maps API** to display the location using an **embeded map**.
+
+Example:
+//TODO: Add example!
+
+More information is found at: https://developers.google.com/maps/documentation/embed/get-started
+
+#### API Endpoint
+
+The [API Endpoints](#endpoint-design) are found under `ch.fhnw.bucket.api`. In the pursuit of clarity, a class was created for each data class that is touched (e.g. AvatarEndpoint, BucketEndpoint, LabelEndpoint, ...).
+
+The API endpoints call the respective business services (found under `ch.fhnw.bucket.business.service`) to perform the called methods (such as creating, reading, updating, or deleting entities).
+
+For each entity, a repository class (found under `ch.fhnw.bucket.data.repository`) was created to interact with the database. This is a functionality offered through JPA.
+
+![](images/backend-api_explanation.png)
 
 ### Frontend Technology
 
