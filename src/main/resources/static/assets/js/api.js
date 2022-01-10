@@ -7,7 +7,10 @@ const Request = {
         method: 'HEAD',
       });
 
-      if (!response.ok) throw new Error(`HEAD: Request failed endpoint ${endpoint}.`);
+      if (!response.ok) {
+        console.error(response);
+        throw new Error(`HEAD: Request failed endpoint ${endpoint}.`);
+      }
 
       return response;
     } catch (error) {
@@ -24,7 +27,10 @@ const Request = {
         },
       });
 
-      if (!response.ok) throw new Error(`GET: Request failed endpoint ${endpoint}.`);
+      if (!response.ok) {
+        console.error(response);
+        throw new Error(`GET: Request failed endpoint ${endpoint}.`);
+      }
 
       return await response.json();
     } catch (error) {
@@ -46,7 +52,10 @@ const Request = {
         body: json ? JSON.stringify(payload) : payload,
       });
 
-      if (!response.ok) throw new Error(`POST: Request failed endpoint ${endpoint}.`);
+      if (!response.ok) {
+        console.error(response);
+        throw new Error(`POST: Request failed endpoint ${endpoint}.`);
+      }
 
       return jsonFeedback ? await response.json() : response;
     } catch (error) {
@@ -65,7 +74,10 @@ const Request = {
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error(`PUT: Request failed endpoint ${endpoint}.`);
+      if (!response.ok) {
+        console.error(response);
+        throw new Error(`PUT: Request failed endpoint ${endpoint}.`);
+      }
 
       return jsonFeedback ? await response.json() : response;
     } catch (error) {
@@ -82,7 +94,10 @@ const Request = {
         },
       });
 
-      if (!response.ok) throw new Error(`DELETE: Request failed endpoint ${endpoint}.`);
+      if (!response.ok) {
+        console.error(response);
+        throw new Error(`DELETE: Request failed endpoint ${endpoint}.`);
+      }
 
       return response;
     } catch (error) {
