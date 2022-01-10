@@ -17,6 +17,7 @@ each class in the hierarchy defines its own unique discriminator value.
 @Entity
 @Inheritance
 @DiscriminatorColumn(name="IMAGE_TYPE")
+@Table(name="IMAGE")
 public abstract class AbstractImage {
 
     @Id
@@ -32,7 +33,6 @@ public abstract class AbstractImage {
     //Check PostgreSQLDialectCustom.java to see custom implementation, making @Lob possible on Postgresql (heroku)
     //This is never an issue as the local storage is in-memory
     @Lob
-    @Type(type="org.hibernate.type.BinaryType")
     @JsonIgnore
     private byte[] data;
 

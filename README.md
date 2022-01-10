@@ -154,7 +154,8 @@ When creating a bucket item, a specific location can be added. For example: the 
 The location is added as regular text and uses the **Google Maps API** to display the location using an **embeded map**.
 
 Example:
-//TODO: Add example!
+
+![](images/location-example.png)
 
 More information is found at: https://developers.google.com/maps/documentation/embed/get-started
 
