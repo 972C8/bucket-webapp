@@ -91,9 +91,10 @@ Key points include:
 
 ### Business Logic Design
 
-The bucket-webapp package contains classes of the following business services:
+Our application is composed of a total of 7 business services, of which 5 are implementing validations.
+The bucket-webapp package is depicted in the following Business Logic Design:
 
-/ haben wir das?/
+<img src="images/Business_Logic_Design_Bucketlist_App.png">
 
 ### Endpoint Design
 
