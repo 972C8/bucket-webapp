@@ -49,7 +49,7 @@ In addition to the minimal generic user stories, the following user stories were
 <img src="images/Use-case_BucketWebapp.PNG" width="700">
 
 - UC-1 [Login on bucket-webapp]: Customers can log-in by entering an email address and password. As an extension, new customers may register first.
-- UC-2 [Register on bucket-webappp]: Customers can register to get an account (profile) to access the bucket-webapp.
+- UC-2 [Register on bucket-webapp]: Customers can register to get an account (profile) to access the bucket-webapp.
 - UC-3 [Edit profile information]: Customers can edit their profile information, e.g. Email/password/name.
 - UC-4 [Create a BLI]: Customers can create BLI. They can choose a title, description, date to accomplish, bucket, label, and an icon. These BLI can be edited/deleted[UC-5] and their status can be set to achieved[UC-6].
 - UC-7-10: The BLI can be viewed in different views. A Customer can see all of the BLI at once / on the timeline / filtered by buckets / filtered by labels.
@@ -95,18 +95,18 @@ The bucket-webapp package contains classes of the following business services:
 / haben wir das?/
 
 ### Endpoint Design
-**Please check our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
 
-The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman allowed us to create a user-friendly, web-view of the API documentation. The documentation of the endpoint design is found at https://documenter.getpostman.com/view/17679206/UVXerdXY.
+The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman allowed us to create a user-friendly, web-view of the API documentation.
 
 Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/972C8/bucket-webapp-api) was created to automatically push API changes in Postman to Github.
 
-**For an interactive experience, use https://documenter.getpostman.com/view/17679206/UVXerdXY**
+**Please check out our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
+
 ![](images/bucket-endpoint-design-postman_doublecolumn.png)
 
 ## Implementation
 
-After the work was done and the website was running like we wanted we had to implement the se-curity framework and deploy the finished website.
+After the work was done and the website was running like we wanted we had to implement the security framework and deploy the finished website.
 
 ### Backend Technology
 
