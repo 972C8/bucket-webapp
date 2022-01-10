@@ -1,8 +1,20 @@
-# bucket-webapp
+<p align="center">
+  <img src="./images/bucket_logo.png" width="600" />
+</p>
+<p align="center">  
+  Manage your bucket list in a modern web experience.<br>
+  <a href="#introduction">Introduction</a> | <a href="https://github.com/mahgoh/bucket-frontend">Frontend Development</a> | <a href="https://bucket-webapp.herokuapp.com">Demo</a>
+</p>
+
+# Bucket Webapp
+
+The Bucket web app was developed as a part of the Internet Technology module of the Business Information Technology study programme at FHNW by Flavio Filoni ([@ffiloni](https://github.com/ffiloni)), Tibor Haller ([@972C8](https://github.com/972C8)), Luca Herlig ([@luca-h1998](https://github.com/luca-h1998)) and Marco Kaufmann ([@mahgoh](https://github.com/mahgoh)). The app allows users to manage their personal bucket list and follow their achievements in a timeline over time. 
+
+The project was developed in two repositories: [bucket-webapp](https://github.com/972C8/bucket-webapp) and [bucket-frontend](https://github.com/mahgoh/bucket-frontend). `bucket-webapp` contains the main application and the final web application. The frontend was developed in the repository `bucket-frontend`, using a custom HTML bundler - more information about the bundler can be found in the repository.
 
 ## Introduction
 
-This documentation describes the continuous process/journey of our project in the Internet Technology module of the Business Technology studies at the FHNW (Fachhochschule Nordwestschweiz). The goal of the module was to create full fledged application using wide variety of softwares and tools introduced by the lecturers. Applying the acqured knowledge from the lectures was a major assistance to achieve the set module goals. As a team consisting of four students, (link to project Management and Roles? Or mentioning every member?) every member contributed to the project by using their strongest skills and enhanced their weaker skills by working as a team and learning/training by doing.
+This documentation describes the continuous development process/journey of our project. The goal of the project work was to create a full fledged-web application using a wide variety of software and tools introduced by the lecturers. Applying the acquired knowledge from the lectures was a major assistance to achieve the set module goals. As a team consisting of four students, every member contributed to the project by using their strongest skills and enhanced their weaker skills by working as a team and learning/training by doing.
 
 #### Contents:
 - [Analysis](#analysis)
