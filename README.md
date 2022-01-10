@@ -108,7 +108,7 @@ Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/9
 
 ### Backend Technology
 
-The backend was initially based on a fork of https://github.com/DigiPR/acrm-webapp. The following description are copied from acrm-webapp and explain the main project dependencies:
+The backend was initially based on a fork of https://github.com/DigiPR/acrm-webapp. The following excerpt is copied from acrm-webapp and explains the main project dependencies:
 
 #### Dependencies according to the ACRM fork:
 This Web application is relying on [Spring Boot](https://projects.spring.io/spring-boot) and the following dependencies:
@@ -124,7 +124,7 @@ To bootstrap the application, the [Spring Initializr](https://start.spring.io/) 
 
 ### Backend Implementation
 
-The backend serves two main purposes: Provide an API endpoint the frontend can interact with, and interact with the database using custom business logic through API calls.
+The backend serves two main purposes: Provide an API endpoint the frontend can interact with, and interact with the database using custom business logic and through API calls by extension.
 
 #### Domain Design:
 Data classes were implemented according to the created [domain design](#domain-design) and are found under `ch.fhnw.bucket.data.domain`. Using JPA it was possible to dynamically create the database schema with the help of annotations, such as @Entity and @Id.
@@ -134,18 +134,18 @@ This example highlights the defined relationships using JPA. The @OneToOne/@OneT
 
 ![](images/backend-jpa_explanation.png)
 
-#### Support of Images 
-The support of uploading images both as profile pictures and for bucket items is enabled through a custom implementation that stores images as byte[] in the database and using inheritance.
+#### Support of Images (using Inheritance)
+The support of uploading images both as profile pictures and for bucket items is enabled through a custom implementation that stores images as byte[] in the database and using inheritance with AbstractImage as the abstract superclass.
 
 This is highlighted in the domain model and implemented accordingly. The abstract class AbstractImage holds the main attributes relevant to images (such as fileName, fileType and data) and the classes ProfilePicture and BucketItemImage extend it.
 
 **Single table inheritance and discriminator:**
 
 The image implementation uses single table inheritance and a discriminator column.
-This effectively means that a single table is created (although there are 3 classes!) and that the discriminator is used
+This effectively means that only asingle table is created in the database (although there are 3 classes!) and that the discriminator is used
 to determine which class the particular row belongs to. More information is found at https://en.wikibooks.org/wiki/Java_Persistence/Inheritance#Single_Table_Inheritance
 
-#### Location
+#### Location (Google Maps API)
 
 When creating a bucket item, a specific location can be added. For example: the location "Big Ben, London, England" can be added to the bucket item "Run a Marathon".
 
