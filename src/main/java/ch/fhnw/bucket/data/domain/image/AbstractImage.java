@@ -17,7 +17,6 @@ each class in the hierarchy defines its own unique discriminator value.
 @Entity
 @Inheritance
 @DiscriminatorColumn(name="IMAGE_TYPE")
-@Table(name="IMAGE")
 public abstract class AbstractImage {
 
     @Id
