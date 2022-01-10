@@ -93,7 +93,7 @@ Key points include:
 
 The bucket-webapp package contains classes of the following business services:
 
-/ haben wir das?/
+<img src="images/Business_Logic_Design_Bucketlist_App">
 
 ### Endpoint Design
 
