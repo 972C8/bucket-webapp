@@ -95,13 +95,13 @@ The bucket-webapp package contains classes of the following business services:
 / haben wir das?/
 
 ### Endpoint Design
-**Please check our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
 
-The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman allowed us to create a user-friendly, web-view of the API documentation. The documentation of the endpoint design is found at https://documenter.getpostman.com/view/17679206/UVXerdXY.
+The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman allowed us to create a user-friendly, web-view of the API documentation.
 
 Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/972C8/bucket-webapp-api) was created to automatically push API changes in Postman to Github.
 
-**For an interactive experience, use https://documenter.getpostman.com/view/17679206/UVXerdXY**
+**Please check our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
+
 ![](images/bucket-endpoint-design-postman_doublecolumn.png)
 
 ## Implementation
