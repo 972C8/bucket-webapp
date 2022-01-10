@@ -128,8 +128,7 @@ TODO: Deploy on Heroku
 TODO: Write section about deployment
 
 ## User Guide
-TODO: Update URL once deployed  
-This Web application can be accessed over the browser by using the following address: `https://bucket-frontend.netlify.app/index.html`.
+This Web application can be accessed over the browser by using the following address: `https://bucket-webapp.herokuapp.com`.
 
 ## Project Management
 
