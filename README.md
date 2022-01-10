@@ -1,5 +1,8 @@
 # bucket-webapp
 
+## Introduction
+
+This documentation describes the continuous process/journey of our project in the Internet Technology module of the Business Technology studies at the FHNW (Fachhochschule Nordwestschweiz). The goal of the module was to create full fledged application using wide variety of softwares and tools introduced by the lecturers. Applying the acqured knowledge from the lectures was a major assistance to achieve the set module goals. As a team consisting of four students, (link to project Management and Roles? Or mentioning every member?) every member contributed to the project by using their strongest skills and enhanced their weaker skills by working as a team and learning/training by doing.
 
 #### Contents:
 - [Analysis](#analysis)
