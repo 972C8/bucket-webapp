@@ -112,7 +112,7 @@ const API = {
       payload.append(name, data[name]);
     }
 
-    return await Request.POST('/api/avatars/profile-picture', payload, false);
+    return await Request.POST('/api/avatars/profile-picture', payload, false, false);
   },
 
   async postBucketItem(bucketItem) {
