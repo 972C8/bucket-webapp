@@ -32,6 +32,8 @@ public abstract class AbstractImage {
     //Check PostgreSQLDialectCustom.java to see custom implementation, making @Lob possible on Postgresql (heroku)
     //This is never an issue as the local storage is in-memory
     @Lob
+    //Required for postgresql to work (doesn't work locally now)
+    @Type(type="org.hibernate.type.BinaryType")
     @JsonIgnore
     private byte[] data;
 
