@@ -1,6 +1,7 @@
 package ch.fhnw.bucket.data.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -31,6 +32,7 @@ public abstract class AbstractImage {
     //Check PostgreSQLDialectCustom.java to see custom implementation, making @Lob possible on Postgresql (heroku)
     //This is never an issue as the local storage is in-memory
     @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     @JsonIgnore
     private byte[] data;
 
