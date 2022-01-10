@@ -79,7 +79,7 @@ public class Bucket {
         this.bucketItems = bucketItems;
     }
 
-    /*
+    /**
     Handle referential integrity constraint for 1:n relationship between Bucket and BucketItem
 
     If a Bucket is removed, the references to this Bucket must be removed from all BucketItems.

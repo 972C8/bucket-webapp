@@ -36,7 +36,7 @@ public class BucketItemEndpoint {
         return ResponseEntity.created(location).body(bucketItem);
     }
 
-    /*
+    /**
     Get bucket item by id and current avatar
      */
     @GetMapping(path = "/bucket-items/{itemId}", produces = "application/json")
@@ -71,7 +71,7 @@ public class BucketItemEndpoint {
         return ResponseEntity.accepted().build();
     }
 
-    /*
+    /**
         Returns List<BucketItem> of bucket items assigned to the given avatar
 
         Boolean completed must be of Boolean (not primitive type boolean!) so that it can be null if no parameter was sent,

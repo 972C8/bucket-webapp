@@ -30,7 +30,7 @@ public class ProfilePicture extends AbstractImage {
         this.avatar = avatar;
     }
 
-    /*
+    /**
     Handle referential integrity constraint for 1:1 relationship between Image and Avatar
 
     If a Image is removed, the references to this Image must be removed from the Avatar.

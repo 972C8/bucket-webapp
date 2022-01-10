@@ -13,9 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -23,7 +20,7 @@ public class ImageEndpoint {
     @Autowired
     private ImageService imageService;
 
-    /*
+    /**
     Save the uploaded image as the image of the provided bucket item id
      */
     @PostMapping("/bucket-items/images")
@@ -38,7 +35,7 @@ public class ImageEndpoint {
         }
     }
 
-    /*
+    /**
     Save the uploaded image as the profile picture of the current avatar
      */
     @PostMapping("/avatars/profile-picture")
@@ -69,7 +66,7 @@ public class ImageEndpoint {
         }
     }
 
-    /*
+    /**
     GET the bucket item image by id
      */
     @GetMapping("/bucket-items/images/{bucketItemId}")

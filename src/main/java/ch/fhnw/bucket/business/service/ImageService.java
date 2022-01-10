@@ -27,7 +27,7 @@ public class ImageService {
     @Autowired
     private AvatarService avatarService;
 
-    /*
+    /**
     Save image in database as byte and add current avatar as owner of image.
      */
     public BucketItemImage uploadBucketItemImage(MultipartFile img) throws Exception {
@@ -49,7 +49,7 @@ public class ImageService {
         }
     }
 
-    /*
+    /**
     Create the new profile picture and assign it to the current user.
     If a profile picture already exists, it is overwritten and the old one is deleted.
      */
@@ -79,14 +79,14 @@ public class ImageService {
         }
     }
 
-    /*
+    /**
     Get image from database by id
      */
     public BucketItemImage getBucketItemImage(Long bucketItemId) {
         return bucketItemImageRepository.findBucketItemImageByBucketItemId(bucketItemId);
     }
 
-    /*
+    /**
     Get profile picture of the current avatar
      */
     public ProfilePicture getCurrentAvatarProfilePicture() {

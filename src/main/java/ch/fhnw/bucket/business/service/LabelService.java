@@ -41,14 +41,14 @@ public class LabelService {
         return labelList.get(0);
     }
 
-    /*
+    /**
     Delete label by id
      */
     public void deleteLabel(Long labelId) {
         labelRepository.deleteById(labelId);
     }
 
-    /*
+    /**
     Returns List<Label> of labels assigned to the given avatar
     */
     public List<Label> findAllLabels() {

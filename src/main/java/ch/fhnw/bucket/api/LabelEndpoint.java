@@ -36,7 +36,7 @@ public class LabelEndpoint {
         return ResponseEntity.created(location).body(label);
     }
 
-    /*
+    /**
     Get label by id and current avatar
      */
     @GetMapping(path = "/labels/{labelId}", produces = "application/json")
@@ -72,7 +72,7 @@ public class LabelEndpoint {
         return ResponseEntity.accepted().build();
     }
 
-    /*
+    /**
     Returns List<Label> of labels assigned to the given avatar
     */
     @GetMapping(path = "/labels", produces = "application/json")

@@ -57,7 +57,7 @@ public class Label {
         this.bucketItems = bucketItems;
     }
 
-    /*
+    /**
     Handle referential integrity constraint for n:n relationship between Label and BucketItem
 
     If a Label is removed, the references to this Label must be removed from all BucketItems.

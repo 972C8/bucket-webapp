@@ -1,7 +1,6 @@
 package ch.fhnw.bucket.api;
 
 import ch.fhnw.bucket.business.service.LocationService;
-import ch.fhnw.bucket.data.domain.Bucket;
 import ch.fhnw.bucket.data.domain.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +57,7 @@ public class LocationEndpoint {
         return ResponseEntity.accepted().build();
     }
 
-    /*
+    /**
     Returns List<Location> of locations assigned to the given avatar
     */
     @GetMapping(path = "/locations", produces = "application/json")

@@ -30,7 +30,7 @@ public class BucketItemImage extends AbstractImage {
         this.bucketItem = bucketItem;
     }
 
-    /*
+    /**
     Handle referential integrity constraint for 1:1 relationship between Image and BucketItem
 
     If a Image is removed, the references to this Image must be removed from all BucketItems.
