@@ -46,7 +46,6 @@ public class BucketService {
     }
 
     public Bucket findBucketByIdAndCurrentAvatar(Long bucketId) throws Exception {
-        //TODO: Currently gives only the buckets of the current user (api call "get bucket by api")
         List<Bucket> bucketList = bucketRepository.findByIdAndAvatarId(bucketId, avatarService.getCurrentAvatar().getId());
         if (bucketList.isEmpty()) {
             throw new Exception("No bucket with ID " + bucketId + " found.");
