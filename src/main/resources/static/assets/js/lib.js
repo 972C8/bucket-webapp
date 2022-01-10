@@ -29,15 +29,17 @@ function queryAll(identifier) {
 }
 
 // Shortcut for when document is ready
-function ready(callback) {
+function ready(callback, validate = true) {
   document.addEventListener(
     'DOMContentLoaded',
     () => {
-      validateLogin((result) => {
-        if (!result) {
-          redirect('/login');
-        }
-      });
+      if (validate) {
+        validateLogin((result) => {
+          if (!result) {
+            redirect('/login');
+          }
+        });
+      }
       callback();
     },
     { once: true }
