@@ -81,6 +81,11 @@ An example for the dashboard design written by hand:
 
 The domain model describes the domain objects / entities that are found in `ch.fhnw.bucket.data.domain`. Note that for clarity getters and setters are not included in the domain model.
 
+Key points include:
+* The entity **AbstractImage** is an abstract class with inheritance to both BucketItemImage and ProfilePicture. They are used to store uploaded Images as profile pictures or images for bucket items.
+* The entity **BucketItem** as the idea of bucket items (similar to todo items) is at the core of our bucket-webapp. Logically, many connections to this entity exist.
+* The ManyToMany relationship between BucketItem and Label. BucketItemToLabel signals the intermediate table, according to the UML standard.
+
 ![](images/bucket-domain-model.png)
 
 ### Business Logic Design
@@ -95,6 +100,9 @@ The bucket-webapp package contains classes of the following business services:
 The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman allowed us to create a user-friendly, web-view of the API documentation. The documentation of the endpoint design is found at https://documenter.getpostman.com/view/17679206/UVXerdXY.
 
 Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/972C8/bucket-webapp-api) was created to automatically push API changes in Postman to Github.
+
+**For an interactive experience, use https://documenter.getpostman.com/view/17679206/UVXerdXY**
+![](images/bucket-endpoint-design-postman_doublecolumn.png)
 
 ## Implementation
 
