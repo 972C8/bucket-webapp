@@ -100,13 +100,13 @@ The [Postman](https://www.postman.com/) API Platform was used for the endpoint d
 
 Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/972C8/bucket-webapp-api) was created to automatically push API changes in Postman to Github.
 
-**Please check our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
+**Please check out our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
 
 ![](images/bucket-endpoint-design-postman_doublecolumn.png)
 
 ## Implementation
 
-After the work was done and the website was running like we wanted we had to implement the se-curity framework and deploy the finished website.
+After the work was done and the website was running like we wanted we had to implement the security framework and deploy the finished website.
 
 ### Backend Technology
 
