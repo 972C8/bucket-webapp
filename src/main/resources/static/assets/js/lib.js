@@ -330,7 +330,7 @@ const Format = {
     const options = short
       ? { year: 'numeric', month: 'short', day: '2-digit' }
       : { year: 'numeric', month: 'long', day: '2-digit' };
-    return date.toLocaleDateString('de-CH', options);
+    return date.toLocaleDateString('en-GB', options);
   },
   sort(items, key, desc = false) {
     switch (key) {
