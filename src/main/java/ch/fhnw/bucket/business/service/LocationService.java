@@ -35,7 +35,7 @@ public class LocationService {
         locationRepository.deleteById(locationId);
     }
 
-    /*
+    /**
     Returns List<Location> of locations assigned to the given avatar
     */
     public List<Location> findAllLocations() {

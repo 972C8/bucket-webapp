@@ -27,7 +27,7 @@ public class BucketItemService {
     @Autowired
     private AvatarService avatarService;
 
-    /*
+    /**
     Save BucketItem and assign referenced objects (avatar, bucket, image, label) based on provided id in JSON using a proxy
 
     Proxy logic adapted from:
@@ -108,7 +108,7 @@ public class BucketItemService {
         bucketItemRepository.deleteById(itemId);
     }
 
-    /*
+    /**
     Returns a list of BucketItems based on query params provided through the API
 
     Query params:bucketId, completed, labelId
@@ -135,7 +135,7 @@ public class BucketItemService {
         return bucketItems;
     }
 
-    /*
+    /**
     Filter the result of findAllBucketItems() by query param labelId
      */
     private List<BucketItem> filterBucketItemsByLabelId(List<BucketItem> bucketItems, Long labelId) {

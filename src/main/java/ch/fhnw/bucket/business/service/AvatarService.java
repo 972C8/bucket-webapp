@@ -28,7 +28,9 @@ public class AvatarService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //Save or edit avatar based on avatarId if provided
+    /**
+     * Save or edit avatar based on avatarId if provided
+     */
     public Avatar saveAvatar(@Valid Avatar avatar) throws Exception {
         if (avatar.getId() == null) {
             if (avatarRepository.findByEmail(avatar.getEmail()) != null) {
