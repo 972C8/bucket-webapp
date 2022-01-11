@@ -83,10 +83,9 @@ Limitations for first prototype: Social media aspect
 
 ### Prototype Design
 
-After the Analysis we started with the prototype design. At first we only had the prototype design for the timeline and the dashboard. After the first designs were given we focused on the domain model and the business logic (including the API design). Simultaneously we started to code the website according to our designs. During this phase we also designed the profile page and the page to add a new item.
-We used another repository for easier deployment of the prototypes (https://github.com/mahgoh/bucket-frontend.git)
+After the Analysis we started with the prototype design. At first we only had the prototype design for the timeline and the dashboard. After the first designs were given we focused on the domain model and the business logic (including the API design). Simultaneously, we started to code the website according to our designs. During this phase we also designed the profile page and the page to add a new item. As stated before, this was done in a [second repository](https://github.com/mahgoh/bucket-frontend) for a more efficient development.
 
-The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with jQuery, to build a dynamic website.
+The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with JavaScript, to build a dynamic website.
 
 We used a method called brainwriting to gather ideas for certain designs of our interface. With this method the members of our group individually wrote down their ideas and presented them in a Microsoft Teams meeting to the team. The advantage of this method was that everyone of the team already had their ideas ready and thus we did not waste time to look for ideas but combined the presented ideas to create our design.
 An example for the bucketlist timeline design written by hand:
@@ -107,7 +106,7 @@ Key points include:
 - The entity **BucketItem** as the idea of bucket items (similar to todo items) is at the core of our bucket-webapp. Logically, many connections to this entity exist.
 - The ManyToMany relationship between BucketItem and Label. BucketItemToLabel signals the intermediate table, according to the UML standard.
 
-![](images/bucket-domain-model.png)
+![Domain Model](images/bucket-domain-model.png)
 
 ### Business Logic Design
 
@@ -124,7 +123,7 @@ Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/9
 
 **Please check out our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
 
-![](images/bucket-endpoint-design-postman_doublecolumn.png)
+![Postman Documentation](images/bucket-endpoint-design-postman_doublecolumn.png)
 
 ## Implementation
 
@@ -156,7 +155,7 @@ Furthermore, the relationship mapping was defined using JPA annotations such as 
 
 This example highlights the defined relationships using JPA. The @OneToOne/@OneToMany relationships from Avatar correspond to the domain model.
 
-![](images/backend-jpa_explanation.png)
+![JPA Explanation](images/backend-jpa_explanation.png)
 
 #### Support of Images (using Inheritance)
 
@@ -178,7 +177,7 @@ The location is added as regular text and uses the **Google Maps API** to displa
 
 Example:
 
-![](images/location-example.png)
+![Example: Location](images/location-example.png)
 
 More information is found at: https://developers.google.com/maps/documentation/embed/get-started
 
@@ -190,13 +189,15 @@ The API endpoints call the respective business services (found under `ch.fhnw.bu
 
 For each entity, a repository class (found under `ch.fhnw.bucket.data.repository`) was created to interact with the database. This is a functionality offered through JPA.
 
-![](images/backend-api_explanation.png)
+![API Explanation](images/backend-api_explanation.png)
 
 ### Frontend Technology
 
 The visual appearance of the frontend was developed in a separate repository ([bucket-frontend](https://github.com/mahgoh/bucket-frontend)) with the usage of a custom component-based HTML bundler - written in [Go](https://go.dev/) specifically for this project. More about how the bundler works and how to use it is mentioned in the repository.
 
 The power of utility classes in CSS, especially, when working in a team is incredible. We use [Tailwind CSS](https://tailwindcss.com/) to make use of this and ensure a great collaboration and maintainability in the future. During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes. The bundler does the same for the HTML files. These static files can then be integrated with the backend.
+
+#### Dependencies
 
 - [Custom HTML bundler](https://github.com/mahgoh/bucket-frontend)
 - [Tailwind CSS](https://tailwindcss.com) ([MIT License](https://github.com/tailwindlabs/tailwindcss/blob/master/LICENSE))
