@@ -20,6 +20,7 @@ This documentation describes the continuous development process/journey of our p
 
 - [Analysis](#analysis)
   - [Scenario](#scenario)
+  - [Explanation of Terms](#explanation-of-terms)
   - [User Stories](#user-stories)
   - [Use Case](#use-case)
 - [Design](#design)
@@ -64,7 +65,13 @@ In addition to the minimal generic user stories, the following user stories were
 6. As a [user], I want a detailed view of BLI so that I can read up on the details.
 7. As a [user], I want to add a focus to my BLI so that I can see my prioritized BLI.
 
-### Use Case / Fuctionalities
+### Explanation of Terms
+
+During the project specific terms were used that are relevant to the bucket list tracker:
+
+- TODO: BLI (bucket list item), bucket (category), timeline (see what you've accomplished), labels (labelling your BLI), etc.
+
+### Use Case
 
 <img src="images/Use-case_BucketWebapp.PNG" width="700">
 
