@@ -20,6 +20,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Service to save and retrieve uploaded images (ProfilePicture/BucketItemImage) from file system.
+ *
+ * https://www.bezkoder.com/spring-boot-file-upload/
+ */
 @Service
 public class ImageService {
     @Autowired

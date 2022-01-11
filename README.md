@@ -102,7 +102,7 @@ The domain model describes the domain objects / entities that are found in `ch.f
 
 Key points include:
 
-- The entity **AbstractImage** is an abstract class with inheritance to both BucketItemImage and ProfilePicture. They are used to store uploaded Images as profile pictures or images for bucket items.
+- The entity **AbstractImage** is an abstract class with inheritance to both BucketItemImage and ProfilePicture. They are used to store information about uploaded Images as profile pictures or images for bucket items.
 - The entity **BucketItem** as the idea of bucket items (similar to todo items) is at the core of our bucket-webapp. Logically, many connections to this entity exist.
 - The ManyToMany relationship between BucketItem and Label. BucketItemToLabel signals the intermediate table, according to the UML standard.
 
@@ -110,16 +110,16 @@ Key points include:
 
 ### Business Logic Design
 
-Our application is composed of a total of 7 business services, of which 5 are implementing validations.
-The bucket-webapp package is depicted in the following Business Logic Design:
+Our application is composed of a total of 7 business services, which are used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation.
+This is depicted in the following Business Logic Design:
 
-<img src="images/Business_Logic_Design_Bucketlist_App.png">
+![Domain Model](images/Business_Logic_Design_Bucketlist_App.png)
 
 ### Endpoint Design
 
-The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman allowed us to create a user-friendly, web-view of the API documentation.
+The [Postman](https://www.postman.com/) API Platform was used for the endpoint design and during the implementation of the backend. Using Postman allowed us to create the API collaboratively and efficiently thanks to a synchronized workflow. Furthermore, Postman also allowed us to create the API documentation through an out-of-the-box, user-friendly, web-view of the API.
 
-Furthermore, as a backup, the bucket-webapp-api repository (https://github.com/972C8/bucket-webapp-api) was created to automatically push API changes in Postman to Github.
+As a backup, the bucket-webapp-api repository (https://github.com/972C8/bucket-webapp-api) was created to automatically push API changes in Postman to Github.
 
 **Please check out our endpoint design at https://documenter.getpostman.com/view/17679206/UVXerdXY for a user-friendly web-view of the API.**
 
@@ -159,15 +159,27 @@ This example highlights the defined relationships using JPA. The @OneToOne/@OneT
 
 #### Support of Images (using Inheritance)
 
-The support of uploading images both as profile pictures and for bucket items is enabled through a custom implementation that stores images as byte[] in the database and using inheritance with AbstractImage as the abstract superclass.
+The support of uploading images both as profile pictures and for bucket items is enabled through a custom implementation that stores images in the file system and a corresponding object in the database, which holds the relevant information to retrieve the image.
+The implementation employs inheritance through AbstractImage as the abstract superclass with BucketItemImage and ProfilePicture extending from it.
 
-This is highlighted in the domain model and implemented accordingly. The abstract class AbstractImage holds the main attributes relevant to images (such as fileName, fileType and data) and the classes ProfilePicture and BucketItemImage extend it.
+This is highlighted in the domain model and implemented accordingly. The abstract class AbstractImage holds the main attributes relevant to images (such as fileName, fileType and fileUrl) and the classes ProfilePicture and BucketItemImage extend it.
 
 **Single table inheritance and discriminator:**
 
 The image implementation uses single table inheritance and a discriminator column.
-This effectively means that only asingle table is created in the database (although there are 3 classes!) and that the discriminator is used
+This effectively means that only a single table is created in the database (although there are 3 classes!) and that the discriminator is used
 to determine which class the particular row belongs to. More information is found at https://en.wikibooks.org/wiki/Java_Persistence/Inheritance#Single_Table_Inheritance
+
+**Storing of Images:**
+
+Images are stored in the directory "/uploads" and a database entry is created for either BucketItem or ProfilePicture,
+which holds the relevant information (fileName, fileType, fileUrl). When a GET request is sent, the entry is retrieved from
+the database and the image is taken from the file system using this information. 
+
+Images can be both stored in the database and using the file system. The implementation initially stored the images in the database,
+but due to compatibility issue when using PostgreSQL on Heroku and Oracle locally, it was decided to store images in the directory.
+
+Read more about this issue in the [deployment section](#deployment).
 
 #### Location (Google Maps API)
 
@@ -205,8 +217,32 @@ The power of utility classes in CSS, especially, when working in a team is incre
 
 ## Deployment
 
-TODO: Deploy on Heroku  
-TODO: Write section about deployment
+This project has been deployed to Heroku by using the pre-configuration scripts `app.json` and `Procfile`.
+The project locally uses an in-memory database and PostgreSQL on Heroku, as it was added as an addon.
+
+The deployment to Heroku is very easy and self-explanatory. After connecting to the Github account, the project is deployed and ready to go.
+
+The project was automatically deployed to: https://bucket-webapp.herokuapp.com
+
+### Issues during the deployment:
+
+Deployment to Heroku was smooth. However, an issue arised with storing images.
+
+**Source of the issue:** The project uses PostgreSQL on Heroku, but an in-memory (oracle) database locally.
+Storing images directly in the datababe using the byte[] datatype and the @Lob annotation (to signify large objects)
+is not supported out-of-the-box for the two different databases!
+
+In other words, when using PostgreSQL on Heroku and Oracle locally, the hibernate annotation for byte[] is not compatible.
+
+The problem is detailed at https://stackoverflow.com/questions/3677380/proper-hibernate-annotation-for-byte and
+the solution is to either use the same database locally and remote, or create a custom dialect for PostgreSQL.
+
+No simple solution existed and testing was difficult due to not being able to reproduce it locally
+(no effective testing is possible when the local environment works even when it doesn't for remote).
+Therefore, it was decided to use this time and implement a file system for uploading and retrieving images. This approach
+is sensible and how it is usually done for websites as we also know from work experience in web development.
+Using a file system took additional time, but was estimated to be worthwhile for both the future additions to the project
+and as a learning experience.
 
 ## User Guide
 
