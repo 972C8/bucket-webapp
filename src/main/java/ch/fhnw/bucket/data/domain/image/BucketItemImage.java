@@ -13,8 +13,12 @@ public class BucketItemImage extends AbstractImage {
         super();
     }
 
-    public BucketItemImage(String fileName, String fileType, byte[] data) {
-        super(fileName, fileType, data);
+    public BucketItemImage(String fileName) {
+        super(fileName);
+    }
+
+    public BucketItemImage(String fileName, String fileUrl, String fileType) {
+        super(fileName, fileUrl, fileType);
     }
 
     //The image is assigned to a bucket item

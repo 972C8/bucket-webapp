@@ -1,22 +1,24 @@
 package ch.fhnw.bucket.business.service;
 
-import ch.fhnw.bucket.data.domain.BucketItem;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
+import java.util.Random;
+import java.util.stream.Stream;
+
 import ch.fhnw.bucket.data.domain.image.BucketItemImage;
-import ch.fhnw.bucket.data.domain.image.ProfilePicture;
-import ch.fhnw.bucket.data.repository.BucketItemRepository;
 import ch.fhnw.bucket.data.repository.BucketItemImageRepository;
 import ch.fhnw.bucket.data.repository.ProfilePictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
-import java.util.Objects;
-
-/*
-Service to store image uploaded through API as byte in the database.
- */
 @Service
 public class ImageService {
     @Autowired
@@ -24,72 +26,115 @@ public class ImageService {
     @Autowired
     private ProfilePictureRepository profilePictureRepository;
 
-    @Autowired
-    private AvatarService avatarService;
+    private final Path root = Paths.get("uploads");
 
     /**
-    Save image in database as byte and add current avatar as owner of image.
+     * Create root directory if not exists yet
      */
-    public BucketItemImage uploadBucketItemImage(MultipartFile img) throws Exception {
+    public void rootExists() {
         try {
-            // Normalize file name
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
-
-            // Check if the file's name contains invalid characters
-            if (fileName.contains("..")) {
-                throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
+            if (Files.notExists(root)) {
+                Files.createDirectory(root);
             }
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initialize folder for upload!");
+        }
+    }
 
-            //Create the uploaded image object
-            BucketItemImage image = new BucketItemImage(fileName, img.getContentType(), img.getBytes());
+    /**
+     * Creates a randomized name for the image name
+     *
+     * @param name
+     * @return
+     */
+    public String createRandomName(String name) {
+        //generate the random string
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
 
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        String[] split = name.split("[.]");
+        String suffix = split[split.length - 1];
+
+        //Return the generated string and append the image type as suffix.
+        //e.g. 1283239.png
+        return generatedString + "." + suffix;
+    }
+
+    public BucketItemImage saveBucketItemImage(MultipartFile file) {
+        try {
+            //Check if root already exists
+            rootExists();
+
+            //Create a random image name
+            String imageName = createRandomName(Objects.requireNonNull(file.getOriginalFilename()));
+
+            //Upload image to root folder
+            Path url = this.root.resolve(imageName);
+            Files.copy(file.getInputStream(), url);
+
+            //store the image information in the database
+            BucketItemImage image = new BucketItemImage(imageName, url.toString(), file.getContentType());
             return bucketItemImageRepository.save(image);
-        } catch (Exception ex) {
-            throw new Exception("Could not store image.", ex);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
     }
 
     /**
-    Create the new profile picture and assign it to the current user.
-    If a profile picture already exists, it is overwritten and the old one is deleted.
+     * Load BucketItemImage from bucketItemId
+     *
+     * @param bucketItemId
+     * @return
      */
-    public ProfilePicture uploadAvatarProfilePicture(MultipartFile img) throws Exception {
+    public BucketItemImage loadBucketItemImage(Long bucketItemId) {
         try {
-            // Normalize file name
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
+            return bucketItemImageRepository.findBucketItemImageByBucketItemId(bucketItemId);
 
-            // Check if the file's name contains invalid characters
-            if (fileName.contains("..")) {
-                throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
-            }
-
-            ProfilePicture image = new ProfilePicture(fileName, img.getContentType(), img.getBytes());
-
-            //Assign the current avatar to the created image
-            image.setAvatar(avatarService.getCurrentAvatar());
-
-            //Remove the current profile picture from the current avatar as it is overwritten with the new one
-            if (avatarService.getCurrentAvatar().getProfilePicture() != null) {
-                profilePictureRepository.delete(avatarService.getCurrentAvatar().getProfilePicture());
-            }
-
-            return profilePictureRepository.save(image);
-        } catch (Exception ex) {
-            throw new Exception("Could not store profile picture.", ex);
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         }
     }
 
     /**
-    Get image from database by id
+     * Load the resource using the bucket item image. Resource is used to provide image through API.
+     *
+     * @param item
+     * @return
      */
-    public BucketItemImage getBucketItemImage(Long bucketItemId) {
-        return bucketItemImageRepository.findBucketItemImageByBucketItemId(bucketItemId);
+    public Resource loadResourceFromBucketItemImage(BucketItemImage item) {
+        try {
+            //Find the image of the BucketItem
+            Path file = root.resolve(item.getFileName());
+
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
     }
 
-    /**
-    Get profile picture of the current avatar
-     */
-    public ProfilePicture getCurrentAvatarProfilePicture() {
-        return profilePictureRepository.findProfilePictureByAvatarId(avatarService.getCurrentAvatar().getId());
+    public void deleteAll() {
+        FileSystemUtils.deleteRecursively(root.toFile());
+    }
+
+    public Stream<Path> loadAll() {
+        try {
+            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not load the files!");
+        }
     }
 }

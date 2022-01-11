@@ -2,9 +2,7 @@ package ch.fhnw.bucket.api;
 
 import ch.fhnw.bucket.business.service.ImageService;
 import ch.fhnw.bucket.data.domain.image.BucketItemImage;
-import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,27 +19,29 @@ public class ImageEndpoint {
     private ImageService imageService;
 
     /**
-    Save the uploaded image as the image of the provided bucket item id
+     * Save the uploaded image as the image of the provided bucket item id
      */
     @PostMapping("/bucket-items/images")
     public ResponseEntity<BucketItemImage> uploadImage(@RequestParam(value = "image") MultipartFile image) {
         try {
-            BucketItemImage file = imageService.uploadBucketItemImage(image);
+            BucketItemImage item = imageService.saveBucketItemImage(image);
 
-            return ResponseEntity.accepted().body(file);
-
+            return ResponseEntity.accepted().body(item);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
+    //TODO: upload profile picture
     /**
-    Save the uploaded image as the profile picture of the current avatar
+     * Save the uploaded image as the profile picture of the current avatar
      */
+    /*
     @PostMapping("/avatars/profile-picture")
     public ResponseEntity<ProfilePicture> uploadProfilePicture(@RequestParam(value = "image") MultipartFile image) {
         try {
-            ProfilePicture file = imageService.uploadAvatarProfilePicture(image);
+
+            //ProfilePicture file = imageService.uploadAvatarProfilePicture(image);
 
             return ResponseEntity.accepted().body(file);
 
@@ -65,20 +65,24 @@ public class ImageEndpoint {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
+    */
 
     /**
-    GET the bucket item image by id
+     * GET the bucket item image by id
      */
     @GetMapping("/bucket-items/images/{bucketItemId}")
     public ResponseEntity<Resource> getBucketItemImage(@PathVariable(value = "bucketItemId") String bucketItemId) {
         try {
             // Load file as Resource
-            BucketItemImage imageFile = imageService.getBucketItemImage(Long.parseLong(bucketItemId));
+            BucketItemImage imageFile = imageService.loadBucketItemImage(Long.parseLong(bucketItemId));
+
+            //Create resource from imageFile
+            Resource resource = imageService.loadResourceFromBucketItemImage(imageFile);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(imageFile.getFileType()))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageFile.getFileName() + "\"")
-                    .body(new ByteArrayResource(imageFile.getData()));
+                    .body(resource);
 
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

@@ -16,32 +16,30 @@ each class in the hierarchy defines its own unique discriminator value.
  */
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="IMAGE_TYPE")
+@DiscriminatorColumn(name = "IMAGE_TYPE")
 public abstract class AbstractImage {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @JsonIgnore
     private String fileName;
 
-    @JsonIgnore
-    private String fileType;
+    private String fileUrl;
 
-    //Check PostgreSQLDialectCustom.java to see custom implementation, making @Lob possible on Postgresql (heroku)
-    //This is never an issue as the local storage is in-memory
-    @Lob
-    @JsonIgnore
-    private byte[] data;
+    private String fileType;
 
     public AbstractImage() {
     }
 
-    public AbstractImage(String fileName, String fileType, byte[] data) {
+    public AbstractImage(String fileName) {
         this.fileName = fileName;
+    }
+
+    public AbstractImage(String fileName, String fileUrl, String fileType) {
+        this.fileName = fileName;
+        this.fileUrl = fileUrl;
         this.fileType = fileType;
-        this.data = data;
     }
 
     public Long getId() {
@@ -60,19 +58,19 @@ public abstract class AbstractImage {
         this.fileName = fileName;
     }
 
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
     public String getFileType() {
         return fileType;
     }
 
     public void setFileType(String fileType) {
         this.fileType = fileType;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
     }
 }

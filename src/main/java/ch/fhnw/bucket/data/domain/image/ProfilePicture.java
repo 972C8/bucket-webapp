@@ -13,8 +13,8 @@ public class ProfilePicture extends AbstractImage {
         super();
     }
 
-    public ProfilePicture(String fileName, String fileType, byte[] data) {
-        super(fileName, fileType, data);
+    public ProfilePicture(String fileName, String fileUrl, String fileType) {
+        super(fileName, fileUrl, fileType);
     }
 
     //A profile picture is assigned to one avatar
