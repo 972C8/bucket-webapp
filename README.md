@@ -69,7 +69,13 @@ In addition to the minimal generic user stories, the following user stories were
 
 During the project specific terms were used that are relevant to the bucket list tracker:
 
-- TODO: BLI (bucket list item), bucket (category), timeline (see what you've accomplished), labels (labelling your BLI), etc.
+- Bucket List Item (BLI) can be a goal or achievement for the future that can be given a title, short description, Bucket (category, due date, image/foto, location and labels.
+- Bucket lets you define a certain category that a Bucket List Item belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
+- Labels are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
+- Timeline shows you all your accomplished Bucket List Items in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
+- Dashboard...
+- Profile...
+
 
 ### Use Case
 
