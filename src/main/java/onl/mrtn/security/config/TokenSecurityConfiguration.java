@@ -42,6 +42,7 @@ public class TokenSecurityConfiguration {
         Properties properties = new Properties();
         properties.putAll(entityManagerFactory.getProperties());
         properties.remove("hibernate.transaction.coordinator_class"); //Spring Data issue
+        properties.put("hibernate.jdbc.use_streams_for_binary", "false");
         return properties;
     }
 }
