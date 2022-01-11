@@ -1,6 +1,6 @@
 package ch.fhnw.bucket.data.domain.image;
 
-import org.hibernate.dialect.PostgreSQL82Dialect;
+import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
 import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 
@@ -11,7 +11,7 @@ import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
  *
  * https://stackoverflow.com/questions/35505424/how-to-read-bytea-image-data-from-postgresql-with-jpa
  */
-public class PostgreSQLDialectCustom extends PostgreSQL82Dialect {
+public class PostgreSQLDialectCustom extends PostgreSQL10Dialect {
 
     @Override
     public SqlTypeDescriptor remapSqlTypeDescriptor(SqlTypeDescriptor sqlTypeDescriptor) {
