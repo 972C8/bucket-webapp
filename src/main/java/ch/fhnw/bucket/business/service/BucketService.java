@@ -18,9 +18,6 @@ public class BucketService {
     private BucketRepository bucketRepository;
 
     @Autowired
-    private AvatarRepository avatarRepository;
-
-    @Autowired
     private AvatarService avatarService;
 
     public Bucket saveBucket(@Valid Bucket bucket) throws Exception {

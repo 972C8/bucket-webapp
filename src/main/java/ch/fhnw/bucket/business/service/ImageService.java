@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import ch.fhnw.bucket.data.domain.image.BucketItemImage;
+import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import ch.fhnw.bucket.data.repository.BucketItemImageRepository;
 import ch.fhnw.bucket.data.repository.ProfilePictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class ImageService {
     private BucketItemImageRepository bucketItemImageRepository;
     @Autowired
     private ProfilePictureRepository profilePictureRepository;
+
+    @Autowired
+    private AvatarService avatarService;
 
     private final Path root = Paths.get("uploads");
 
@@ -68,6 +72,12 @@ public class ImageService {
         return generatedString + "." + suffix;
     }
 
+    /**
+     * Save the uploaded image as a BucketItemImage in the file system
+     *
+     * @param file
+     * @return
+     */
     public BucketItemImage saveBucketItemImage(MultipartFile file) {
         try {
             //Check if root already exists
@@ -99,6 +109,71 @@ public class ImageService {
             return bucketItemImageRepository.findBucketItemImageByBucketItemId(bucketItemId);
 
         } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Save the uploaded image as a ProfilePicture in the file system
+     *
+     * @param file
+     * @return
+     */
+    public ProfilePicture saveAvatarProfilePicture(MultipartFile file) {
+        try {
+            //Check if root already exists
+            rootExists();
+
+            //Create a random image name
+            String imageName = createRandomName(Objects.requireNonNull(file.getOriginalFilename()));
+
+            //Upload image to root folder
+            Path url = this.root.resolve(imageName);
+            Files.copy(file.getInputStream(), url);
+
+            //store the image information in the database
+            ProfilePicture image = new ProfilePicture(imageName, url.toString(), file.getContentType());
+
+            //Assign the current avatar to the created image
+            image.setAvatar(avatarService.getCurrentAvatar());
+
+            //Remove the current profile picture from the current avatar as it is overwritten with the new one
+            if (avatarService.getCurrentAvatar().getProfilePicture() != null) {
+                profilePictureRepository.delete(avatarService.getCurrentAvatar().getProfilePicture());
+            }
+
+            return profilePictureRepository.save(image);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+    }
+
+    /**
+     Get profile picture of the current avatar
+     */
+    public ProfilePicture loadCurrentAvatarProfilePicture() {
+        return profilePictureRepository.findProfilePictureByAvatarId(avatarService.getCurrentAvatar().getId());
+    }
+
+    /**
+     * Load the resource using the avatar profile picture. Resource is used to provide image through API.
+     *
+     * @param profilePicture
+     * @return
+     */
+    public Resource loadResourceFromAvatarProfilePicture(ProfilePicture profilePicture) {
+        try {
+            //Find the image of the Avatar
+            Path file = root.resolve(profilePicture.getFileName());
+
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }

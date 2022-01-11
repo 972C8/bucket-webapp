@@ -2,6 +2,7 @@ package ch.fhnw.bucket.api;
 
 import ch.fhnw.bucket.business.service.ImageService;
 import ch.fhnw.bucket.data.domain.image.BucketItemImage;
+import ch.fhnw.bucket.data.domain.image.ProfilePicture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -33,18 +34,16 @@ public class ImageEndpoint {
     }
 
     //TODO: upload profile picture
+
     /**
      * Save the uploaded image as the profile picture of the current avatar
      */
-    /*
     @PostMapping("/avatars/profile-picture")
     public ResponseEntity<ProfilePicture> uploadProfilePicture(@RequestParam(value = "image") MultipartFile image) {
         try {
-
-            //ProfilePicture file = imageService.uploadAvatarProfilePicture(image);
+            ProfilePicture file = imageService.saveAvatarProfilePicture(image);
 
             return ResponseEntity.accepted().body(file);
-
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
@@ -54,18 +53,20 @@ public class ImageEndpoint {
     public ResponseEntity<Resource> getProfilePicture() {
         try {
             // Load file as Resource
-            ProfilePicture imageFile = imageService.getCurrentAvatarProfilePicture();
+            ProfilePicture imageFile = imageService.loadCurrentAvatarProfilePicture();
+
+            //Create resource from imageFile
+            Resource resource = imageService.loadResourceFromAvatarProfilePicture(imageFile);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(imageFile.getFileType()))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageFile.getFileName() + "\"")
-                    .body(new ByteArrayResource(imageFile.getData()));
+                    .body(resource);
 
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
-    */
 
     /**
      * GET the bucket item image by id
