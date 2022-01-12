@@ -100,7 +100,8 @@ After the Analysis we started with the prototype design. At first we only had th
 
 The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with JavaScript, to build a dynamic website.
 
-We used a method called brainwriting to gather ideas for certain designs of our interface. With this method the members of our group individually wrote down their ideas and presented them in a Microsoft Teams meeting to the team. The advantage of this method was that everyone of the team already had their ideas ready and thus we did not waste time to look for ideas but combined the presented ideas to create our design.
+We used a method called brainwriting to gather ideas for certain designs of our interface. With this method the members of our group individually wrote down their ideas and presented them in a Microsoft Teams meeting to the team. The advantage of this method was that everyone of the team already had their ideas ready and thus we did not waste time to look for ideas but combined the presented ideas to create our design. We evaluated the collected ideas and democratically chose the best ones that were suitable for our project. With the inspiration taken from this particular prototype meeting we were ready to approach the next challenge, namely the domain design.
+
 An example for the bucketlist timeline design written by hand:
 
 <img src="images/bucketList_Design_Timeline2.png" width="300">
@@ -132,7 +133,7 @@ Key points include:
 
 ### Business Logic Design
 
-Our application is composed of a total of 7 business services, which are used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation.
+Our application is composed of a total of 7 business services, which are used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation. The business services which use the validated annotation, all have particular methods that have to use this annotation and not every method is required to use it.
 This is depicted in the following Business Logic Design:
 
 ![Domain Model](images/Business_Logic_Design_Bucketlist_App.png)
