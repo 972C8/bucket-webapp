@@ -113,6 +113,15 @@ An example for the dashboard design written by hand:
 
 The domain model describes the domain objects / entities that are found in `ch.fhnw.bucket.data.domain`. Note that for clarity getters and setters are not included in the domain model.
 
+Classes included:
+
+- Avatar, which is our name for a User
+- Bucket, which is a category
+- Location, which is a text address displayed using the Google Maps API
+- Label, which is used to label a BucketItem
+- BucketItem, is at the core of the app. Avatars create bucket items of things they want to accomplish in the future. BucketItems hold many different data, and Bucket, Label, Location, and BucketItemImage can be assigned them.
+- AbstractImage, is the abstract class from which two types of images are extended. ProfilePicture to upload a new profile picture for an avatar, and BucketItemImage to upload an image for a bucket item.
+
 Key points include:
 
 - The entity **AbstractImage** is an abstract class with inheritance to both BucketItemImage and ProfilePicture. They are used to store information about uploaded Images as profile pictures or images for bucket items.
