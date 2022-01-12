@@ -73,8 +73,8 @@ During the project specific terms were used that are relevant to the bucket list
 - Bucket lets you define a certain category that a Bucket List Item belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
 - Labels are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
 - Timeline shows you all your accomplished Bucket List Items in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
-- Dashboard...
-- Profile...
+- Dashboard is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs, look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
+- Profile provides you with all your personal credentials like your name, Email and profile picture. The password can be directly managed inside the profile credentials if it needs to be updated due to security reasons.
 
 
 ### Use Case
