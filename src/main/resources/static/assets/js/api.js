@@ -218,9 +218,7 @@ function getBucketItemPayload(
   let bucketItem = {
     title: title,
     description: description,
-    bucket: {
-      id: parseInt(bucket),
-    },
+    bucket: null,
     dateToAccomplish: dateToAccomplish,
     dateAccomplishedOn: dateAccomplishedOn,
     completed: completed,
@@ -230,6 +228,7 @@ function getBucketItemPayload(
   };
 
   if (id !== null) bucketItem.id = id;
+  if (bucket !== '0') bucketItem.bucket = { id: parseInt(bucket) };
   if (image !== null) bucketItem.image = { id: image };
   if (labels !== null)
     bucketItem.labels = labels.map((label) => {
