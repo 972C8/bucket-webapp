@@ -60,10 +60,11 @@ In addition to the minimal generic user stories, the following user stories were
 1. As a [user], I want to view a timeline of achieved BLI so that I can get an overview of my past achievements.
 2. As a [user], I want to create, read, update, and delete BLI so that I can manage my bucket list.
 3. As a [user], I want to add different data to my BLI so that I can further personalize my BLI.
-4. As a [user], I want a dashboard as a list of categorized BLI so that I can get an overview of my BLI.
+4. As a [user], I want a dashboard as a starting page to get an overview and access all the other pages from there.
 5. As a [user], I want to create categories for my BLI so that I have my BLI organized.
-6. As a [user], I want a detailed view of BLI so that I can read up on the details.
-7. As a [user], I want to add a focus to my BLI so that I can see my prioritized BLI.
+6. As a [user], I want to be able to filter and sort my BLI according to my wishes.
+7. As a [user], I want a detailed view of BLI so that I can read up on the details.
+8. As a [user], I want a good GUI where I can easily find all the pages.
 
 ### Explanation of Terms
 
