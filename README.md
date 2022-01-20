@@ -41,13 +41,24 @@ This documentation describes the continuous development process/journey of our p
 
 ### Scenario
 
-One of the first major decisions we made as a group was the idea of an application for our project work. We voted for the idea of making a Bucketlist application which was very unambiguously. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future. The CRM template provided by the lecturers served as basis of our program. We adjusted and changed the template accordingly to our visions to deliver a well designed result. We even went as far as creating a second repository dedicated to the front-end development. (https://github.com/mahgoh/bucket-frontend.git)
+One of the first major decisions we made as a group was the idea of an application for our project work. The team was concurring to take the project further than a simple CRM web app in order to profit of an interesting project. We voted for the idea of making a Bucketlist application which was very unambiguously. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future. The CRM template provided by the lecturers served as basis of our program. We adjusted and changed the template accordingly to our visions to deliver a well designed result. We even went as far as creating a second repository dedicated to the front-end development. (https://github.com/mahgoh/bucket-frontend.git)
 
 By determining our goal for the project we set up the scene for the next step which is the definition of user stories regarding the Bucketlist application.
 
+### Explanation of Terms
+
+During the project specific terms were used that are relevant to the bucket list tracker:
+
+- **Bucket List Item (BLI)** can be a goal or achievement for the future that can be given a title, short description, Bucket (category, due date, image, location and labels.
+- **Bucket** lets you define a certain category that a BLI belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
+- **Labels** are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
+- **Timeline** shows you all your accomplished BLIs in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
+- **Dashboard** is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs, look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
+- **Profile** provides you with all your personal credentials like your name, Email and profile picture. The password can be directly managed inside the profile credentials if it needs to be updated due to security reasons.
+
 ### User Stories
 
-1. As a [user], I want to have a Web app so that I can use it on different mobile devices and on desktop computers.
+1. As a [user], I want to have a web app so that I can use it on different mobile devices and on desktop computers.
 2. As a [user], I want to see a consistent visual appearance so that I can navigate easily, and it looks consistent.
 3. As a [user], I want to use list views so that I can explore and read my business data.
 4. As a [user], I want to use edit and create views so that I can maintain my data
@@ -60,23 +71,11 @@ In addition to the minimal generic user stories, the following user stories were
 1. As a [user], I want to view a timeline of achieved BLI so that I can get an overview of my past achievements.
 2. As a [user], I want to create, read, update, and delete BLI so that I can manage my bucket list.
 3. As a [user], I want to add different data to my BLI so that I can further personalize my BLI.
-4. As a [user], I want a dashboard as a starting page to get an overview and access all the other pages from there.
+4. As a [user], I want a dashboard as a starting page so that I have an overview and can easily access relevant pages.
 5. As a [user], I want to create categories for my BLI so that I have my BLI organized.
-6. As a [user], I want to be able to filter and sort my BLI according to my wishes.
+6. As a [user], I want to be able to filter and sort my BLI so that I can get an overview.
 7. As a [user], I want a detailed view of BLI so that I can read up on the details.
-8. As a [user], I want a good GUI where I can easily find all the pages.
-
-### Explanation of Terms
-
-During the project specific terms were used that are relevant to the bucket list tracker:
-
-- Bucket List Item (BLI) can be a goal or achievement for the future that can be given a title, short description, Bucket (category, due date, image/foto, location and labels.
-- Bucket lets you define a certain category that a Bucket List Item belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
-- Labels are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
-- Timeline shows you all your accomplished Bucket List Items in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
-- Dashboard is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs, look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
-- Profile provides you with all your personal credentials like your name, Email and profile picture. The password can be directly managed inside the profile credentials if it needs to be updated due to security reasons.
-
+8. As a [user], I want a well-structured GUI so that I can easily find the pages I look for.
 
 ### Use Case
 
