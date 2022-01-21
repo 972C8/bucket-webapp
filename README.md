@@ -171,7 +171,7 @@ To bootstrap the application, the [Spring Initializr](https://start.spring.io/) 
 
 ### Backend Implementation
 
-The backend serves two main purposes: Provide an API endpoint the frontend can interact with, and interact with the database using custom business logic and through API calls by extension. Please also check the [domain design](#domain-design), [Business Logic Design](#business-logic-design) and [Endpoint Design](#endpoint-design) for more information about the design phase.
+The backend serves two main purposes: Provide an API endpoint the frontend can interact with, and interact with the database using custom business logic and through API calls by extension.
 
 #### Domain Design:
 
@@ -245,9 +245,9 @@ The power of utility classes in CSS, especially, when working in a team is incre
 This project has been deployed to Heroku by using the pre-configuration scripts `app.json` and `Procfile`.
 The project locally uses an in-memory database and PostgreSQL on Heroku, as it was added as an addon.
 
-The deployment to Heroku is very easy and self-explanatory. After connecting to the Github account, the project is deployed and ready to go.
+The deployment to Heroku is quite easy and the project was therefore quickly set up. After creating a new web app by giving it a name, it was only necessary to connect it to the Github repository. The project could then be deployed and was ready to go. Although no issue occured during the deploymenet, a bigger problem was found with the image upload in regards to compatibility with PostgreSQL. This issue is detailed in the next section. 
 
-The project was automatically deployed to: https://bucket-webapp.herokuapp.com
+The project is accessible at: https://bucket-webapp.herokuapp.com
 
 ### Issues during the deployment:
 
