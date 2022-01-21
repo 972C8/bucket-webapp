@@ -65,35 +65,35 @@ During the project specific terms were used that are relevant to the bucket list
 **Functional Requirements**
 
 *Creating*
-- shall be able to create a new user account
-- shall be able to create new Buckets
-- shall be able to create new BLIs
+- the application shall offer the user the ability to create a new user account
+- the application shall offer the user the ability to create new Buckets
+- the application shall offer the user the ability to create new BLIs
 
 *Reading*
-- shall be able to display existing user account credentials
-- shall be able to display existing Buckets with their attributes in a list
-- shall be able to display existing BLIs with their attributes in a list
-- shall be able to display and sort existing Buckets in a list, according to the Name attribute
-- shall be able to display and sort existing BLIs chronologically in a list
-- shall be able to filter and display existing BLIs according to Buckets or Labels
-- shall be able to select a single BLI to display its details
+- the application shall offer the user the ability to display existing user account credentials
+- the application shall offer the user the ability to display existing Buckets with the attributes in a list
+- the application shall offer the user the ability to display existing BLIs with the attributes in a list
+- the application shall offer the user the ability to display and sort existing Buckets in a list, according to the Name attribute
+- the application shall offer the user the ability to display and sort existing BLIs chronologically in a list
+- the application shall offer the user the ability to filter and display existing BLIs according to Buckets or Labels
+- the application shall offer the user the ability to select a single BLI to display its details
 
 *Updating*
-- shall be able to update user account credentials (Name, Password and Picture)
-- shall be able to update Bucket attributes
-- shall be able to update BLI attributes
-- shall be able to update Timeline when further BLIs are achieved
-- shall be able to update Dashboard to show the chronologically pending BLI
+- the application shall offer the user the ability to update user account credentials (Name, Password and Picture)
+- the application shall offer the user the ability to update Bucket attributes
+- the application shall offer the user the ability to update BLI attributes
+- the application shall offer the user the ability to update the Timeline when further BLIs are achieved
+- the application shall offer the user the ability to update the Dashboard to show the chronologically pending BLI
 
 *Deleting*
-- shall be able to delete Buckets
-- shall be able to delete BLIs
+- the application shall offer the user the ability to delete Buckets
+- the application shall offer the user the ability to delete BLIs
 
 *Others*
-- shall be able to remember the password to stay logged-in when application is closed
-- shall be able to log-out of a logged-in account
-- shall be able to navigate to the homepage with one click
-- shall be able to navigate to the main pages from the homepage
+- the application shall offer the user the ability to remember the password during the login to stay logged-in when the application is closed
+- the application shall offer the user the ability to log-out of a logged-in account
+- the application shall offer the user the ability to navigate to the homepage with one click
+- the application shall offer the user the ability to navigate to the main pages from the homepage
 
 **Non-Functional Requirements**
 
@@ -127,21 +127,19 @@ In addition to the minimal generic user stories, the following user stories were
 
 ### Use Case
 
-<img src="images/Use-case_BucketWebapp.PNG" width="800">
+<img src="images/Use-case_BucketWebapp.PNG" width="700">
 
 - UC-1 [Login on bucket-webapp]: Customers can log-in by entering an email address and password. As an extension, new customers may register first.
 - UC-2 [Register on bucket-webapp]: Customers can register to get an account (profile) to access the bucket-webapp.
 - UC-3 [Edit profile information]: Customers can edit their profile information, e.g. Email/password/name/profile picture.
-- UC-4 [Create a Bucket]: Customers can create a bucket. They can choose a name, color and icon.
-- UC-5 [Edit a Bucket]: Customers can edit a bucket.
-- UC-6 [View all Buckets]: Customers can view their buckets all at once. Each bucket can be deleted directly from this view.
-- UC-7 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels.
-- UC-8 [Edit a BLI]: Customers can edit a BLI.
-- UC-9 [View a BLI]: Customers can view a single BLI and set/change the status of the BLI accomplished with a given date accomplished. The BLI can be deleted directly from this view.
-- UC-10 [View all BLI]: Customers can view their BLI's all at once. Each BLI can be deleted directly from this view.
-- UC-11 [View BLI on the timeline]: Customers can view their achieved BLI's on the timeline.
-- UC-12 [Filter BLI by buckets]: Customers can view their BLI's filtered by buckets
-- UC-13 [Filter BLI by labels]: Customers can view their BLI's filtered by labels.
+- UC-4 [Create a Bucket]: Customers can create a bucket. They can choose a name, color and icon. These buckets can be edited/deleted.
+- UC-5 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels. 
+- UC-6 [Edit/Delete BLI]: Customers can edited/delete their BLI.
+- UC-7 [Change status]: Customers can set/change the status of the BLI accomplished with a given date accomplished.
+- UC-8 [View BLI all at once]: Customers can view their BLI's all at once.
+- UC-9 [View BLI on the timeline]: Customers can view their achieved BLI's on the timeline.
+- UC-10 [Filter BLI by buckets]: Customers can view their BLI's filtered by buckets
+- UC-11 [Filter BLI by labels]: Customers can view their BLI's filtered by labels.
 
 ## Design
 
