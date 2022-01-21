@@ -132,14 +132,16 @@ In addition to the minimal generic user stories, the following user stories were
 - UC-1 [Login on bucket-webapp]: Customers can log-in by entering an email address and password. As an extension, new customers may register first.
 - UC-2 [Register on bucket-webapp]: Customers can register to get an account (profile) to access the bucket-webapp.
 - UC-3 [Edit profile information]: Customers can edit their profile information, e.g. Email/password/name/profile picture.
-- UC-4 [Create a Bucket]: Customers can create a bucket. They can choose a name, color and icon. These buckets can be edited/deleted.
-- UC-5 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels. 
-- UC-6 [Edit/Delete BLI]: Customers can edited/delete their BLI.
-- UC-7 [Change status]: Customers can set/change the status of the BLI accomplished with a given date accomplished.
-- UC-8 [View BLI all at once]: Customers can view their BLI's all at once.
-- UC-9 [View BLI on the timeline]: Customers can view their achieved BLI's on the timeline.
-- UC-10 [Filter BLI by buckets]: Customers can view their BLI's filtered by buckets
-- UC-11 [Filter BLI by labels]: Customers can view their BLI's filtered by labels.
+- UC-4 [Create a Bucket]: Customers can create a bucket. They can choose a name, color and icon.
+- UC-5 [Edit a Bucket]: Customers can edit a bucket.
+- UC-6 [View Buckets all at once]: Customers can view their Buckets all at once. Each bucket can be deleted directly from this view.
+- UC-7 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels.
+- UC-8 [Edit a BLI]: Customers can edited a BLI.
+- UC-9 [View a BLI]: Customers can view a single BLI and set/change the status of the BLI accomplished with a given date accomplished. The bucket can be deleted directly from this view.
+- UC-10 [View BLI all at once]: Customers can view their BLI's all at once. Each BLI can be deleted directly from this view.
+- UC-11 [View BLI on the timeline]: Customers can view their achieved BLI's on the timeline.
+- UC-12 [Filter BLI by buckets]: Customers can view their BLI's filtered by buckets
+- UC-13 [Filter BLI by labels]: Customers can view their BLI's filtered by labels.
 
 ## Design
 
