@@ -102,7 +102,7 @@ During the project specific terms were used that are relevant to the bucket list
 - reactive UI design for PC and mobile devices
 - fluent timeline to scroll through all achieved BLIs
 - BLIs on the timeline are shown uniformly with the details of the BLIs
-- uniform design and structure of all pages (colours & fonts)
+- uniform design and structure of all pages (Continuous Integrity (CI))
 
 ### User Stories
 
