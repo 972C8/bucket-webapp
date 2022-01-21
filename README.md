@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/bucket_logo.png" width="600" />
+  <img src="./images/bucket_logo.svg" width="600" />
 </p>
 <p align="center">  
   Manage your bucket list in a modern web experience.<br>
