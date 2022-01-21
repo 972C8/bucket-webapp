@@ -127,7 +127,7 @@ In addition to the minimal generic user stories, the following user stories were
 
 ### Use Case
 
-<img src="images/Use-case_BucketWebapp.PNG" width="700">
+<img src="images/Use-case_BucketWebapp.PNG" width="750">
 
 - UC-1 [Login on bucket-webapp]: Customers can log-in by entering an email address and password. As an extension, new customers may register first.
 - UC-2 [Register on bucket-webapp]: Customers can register to get an account (profile) to access the bucket-webapp.
@@ -136,7 +136,7 @@ In addition to the minimal generic user stories, the following user stories were
 - UC-5 [Edit a Bucket]: Customers can edit a bucket.
 - UC-6 [View Buckets all at once]: Customers can view their Buckets all at once. Each bucket can be deleted directly from this view.
 - UC-7 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels.
-- UC-8 [Edit a BLI]: Customers can edited a BLI.
+- UC-8 [Edit a BLI]: Customers can edit a BLI.
 - UC-9 [View a BLI]: Customers can view a single BLI and set/change the status of the BLI accomplished with a given date accomplished. The bucket can be deleted directly from this view.
 - UC-10 [View BLI all at once]: Customers can view their BLI's all at once. Each BLI can be deleted directly from this view.
 - UC-11 [View BLI on the timeline]: Customers can view their achieved BLI's on the timeline.
