@@ -141,7 +141,6 @@ In addition to the minimal generic user stories, the following user stories were
 - UC-10 [Filter BLI by buckets]: Customers can view their BLI's filtered by buckets
 - UC-11 [Filter BLI by labels]: Customers can view their BLI's filtered by labels.
 
-
 ## Design
 
 ### Prototype Design
@@ -299,7 +298,7 @@ The basic structure of the frontend is written in plain HTML. Without using a fr
 
 The power of utility classes in CSS, especially, when working in a team is incredible. We use [Tailwind CSS](https://tailwindcss.com/) to make use of this and ensure a great collaboration and maintainability in the future. This means that we did not write a single line of CSS but used utility classes instead. This promises to lead to a more consistent visual appearance and easier collaboration and maintenance. To learn more about this approach and it's benefits read the [article](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) by Adam Wathan the creator of Tailwind CSS.
 
-During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes.
+During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes ([read more](https://github.com/mahgoh/bucket-frontend#bundle-tailwindcss)).
 
 Thanks to the component-based approach, the use of utility classes makes even more sense. Otherwise, there would be the chance that we'd had to rewrite the same elements over and over. If they have many utility classes, this can result in a loss of clarity. With the use of components, the readability is improved a lot and the utility classes describe precisely the appearance of the element.
 
@@ -340,7 +339,15 @@ and as a learning experience.
 
 ## User Guide
 
-This Web application can be accessed over the browser by using the following address: `https://bucket-webapp.herokuapp.com`.
+The Web application can be accessed over the browser by using the following address: `https://bucket-webapp.herokuapp.com`.
+
+After registering, the user is greeted with the **Dashboard**. Here, new bucket items can created quickly, all bucket items and buckets can be reached, and the upcoming bucket items that are yet to complete are shown. This particular user's upcoming bucket item is to visit Beijing. By clicking on the item, all details can be seen quickly.
+
+![Frontend Preview Dashboard](./images/frontend_dashboard.png)
+
+On the **Timeline**, the user finds all his accomplished bucket items ordered on a timeline with the newest items at the top. By scrolling through the timeline, the user can look back at all the achievements made over the years and reflect on the experiences.
+
+![Frontend Preview Timeline](./images/frontend_timeline.png)
 
 ## Project Management
 
