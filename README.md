@@ -41,13 +41,24 @@ This documentation describes the continuous development process/journey of our p
 
 ### Scenario
 
-One of the first major decisions we made as a group was the idea of an application for our project work. We voted for the idea of making a Bucketlist application which was very unambiguously. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future. The CRM template provided by the lecturers served as basis of our program. We adjusted and changed the template accordingly to our visions to deliver a well designed result. We even went as far as creating a second repository dedicated to the front-end development. (https://github.com/mahgoh/bucket-frontend.git)
+One of the first major decisions we made as a group was the idea of an application for our project work. The team concurred to take the project further than a simple CRM web app in order to profit of an interesting project. We voted for the idea of making a Bucketlist application which was very unambiguously. The application allows a users to create an account where they can manage their personal Bucketlist items with their goals in the future. The CRM template (https://github.com/DigiPR/acrm-webapp) provided by the lecturers served as basis of our program. We adjusted and changed the template accordingly to our visions to deliver a well designed result. We even went as far as creating a second repository dedicated to the front-end development (https://github.com/mahgoh/bucket-frontend.git).
 
-By determining our goal for the project we set up the scene for the next step which is the definition of user stories regarding the Bucketlist application.
+By determining our goal for the project we set up the scene for the next step which is the definition of user stories regarding the Bucketlist application. The following explanation of terms provides a common basis for the discussions and explanations in the documentation.
+
+### Explanation of Terms
+
+During the project specific terms were used that are relevant to the bucket list tracker:
+
+- **Bucket List Item (BLI)** can be a goal or achievement for the future that can be given a title, short description, Bucket (category, due date, image, location and labels.
+- **Bucket** lets you define a certain category that a BLI belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
+- **Labels** are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
+- **Timeline** shows you all your accomplished BLIs in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
+- **Dashboard** is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs, look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
+- **Profile** provides you with all your personal credentials like your name, Email and profile picture. The password can be directly managed inside the profile credentials if it needs to be updated due to security reasons.
 
 ### User Stories
 
-1. As a [user], I want to have a Web app so that I can use it on different mobile devices and on desktop computers.
+1. As a [user], I want to have a web app so that I can use it on different mobile devices and on desktop computers.
 2. As a [user], I want to see a consistent visual appearance so that I can navigate easily, and it looks consistent.
 3. As a [user], I want to use list views so that I can explore and read my business data.
 4. As a [user], I want to use edit and create views so that I can maintain my data
@@ -60,22 +71,11 @@ In addition to the minimal generic user stories, the following user stories were
 1. As a [user], I want to view a timeline of achieved BLI so that I can get an overview of my past achievements.
 2. As a [user], I want to create, read, update, and delete BLI so that I can manage my bucket list.
 3. As a [user], I want to add different data to my BLI so that I can further personalize my BLI.
-4. As a [user], I want a dashboard as a list of categorized BLI so that I can get an overview of my BLI.
+4. As a [user], I want a dashboard as a starting page so that I have an overview and can easily access relevant pages.
 5. As a [user], I want to create categories for my BLI so that I have my BLI organized.
-6. As a [user], I want a detailed view of BLI so that I can read up on the details.
-7. As a [user], I want to add a focus to my BLI so that I can see my prioritized BLI.
-
-### Explanation of Terms
-
-During the project specific terms were used that are relevant to the bucket list tracker:
-
-- Bucket List Item (BLI) can be a goal or achievement for the future that can be given a title, short description, Bucket (category, due date, image/foto, location and labels.
-- Bucket lets you define a certain category that a Bucket List Item belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
-- Labels are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
-- Timeline shows you all your accomplished Bucket List Items in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
-- Dashboard...
-- Profile...
-
+6. As a [user], I want to be able to filter and sort my BLI so that I can get an overview.
+7. As a [user], I want a detailed view of BLI so that I can read up on the details.
+8. As a [user], I want a well-structured GUI so that I can easily find the pages I look for.
 
 ### Use Case
 
@@ -100,7 +100,8 @@ After the Analysis we started with the prototype design. At first we only had th
 
 The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with JavaScript, to build a dynamic website.
 
-We used a method called brainwriting to gather ideas for certain designs of our interface. With this method the members of our group individually wrote down their ideas and presented them in a Microsoft Teams meeting to the team. The advantage of this method was that everyone of the team already had their ideas ready and thus we did not waste time to look for ideas but combined the presented ideas to create our design.
+We used a method called brainwriting to gather ideas for certain designs of our interface. With this method the members of our group individually wrote down their ideas and presented them in a Microsoft Teams meeting to the team. The advantage of this method was that everyone of the team already had their ideas ready and thus we did not waste time to look for ideas but combined the presented ideas to create our design. We evaluated the collected ideas and democratically chose the best ones that were suitable for our project. With the inspiration taken from this particular prototype meeting we were ready to approach the next challenge, namely the domain design.
+
 An example for the bucketlist timeline design written by hand:
 
 <img src="images/bucketList_Design_Timeline2.png" width="300">
@@ -113,6 +114,15 @@ An example for the dashboard design written by hand:
 
 The domain model describes the domain objects / entities that are found in `ch.fhnw.bucket.data.domain`. Note that for clarity getters and setters are not included in the domain model.
 
+Classes included:
+
+- Avatar, which is our name for a User
+- Bucket, which is a category
+- Location, which is a text address displayed using the Google Maps API
+- Label, which is used to label a BucketItem
+- BucketItem, is at the core of the app. Avatars create bucket items of things they want to accomplish in the future. BucketItems hold many different data, and Bucket, Label, Location, and BucketItemImage can be assigned them.
+- AbstractImage, is the abstract class from which two types of images are extended. ProfilePicture to upload a new profile picture for an avatar, and BucketItemImage to upload an image for a bucket item.
+
 Key points include:
 
 - The entity **AbstractImage** is an abstract class with inheritance to both BucketItemImage and ProfilePicture. They are used to store information about uploaded Images as profile pictures or images for bucket items.
@@ -123,7 +133,7 @@ Key points include:
 
 ### Business Logic Design
 
-Our application is composed of a total of 7 business services, which are used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation.
+Our application is composed of a total of 7 business services, which are used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation. The business services which use the validated annotation, all have particular methods that have to use this annotation and not every method is required to use it.
 This is depicted in the following Business Logic Design:
 
 ![Domain Model](images/Business_Logic_Design_Bucketlist_App.png)
