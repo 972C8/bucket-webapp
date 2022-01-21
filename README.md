@@ -88,12 +88,14 @@ In addition to the minimal generic user stories, the following user stories were
 - UC-2 [Register on bucket-webapp]: Customers can register to get an account (profile) to access the bucket-webapp.
 - UC-3 [Edit profile information]: Customers can edit their profile information, e.g. Email/password/name/profile picture.
 - UC-4 [Create a Bucket]: Customers can create a bucket. They can choose a name, color and icon. These buckets can be edited/deleted.
-- UC-5 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels. These BLI can be edited/deleted[UC-6] and their status can be set to accomplished with a given date accomplished on[UC-7].
-- UC-8-11: The BLI can be viewed in different views. A Customer can see all of the BLI at once / on the timeline / filtered by buckets / filtered by labels.
+- UC-5 [Create a BLI]: Customers can create a BLI. They can choose a title, description, bucket, date to accomplish, image, location and labels. 
+- UC-6 [Edit/Delete BLI]: Customers can edited/delete their BLI.
+- UC-7 [Change status]: Customers can set/change the status of the BLI accomplished with a given date accomplished.
+- UC-8 [View BLI all at once]: Customers can view their BLI's all at once.
+- UC-9 [View BLI on the timeline]: Customers can view their achieved BLI's on the timeline.
+- UC-10 [Filter BLI by buckets]: Customers can view their BLI's filtered by buckets
+- UC-11 [Filter BLI by labels]: Customers can view their BLI's filtered by labels.
 
-API
-• Read bucket entries by filters (year, date, priority, ...)
-Limitations for first prototype: Social media aspect
 
 ## Design
 
