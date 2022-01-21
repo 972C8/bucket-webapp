@@ -205,7 +205,7 @@ to determine which class the particular row belongs to. More information is foun
 
 Images are stored in the directory "/uploads" and a database entry is created for either BucketItem or ProfilePicture,
 which holds the relevant information (fileName, fileType, fileUrl). When a GET request is sent, the entry is retrieved from
-the database and the image is taken from the file system using this information. 
+the database and the image is taken from the file system using this information.
 
 Images can be both stored in the database and using the file system. The implementation initially stored the images in the database,
 but due to compatibility issue when using PostgreSQL on Heroku and Oracle locally, it was decided to store images in the directory.
@@ -238,20 +238,36 @@ For each entity, a repository class (found under `ch.fhnw.bucket.data.repository
 
 The visual appearance of the frontend was developed in a separate repository ([bucket-frontend](https://github.com/mahgoh/bucket-frontend)) with the usage of a custom component-based HTML bundler - written in [Go](https://go.dev/) specifically for this project. More about how the bundler works and how to use it is mentioned in the repository.
 
-The power of utility classes in CSS, especially, when working in a team is incredible. We use [Tailwind CSS](https://tailwindcss.com/) to make use of this and ensure a great collaboration and maintainability in the future. During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes. The bundler does the same for the HTML files. These static files can then be integrated with the backend.
-
 #### Dependencies
 
 - [Custom HTML bundler](https://github.com/mahgoh/bucket-frontend)
 - [Tailwind CSS](https://tailwindcss.com) ([MIT License](https://github.com/tailwindlabs/tailwindcss/blob/master/LICENSE))
 - [Tabler Icons](https://tabler-icons.io) ([MIT License](https://github.com/tabler/tabler-icons/blob/master/LICENSE))
 
+### Frontend Implementation
+
+The basic structure of the frontend is written in plain HTML. Without using a framework or library, the process of creating multiple HTML files can be tedeous and hard to keep consitent. To mitigate this issue, we created a custom HTML bundler that gives us the power of using components. As an example, let's have a look at the navigation. It is present on almost all views. So, if we'd like to make a change to the navigation, all views containing it would need to be adapted - manually. Our bundler solves this by allowing to extract the navigation into a separate file and then referencing this file. During the bundling process, these components are then loaded (recursively) and processed into a single HTML file. If we now change the navigation, we have to do this at only one place, reducing the inconsitent design and improving the development experience. The documentation in the [frontend repository](https://github.com/mahgoh/bucket-frontend) elaborates more in-depth how this process works.
+
+#### Visual Appearance
+
+The power of utility classes in CSS, especially, when working in a team is incredible. We use [Tailwind CSS](https://tailwindcss.com/) to make use of this and ensure a great collaboration and maintainability in the future. This means that we did not write a single line of CSS but used utility classes instead. This promises to lead to a more consistent visual appearance and easier collaboration and maintenance. To learn more about this approach and it's benefits read the [article](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) by Adam Wathan the creator of Tailwind CSS.
+
+During development, the Tailwind CSS Play CDN is used - a just-in-time CDN in the browser. Once completed with the design, the Tailwind CSS CLI is used to create a CSS bundle with only the used utility classes.
+
+Thanks to the component-based approach, the use of utility classes makes even more sense. Otherwise, there would be the chance that we'd had to rewrite the same elements over and over. If they have many utility classes, this can result in a loss of clarity. With the use of components, the readability is improved a lot and the utility classes describe precisely the appearance of the element.
+
+#### Interactivity
+
+In order to make the frontend interactive, JavaScript is used to make HTTP requests, manipulate the DOM, animate element and so on.
+
+The required functions are all written from scratch without the help of any third-party library by using the available Web Standards. These functions are grouped into modules to logically combine them. The majority of these functions are located in `api.js` and `lib.js`. The former includes relevant functions to make requests to the API. The latter includes relevant functions to validate inputs, render templates, formatting values and much more. For an in-depth documentation on the different modules and their functions, visit the [JavaScript Modules Reference](https://github.com/mahgoh/bucket-frontend#javascript-modules-reference) in the frontend repository.
+
 ## Deployment
 
 This project has been deployed to Heroku by using the pre-configuration scripts `app.json` and `Procfile`.
 The project locally uses an in-memory database and PostgreSQL on Heroku, as it was added as an addon.
 
-The deployment to Heroku is quite easy and the project was therefore quickly set up. After creating a new web app by giving it a name, it was only necessary to connect it to the Github repository. The project could then be deployed and was ready to go. Although no issue occured during the deploymenet, a bigger problem was found with the image upload in regards to compatibility with PostgreSQL. This issue is detailed in the next section. 
+The deployment to Heroku is quite easy and the project was therefore quickly set up. After creating a new web app by giving it a name, it was only necessary to connect it to the Github repository. The project could then be deployed and was ready to go. Although no issue occured during the deploymenet, a bigger problem was found with the image upload in regards to compatibility with PostgreSQL. This issue is detailed in the next section.
 
 The project is accessible at: https://bucket-webapp.herokuapp.com
 
