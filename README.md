@@ -49,11 +49,12 @@ By determining our goal for the project we set up the scene for the next step wh
 
 During the project specific terms were used that are relevant to the bucket list tracker:
 
-- **Bucket List Item (BLI)** can be a goal or achievement for the future that can be given a title, short description, Bucket (category, due date, image, location and labels.
+- **Avatar** is the name we gave our users. An avatar is equivalent to a user.
+- **Bucket List Item (BLI)** can be a goal or achievement for the future that can be given a title, short description, Bucket (category), due date, image, location and labels.
 - **Bucket** lets you define a certain category that a BLI belongs to. A Bucket could be something like travel, health, education, project or work and can be made recognizable with different colours and icons for different Buckets.
-- **Labels** are equvalent to the famous hashtag of social media platforms. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
-- **Timeline** shows you all your accomplished BLIs in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your successes!
-- **Dashboard** is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs, look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
+- **Labels** are similar to the idea of hashtags used by social media platforms like Instagram. You can label your BLIs applicable labels and even sort all of your BLIs to a certain or multiple labels.
+- **Timeline** shows you all your accomplished BLIs in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your past achievements!
+- **Dashboard** is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs and look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
 - **Profile** provides you with all your personal credentials like your name, Email and profile picture. The password can be directly managed inside the profile credentials if it needs to be updated due to security reasons.
 
 ### User Stories
@@ -133,7 +134,8 @@ Key points include:
 
 ### Business Logic Design
 
-Our application is composed of a total of 7 business services, which are used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation. The business services which use the validated annotation, all have particular methods that have to use this annotation and not every method is required to use it.
+Our application is composed of a total of 7 business services, which are mainly used to interact with the database through API calls. All services use the @Service tag, and five use the validated annotation. The business services which use the validated annotation, all have particular methods that have to use this annotation and not every method is required to use it. Special attention should be paid to "ImageService" as this service includes custom implementation to manage images (upload/store/retrieve using the API). Both profile pictures and bucket item images are handled with this service. Uploaded images are stored in the file system and a corresponding object is created and stored in the database with the relevant information to retrieve it.
+
 This is depicted in the following Business Logic Design:
 
 ![Domain Model](images/Business_Logic_Design_Bucketlist_App.png)
@@ -243,9 +245,9 @@ The power of utility classes in CSS, especially, when working in a team is incre
 This project has been deployed to Heroku by using the pre-configuration scripts `app.json` and `Procfile`.
 The project locally uses an in-memory database and PostgreSQL on Heroku, as it was added as an addon.
 
-The deployment to Heroku is very easy and self-explanatory. After connecting to the Github account, the project is deployed and ready to go.
+The deployment to Heroku is quite easy and the project was therefore quickly set up. After creating a new web app by giving it a name, it was only necessary to connect it to the Github repository. The project could then be deployed and was ready to go. Although no issue occured during the deploymenet, a bigger problem was found with the image upload in regards to compatibility with PostgreSQL. This issue is detailed in the next section. 
 
-The project was automatically deployed to: https://bucket-webapp.herokuapp.com
+The project is accessible at: https://bucket-webapp.herokuapp.com
 
 ### Issues during the deployment:
 
