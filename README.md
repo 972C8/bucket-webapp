@@ -65,41 +65,41 @@ During the project specific terms were used that are relevant to the bucket list
 **Functional Requirements**
 
 *Creating*
-- must be able to create a new user account
-- must be able to create new Buckets
-- must be able to create new BLIs
+- shall be able to create a new user account
+- shall be able to create new Buckets
+- shall be able to create new BLIs
 
 *Reading*
-- must be able to display existing user account credentials
-- must be able to display existing Buckets with their attributes in a list
-- must be able to display existing BLIs with their attributes in a list
-- must be able to display and sort existing Buckets in a list, according to the Name attribute
-- must be able to display and sort existing BLIs chronologically in a list
-- must be able to filter and display existing BLIs according to Buckets or Labels
-- must be able to select a single BLI to display its details
+- shall be able to display existing user account credentials
+- shall be able to display existing Buckets with their attributes in a list
+- shall be able to display existing BLIs with their attributes in a list
+- shall be able to display and sort existing Buckets in a list, according to the Name attribute
+- shall be able to display and sort existing BLIs chronologically in a list
+- shall be able to filter and display existing BLIs according to Buckets or Labels
+- shall be able to select a single BLI to display its details
 
 *Updating*
-- must be able to update user account credentials (Name, Password and Picture)
-- must be able to update Bucket attributes
-- must be able to update BLI attributes
-- must be able to update Timeline when further BLIs are achieved
-- must be able to update Dashboard to show the chronologically pending BLI
+- shall be able to update user account credentials (Name, Password and Picture)
+- shall be able to update Bucket attributes
+- shall be able to update BLI attributes
+- shall be able to update Timeline when further BLIs are achieved
+- shall be able to update Dashboard to show the chronologically pending BLI
 
 *Deleting*
-- must be able to delete Buckets
-- must be able to delete BLIs
+- shall be able to delete Buckets
+- shall be able to delete BLIs
 
 *Others*
-- must be able to remember the password to stay logged-in when application is closed
-- must be able to log-out of a logged-in account
-- must be able to navigate to the homepage with one click
-- must be able to navigate to the main pages from the homepage
+- shall be able to remember the password to stay logged-in when application is closed
+- shall be able to log-out of a logged-in account
+- shall be able to navigate to the homepage with one click
+- shall be able to navigate to the main pages from the homepage
 
 **Non-Functional Requirements**
 
 - user friendly navigation
 - clear and structured UI design
-- responsive UI design for PC and mobile devices
+- reactive UI design for PC and mobile devices
 - fluent timeline to scroll through all achieved BLIs
 - BLIs on the timeline are shown uniformly with the details of the BLIs
 - uniform design and structure of all pages (Continuous Integrity (CI))
