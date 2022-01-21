@@ -113,6 +113,10 @@ An example for the dashboard design written by hand:
 
 <img src="images/Dashboard_Brainstorming_Luca_Herlig.png" width="600">
 
+A first sketch of the timeline on a mobile device made in Adobe XD:
+
+<img src="./images/sketch.jpg" width="300">
+
 ### Domain design
 
 The domain model describes the domain objects / entities that are found in `ch.fhnw.bucket.data.domain`. Note that for clarity getters and setters are not included in the domain model.
