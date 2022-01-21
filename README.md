@@ -21,6 +21,7 @@ This documentation describes the continuous development process/journey of our p
 - [Analysis](#analysis)
   - [Scenario](#scenario)
   - [Explanation of Terms](#explanation-of-terms)
+  - [Requirements](#requirements)
   - [User Stories](#user-stories)
   - [Use Case](#use-case)
 - [Design](#design)
@@ -58,6 +59,50 @@ During the project specific terms were used that are relevant to the bucket list
 - **Timeline** shows you all your accomplished BLIs in the order of the date that you completed it. The most recent accomplishment is at the top of your timeline and by scrolling down you travel backwards in time through your past achievements!
 - **Dashboard** is the landing page of the application after a successful login. In the Dashboard you are presented with a UI that lets you create BLIs and look at all your BLIs and Buckets. The eye-catching feature of the Dashboard is the presentation of the BLIs to be achieved with the next upcoming BLI at the top, so you'll never miss your next goal.
 - **Profile** provides you with all your personal credentials like your name, Email and profile picture. The password can be directly managed inside the profile credentials if it needs to be updated due to security reasons.
+
+### Requirements
+
+**Functional Requirements**
+
+*Creating*
+- must be able to create a new user account
+- must be able to create new Buckets
+- must be able to create new BLIs
+
+*Reading*
+- must be able to display existing user account credentials
+- must be able to display existing Buckets with their attributes in a list
+- must be able to display existing BLIs with their attributes in a list
+- must be able to display and sort existing Buckets in a list, according to the Name attribute
+- must be able to display and sort existing BLIs chronologically in a list
+- must be able to filter and display existing BLIs according to Buckets or Labels
+- must be able to select a single BLI to display its details
+
+*Updating*
+- must be able to update user account credentials (Name, Password and Picture)
+- must be able to update Bucket attributes
+- must be able to update BLI attributes
+- must be able to update Timeline when further BLIs are achieved
+- must be able to update Dashboard to show the chronologically pending BLI
+
+*Deleting*
+- must be able to delete Buckets
+- must be able to delete BLIs
+
+*Others*
+- must be able to remember the password to stay logged-in when application is closed
+- must be able to log-out of a logged-in account
+- must be able to navigate to the homepage with one click
+- must be able to navigate to the main pages from the homepage
+
+**Non-Functional Requirements**
+
+- user friendly navigation
+- clear and structured UI design
+- reactive UI design for PC and mobile devices
+- fluent timeline to scroll through all achieved BLIs
+- BLIs on the timeline are shown uniformly with the details of the BLIs
+- uniform design and structure of all pages (colours & fonts)
 
 ### User Stories
 
